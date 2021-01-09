@@ -1,6 +1,6 @@
 import routePath from './config/routePath';
 // import Canvas from './components/canvas';
-import Home from './components/home';
+import Home from './pages/home';
 
 const Routes = [
   {
