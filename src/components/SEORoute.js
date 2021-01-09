@@ -3,13 +3,15 @@ import { Helmet } from 'react-helmet';
 import { Route } from 'react-router-dom';
 // import routePath from '../config/routePath';
 import seoRouteMeta from '../config/seoRouteMeta';
+import structuredData from '../util/structuredData';
 
 const SEORoute = ({
   key, path, exact, component, initalData
 }) => {
-  const currentPage = location.pathname;
+  const currentPage = 'root';
+  console.log('seoRouteMeta[currentPage] ', seoRouteMeta[currentPage]);
   const {
-    title, description, keywords, author, link, imgLink, copyright, pageType
+    title, description, keywords, author, link, imgLink, copyright, pageType, itemType
   } = seoRouteMeta[currentPage];
   return (
     <>
@@ -62,7 +64,7 @@ const SEORoute = ({
         <meta name="twitter:image:src" content={ imgLink } />
 
         {/* ld-json */}
-        <script type="application/ld+json">{structuredData}</script>
+        <script type="application/ld+json">{structuredData(currentPage, seoRouteMeta[currentPage])}</script>
 
         {/* Facebook data */}
         {/* <meta property="fb:admins" content="Facebook numberic ID" /> */}
