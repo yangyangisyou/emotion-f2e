@@ -6,7 +6,7 @@ import seoRouteMeta from '../config/seoRouteMeta';
 import structuredData from '../util/structuredData';
 
 const SEORoute = ({
-  key, path, exact, component, initalData
+  path, exact, component, initalData
 }) => {
   const currentPage = 'root';
   console.log('seoRouteMeta[currentPage] ', seoRouteMeta[currentPage]);
@@ -15,7 +15,7 @@ const SEORoute = ({
   } = seoRouteMeta[currentPage];
   return (
     <>
-      <Route key={ key } path={ path } exact={ exact } component={ component } initalData={ initalData } />
+      <Route key={ path } path={ path } exact={ exact } component={ component } initalData={ initalData } />
       <Helmet>
         {/* Update your html tag to include the itemscope and itemtype attributes. */}
         <html lang="zh" itemScope itemType={ `http://schema.org/${itemType}` } />
