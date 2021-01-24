@@ -2,6 +2,7 @@
 // import { increment } from './actions';
 // import Meme from '../components/meme';
 import Card from '../components/card';
+import CardList from '../components/cardList';
 import Navbar from '../components/Navbar';
 import Landing from '../components/landing';
 import SearchBar from '../components/searchBar';
@@ -16,6 +17,7 @@ const Home = () => {
       <Navbar />
       <Landing />
       <SearchBar />
+      <CardList />
       {/* <Sider /> */}
       <Card />
       {/* <Meme /> */}

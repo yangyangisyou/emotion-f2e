@@ -1,17 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import allReducers from './reducers';
+import configureStore from './config/configureStore';
 
-const store = createStore(
-  allReducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const initState = window.__INITIAL_STATE__;
+window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
+const store = configureStore(initState);
 
 ReactDOM.render(
   <Provider store={ store }>

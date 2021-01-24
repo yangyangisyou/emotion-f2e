@@ -16,7 +16,7 @@ const CardList = () => {
   return (
     <>
       <CardListWrapper>
-        <Button variant="contained" color="primary" onClick={ () => dispatch(() => loadProducts('food')) }>Try it</Button>
+        <Button variant="contained" color="primary" onClick={ () => dispatch(loadProducts('food')) }>Try it</Button>
         <Card />
       </CardListWrapper>
     </>
