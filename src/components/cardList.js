@@ -10,7 +10,7 @@ const CardListWrapper = styled.div`
 
 // useDispatch
 const CardList = () => {
-  const product = useSelector((state) => state.product);
+  const product = useSelector((state) => state.product.data);
   const dispatch = useDispatch();
   console.log('product ', product);
   return (

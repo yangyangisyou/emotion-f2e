@@ -20,12 +20,10 @@ const StyledButton = withStyles({
   }
 })(Button);
 
-const SearchBar = () => {
+const SearchBar = ({ titleList }) => {
   return (
     <SearchBarWrapper>
-      <StyledButton onClick={ () => console.log('123') }>Food</StyledButton>
-      <StyledButton>Travel</StyledButton>
-      <StyledButton>Stay home</StyledButton>
+      { titleList.map((record, key) => <StyledButton key={ key }>{record.productName}</StyledButton>) }
     </SearchBarWrapper>
   );
 };

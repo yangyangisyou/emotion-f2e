@@ -1,22 +1,23 @@
-// import { useSelector, useDispatch } from 'react-redux';
-// import { increment } from './actions';
-// import Meme from '../components/meme';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import Card from '../components/card';
 import CardList from '../components/cardList';
 import Navbar from '../components/Navbar';
 import Landing from '../components/landing';
 import SearchBar from '../components/searchBar';
-
-// import Sider from '../components/Sider';
+import { loadHotProductsTitle } from '../actions/product';
 
 const Home = () => {
-  // const counter = useSelector((state) => state.counter);
-  // const dispatch = useDispatch();
+  const titleList = useSelector((state) => state.product.titleList);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadHotProductsTitle());
+  }, []);
   return (
     <>
       <Navbar />
       <Landing />
-      <SearchBar />
+      <SearchBar titleList={ titleList } />
       <CardList />
       {/* <Sider /> */}
       <Card />
