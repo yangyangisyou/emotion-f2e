@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 // import Button from '@material-ui/core/Button';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { useDispatch } from 'react-redux';
-// import { loadProducts } from '../actions/product';
+import { useSelector } from 'react-redux';
 import Card from './card';
 
 const CardListWrapper = styled.ul`
@@ -29,26 +27,14 @@ const CardListWrapper = styled.ul`
 
 // useDispatch
 const CardList = ({ isLoading }) => {
-  // const products = useSelector((state) => state.product.data);
-  const products = [
-    {
-      productName: 'tofu', description: 'nice', userName: 'Coco', productNo: '10000', imageLink: 'https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png',
-    },
-    {
-      productName: 'tofu', description: 'nice', userName: 'Coco', productNo: '10000', imageLink: 'https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png',
-    },
-    {
-      productName: 'tofu', description: 'nice', userName: 'Coco', productNo: '10000', imageLink: 'https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png',
-    },
-  ];
-  // const dispatch = useDispatch();
+  const products = useSelector((state) => state.product.data);
   console.log('products ', products);
   console.log('isLoading', isLoading);
   return (
     <>
       <CardListWrapper>
         {/* <Button variant="contained" color="primary" onClick={ () => dispatch(loadProducts('food')) }>Try it</Button> */}
-        { products.map((product, key) => <Card product={ product } isLoading={ true } key={ key } />) }
+        { products.map((product, key) => <Card product={ product } isLoading={ isLoading } key={ key } />) }
       </CardListWrapper>
     </>
   );

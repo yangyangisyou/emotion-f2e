@@ -12,14 +12,14 @@ const Home = () => {
   const dispatch = useDispatch();
   useEffect(async () => {
     dispatch(loadHotProductsTitle());
-    dispatch(loadProducts());
+    dispatch(loadProducts('10000'));
   }, []);
   return (
     <>
       <Navbar />
       <Landing />
-      <SearchBar titleList={ titleList } isLoading={ isLoadingProduct } />
-      <CardList />
+      <SearchBar titleList={ titleList } />
+      <CardList isLoading={ isLoadingProduct } />
       {/* <Sider /> */}
       {/* <Meme /> */}
     </>

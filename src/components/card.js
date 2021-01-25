@@ -19,15 +19,52 @@ const CardWrapper = styled.li`
   justify-content: space-around;
   border: grey 1px solid;
   border-radius: 10%;
+  background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.7)), url(${(props) => props.picture});
+  background-size: cover;
+  position: relative;
+  &:hover:after{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    background: #444;
+    border-radius: 8px;
+    color: #fff;
+    content: attr(description);
+    margin: -82px auto 0;
+    font-size: 16px;
+    padding: 13px;
+    width: 220px;
+  }
+  &:hover:before{
+    border: solid;
+    border-color: #444 transparent;
+    border-width: 12px 6px 0 6px;
+    content: "";
+    left: 45%;
+    bottom: 30px;
+    position: absolute;
+  }
   .card-header {
     display: flex;
     align-items: center;
-    .card-image {
+    /* flex-wrap: wrap; */
+    .card-crapper {
       width: 50px;
       height: 50px;
-      border-radius: 100%;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      .card-image {
+        display: inline;
+        margin: 0 auto;
+        height: 100%;
+        width: auto;
+      }
     }
-    .card-image-loading {
+    .card-crapper-loading {
+      width: 50px;
+      height: 50px;
       -webkit-animation: ${loading} 1.4s ease infinite; 
       animation: ${loading} 1.4s ease infinite;
       background: -webkit-gradient(linear, left top, right top, color-stop(25%, rgba(190, 190, 190, 0.2)), color-stop(37%, rgba(129, 129, 129, 0.24)), color-stop(63%, rgba(190, 190, 190, 0.2)));
@@ -46,7 +83,7 @@ const CardWrapper = styled.li`
       background: linear-gradient(90deg, rgba(190, 190, 190, 0.2) 25%, rgba(129, 129, 129, 0.24) 37%, rgba(190, 190, 190, 0.2) 63%);
       background-size: 400% 100%;
     }
-    .card-image + .card-title {
+    .card-crapper + .card-title {
       margin-left: 10px;
     }
   }
@@ -54,25 +91,32 @@ const CardWrapper = styled.li`
   .card-footer {
     display: flex;
     flex-direction: column;
-    height: 50%;
     justify-content: space-around;
+    /* width: 100%; */
+    height: 50%;
     .card-content {
       font-size: 20px;
+      white-space: normal;
+      word-break: break-all;
+      float: left;
     }
     .card-content-loading {
       height: 20px;
+      /* width: 100%; */
       -webkit-animation: ${loading} 1.4s ease infinite; 
       animation: ${loading} 1.4s ease infinite;
       background: -webkit-gradient(linear, left top, right top, color-stop(25%, rgba(190, 190, 190, 0.2)), color-stop(37%, rgba(129, 129, 129, 0.24)), color-stop(63%, rgba(190, 190, 190, 0.2)));
       background: linear-gradient(90deg, rgba(190, 190, 190, 0.2) 25%, rgba(129, 129, 129, 0.24) 37%, rgba(190, 190, 190, 0.2) 63%);
       background-size: 400% 100%;
     }
-
   }
 `;
 
 const Card = ({ product, isLoading }) => {
-  const { productName, description, imageLink } = product;
+  const {
+    productName, description, avatar, picture
+  } = product;
+  console.log('product ', product);
   return (
     <>
       {
@@ -80,7 +124,9 @@ const Card = ({ product, isLoading }) => {
             ? (
               <CardWrapper>
                 <div className="card-header">
-                  <div className="card-image card-image-loading" />
+                  <div className="card-crapper card-crapper-loading">
+                    <div className="card-image card-image-loading" />
+                  </div>
                   <p className="card-title card-title-loading" />
                 </div>
                 <div className="card-footer">
@@ -90,13 +136,14 @@ const Card = ({ product, isLoading }) => {
               </CardWrapper>
             )
             : (
-              <CardWrapper>
+              <CardWrapper picture={ picture } description={ description }>
                 <div className="card-header">
-                  <img src={ imageLink } alt="avatar" className="card-image" />
+                  <div className="card-crapper">
+                    <img className="card-image" src={ avatar } alt="avatar" />
+                  </div>
                   <p className="card-title">{productName}</p>
                 </div>
                 <div className="card-footer">
-                  <p className="card-content">{description}</p>
                   <p className="card-content">{description}</p>
                 </div>
               </CardWrapper>
