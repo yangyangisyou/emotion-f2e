@@ -21,29 +21,10 @@ const CardWrapper = styled.li`
   border-radius: 10%;
   background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.7)), url(${(props) => props.picture});
   background-size: cover;
-  position: relative;
-  &:hover:after{
-    display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: center;
-    justify-content: center;
-    background: #444;
-    border-radius: 8px;
-    color: #fff;
-    content: attr(description);
-    margin: -82px auto 0;
-    font-size: 16px;
-    padding: 13px;
-    width: 220px;
-  }
-  &:hover:before{
-    border: solid;
-    border-color: #444 transparent;
-    border-width: 12px 6px 0 6px;
-    content: "";
-    left: 45%;
-    bottom: 30px;
-    position: absolute;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+    transition: all .5s;
   }
   .card-header {
     display: flex;
