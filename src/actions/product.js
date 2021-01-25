@@ -18,7 +18,7 @@ export const loadHotProductsTitle = () => {
 export const loadProducts = (productType) => {
   return {
     [RSAA]: {
-      endpoint: `${API_PATH}/product/list/${productType}`,
+      endpoint: `${API_PATH}/product/list/${productType || 'food'}`,
       method: 'GET',
       types: [
         'REQUEST_PRODUCTS_LIST',
