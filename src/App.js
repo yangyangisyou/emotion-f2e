@@ -4,11 +4,11 @@ import Routes from './Routes';
 import SEORoute from './components/SEORoute';
 import './sass/all.scss';
 
-const App = ({ match, location, history }) => Routes.map((route, key) => {
-  console.log('match ', match);
-  console.log('location ', location);
-  console.log('history ', history);
-
+const App = () => Routes.map((route, key) => {
+  // match, location, history
+  // console.log('match ', match);
+  // console.log('location ', location);
+  // console.log('history ', history);
   const {
     path, exact, component, initalData, isSSRPage, shouldRedirectPage
   } = route;

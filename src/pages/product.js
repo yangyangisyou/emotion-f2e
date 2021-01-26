@@ -1,30 +1,25 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import CardList from '../components/cardList';
 import Navbar from '../components/Navbar';
-import Landing from '../components/landing';
-import SearchBar from '../components/searchBar';
-import { loadProductList, loadHotProductsTitle } from '../actions/product';
+import useQuery from '../util/query';
+import { loadProduct } from '../actions/product';
+import ProductInfo from '../components/productInfo';
 
-const Home = () => {
-  const defaultCat = '10000';
-  const titleList = useSelector((state) => state.product.titleList);
-  const isLoadingProduct = useSelector((state) => state.product.isLoadingProduct);
+const Product = () => {
+  const query = useQuery();
   const dispatch = useDispatch();
-  useEffect(async () => {
-    dispatch(loadHotProductsTitle());
-    dispatch(loadProductList(defaultCat));
+  const item = useSelector((state) => state.product.item);
+  const isLoadingItem = useSelector((state) => state.product.isLoadingItem);
+  const productNo = query.value.productNo;
+  useEffect(() => {
+    dispatch(loadProduct('10000', productNo));
   }, []);
   return (
     <>
       <Navbar />
-      <Landing />
-      <SearchBar titleList={ titleList } />
-      <CardList isLoading={ isLoadingProduct } />
-      {/* <Sider /> */}
-      {/* <Meme /> */}
+      <ProductInfo item={ item } isLoadingItem={ isLoadingItem } />
     </>
   );
 };
 
-export default Home;
+export default Product;

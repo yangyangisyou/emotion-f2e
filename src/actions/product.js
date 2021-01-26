@@ -16,21 +16,24 @@ export const loadHotProductsTitle = () => {
 };
 
 export const loadProduct = (productCat, productNo) => {
+  console.log(productCat, productNo);
   return {
-    [RSAA]: {
-      endpoint: `${API_PATH}/product/item/${productCat}/${productNo}`,
-      method: 'GET',
-      types: [
-        'REQUEST_PRODUCT_ITEM',
-        'PRODUCT_ITEM_SUCCESS',
-        'FAILURE'
-      ]
-    }
+    type: 'PRODUCT_ITEM_SUCCESS'
   };
+  // return {
+  //   [RSAA]: {
+  //     endpoint: `${API_PATH}/product/item/${productCat}/${productNo}`,
+  //     method: 'GET',
+  //     types: [
+  //       'REQUEST_PRODUCT_ITEM',
+  //       'PRODUCT_ITEM_SUCCESS',
+  //       'FAILURE'
+  //     ]
+  //   }
+  // };
 };
 
 export const loadProductList = (productCat) => {
-  console.log('productCat     =>', productCat);
   return {
     [RSAA]: {
       endpoint: `${API_PATH}/product/list/${productCat}`,

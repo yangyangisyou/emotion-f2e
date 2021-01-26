@@ -1,6 +1,8 @@
 const initState = {
   data: [{}, {}, {}, {}, {}, {}],
   titleList: [],
+  item: {},
+  isLoadingItem: false,
   isLoadingProduct: false,
 };
 
@@ -18,7 +20,7 @@ const productReducer = (state = initState, action) => {
     case 'REQUEST_PRODUCT_ITEM': {
       return {
         ...state,
-        isLoadingProduct: true,
+        isLoadingItem: true,
       };
     }
     case 'PRODUCT_ITEM_SUCCESS': {
@@ -27,8 +29,8 @@ const productReducer = (state = initState, action) => {
       };
       return {
         ...state,
-        data: data,
-        isLoadingProduct: false,
+        item: data,
+        isLoadingItem: false,
       };
     }
     case 'REQUEST_PRODUCT_LIST': {
