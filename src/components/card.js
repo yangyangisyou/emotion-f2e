@@ -75,7 +75,6 @@ const CardWrapper = styled.li`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    /* width: 100%; */
     height: 50%;
     .card-content {
       font-size: 20px;
@@ -85,7 +84,6 @@ const CardWrapper = styled.li`
     }
     .card-content-loading {
       height: 20px;
-      /* width: 100%; */
       -webkit-animation: ${loading} 1.4s ease infinite; 
       animation: ${loading} 1.4s ease infinite;
       background: -webkit-gradient(linear, left top, right top, color-stop(25%, rgba(190, 190, 190, 0.2)), color-stop(37%, rgba(129, 129, 129, 0.24)), color-stop(63%, rgba(190, 190, 190, 0.2)));
@@ -99,7 +97,6 @@ const Card = ({ product, isLoading }) => {
   const {
     productName, description, avatar, picture
   } = product;
-  console.log('product ', product);
   return (
     <>
       {

@@ -50,7 +50,7 @@ const LandingWrapper = styled.div`
     
 `;
 
-const Landing = () => {
+const Landing = ({ imageLink }) => {
   return (
     <LandingWrapper>
       <div className="landing-intro">
@@ -61,7 +61,8 @@ const Landing = () => {
       <div className="landing-attract">
         <div className="avatar">
           <a href="https://codepen.io/MarioDesigns/">
-            <img src="https://news.cgtn.com/news/77416a4e3145544d326b544d354d444d3355444f31457a6333566d54/img/37d598e5a04344da81c76621ba273915/37d598e5a04344da81c76621ba273915.jpg" alt="Skytsunami" />
+            <img src={ imageLink } alt="Skytsunami" />
+            {/* <img src="https://news.cgtn.com/news/77416a4e3145544d326b544d354d444d3355444f31457a6333566d54/img/37d598e5a04344da81c76621ba273915/37d598e5a04344da81c76621ba273915.jpg" alt="Skytsunami" /> */}
           </a>
         </div>
       </div>

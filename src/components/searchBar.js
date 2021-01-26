@@ -1,29 +1,32 @@
 import styled from 'styled-components';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 
 const SearchBarWrapper = styled.div`
     height: 100px;
     display: flex;
+    justify-content: flex-start;
     align-items: center;
-    justify-items: center;
     background-color: grey;
+    .searchbar-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      cursor: pointer;
+      height: 100%;
+      width: 150px;
+      & > p {
+        font-size: 20px;
+      }
+    }
+    .searchbar-link + .searchbar-link {
+      margin-left: 10px;
+    }
 `;
 
-const StyledButton = withStyles({
-  root: {
-    borderRadius: 3,
-    border: 0,
-    color: 'white',
-    height: 48,
-    padding: '0 30px',
-  }
-})(Button);
-
-const SearchBar = ({ titleList }) => {
+const SearchBar = ({ setCurrentCat, titleList }) => {
   return (
     <SearchBarWrapper>
-      { titleList.map((record, key) => <StyledButton key={ key }>{record.productName}</StyledButton>) }
+      { titleList.map((record, key) => <div className="searchbar-link" key={ key } onClick={ () => setCurrentCat(record.productNo) }><p>{record.productName}</p></div>) }
     </SearchBarWrapper>
   );
 };

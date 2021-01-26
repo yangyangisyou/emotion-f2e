@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-// import Button from '@material-ui/core/Button';
-import { useSelector } from 'react-redux';
 import Card from './card';
 
 const CardListWrapper = styled.ul`
@@ -26,16 +24,12 @@ const CardListWrapper = styled.ul`
   }
 `;
 
-// useDispatch
-const CardList = ({ isLoading }) => {
-  const products = useSelector((state) => state.product.data);
-  console.log('products ', products);
-  console.log('isLoading', isLoading);
+const CardList = ({ productList, isLoading }) => {
+  console.log('productList ', productList);
   return (
     <>
       <CardListWrapper>
-        {/* <Button variant="contained" color="primary" onClick={ () => dispatch(loadProducts('food')) }>Try it</Button> */}
-        { products.map((product, key) => <Card product={ product } isLoading={ isLoading } key={ key } />) }
+        { productList.map((product, key) => <Card product={ product } isLoading={ isLoading } key={ key } />) }
       </CardListWrapper>
     </>
   );

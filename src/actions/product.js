@@ -15,14 +15,29 @@ export const loadHotProductsTitle = () => {
   };
 };
 
-export const loadProducts = (productType) => {
+export const loadProduct = (productCat, productNo) => {
   return {
     [RSAA]: {
-      endpoint: `${API_PATH}/product/list/${productType || 'food'}`,
+      endpoint: `${API_PATH}/product/item/${productCat}/${productNo}`,
       method: 'GET',
       types: [
-        'REQUEST_PRODUCTS_LIST',
-        'PRODUCTS_LIST_SUCCESS',
+        'REQUEST_PRODUCT_ITEM',
+        'PRODUCT_ITEM_SUCCESS',
+        'FAILURE'
+      ]
+    }
+  };
+};
+
+export const loadProductList = (productCat) => {
+  console.log('productCat     =>', productCat);
+  return {
+    [RSAA]: {
+      endpoint: `${API_PATH}/product/list/${productCat}`,
+      method: 'GET',
+      types: [
+        'REQUEST_PRODUCT_LIST',
+        'PRODUCT_LIST_SUCCESS',
         'FAILURE'
       ]
     }
