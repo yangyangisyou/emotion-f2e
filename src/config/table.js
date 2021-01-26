@@ -8,3 +8,9 @@ export const landingImageTable = {
   20000: TravelImage,
   30000: CureFoodieImage,
 };
+
+export const titleList = [
+  { productName: 'Foodie', productNo: '10000' },
+  { productName: 'Travel', productNo: '20000' },
+  { productName: 'Cure', productNo: '30000' },
+];

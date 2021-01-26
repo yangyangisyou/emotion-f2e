@@ -38,13 +38,16 @@ const LandingWrapper = styled.div`
         width: 150px;
         height: 150px;
         box-sizing: border-box;
-        border: 5px white solid;
+        border: 4px white solid;
         border-radius: 50%;
         overflow: hidden;
         box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
         transform: translatey(0px);
         animation: ${float} 4s ease-in-out infinite;
-        img { width: 100%; height: auto; }
+        img { 
+          width: 100%; 
+          height: auto; 
+        }
       }
     }
     
