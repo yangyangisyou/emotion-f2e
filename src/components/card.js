@@ -15,6 +15,9 @@ const CardWrapper = styled.li`
   margin: 20px;
   padding: 20px;
   display: flex;
+  flex: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
   flex-direction: column;
   justify-content: space-around;
   border: grey 1px solid;
@@ -29,7 +32,6 @@ const CardWrapper = styled.li`
   .card-header {
     display: flex;
     align-items: center;
-    /* flex-wrap: wrap; */
     .card-crapper {
       width: 50px;
       height: 50px;

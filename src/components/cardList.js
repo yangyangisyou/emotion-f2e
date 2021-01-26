@@ -5,6 +5,7 @@ import Card from './card';
 
 const CardListWrapper = styled.ul`
   display: flex;
+  flex: auto;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
