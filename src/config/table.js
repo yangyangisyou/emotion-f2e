@@ -1,5 +1,6 @@
 import FoodieImage from '../assets/image/yummy.png';
-import TravelImage from '../assets/image/excited.png';
+// import TravelImage from '../assets/image/excited.png';
+import TravelImage from '../assets/image/cool.png';
 import CureFoodieImage from '../assets/image/hug.png';
 
 // https://pngtree.com/so/eggplant-emoji
