@@ -1,61 +1,24 @@
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import styled from 'styled-components';
-import { TextField } from 'formik-material-ui';
-import { Formik, Form, Field } from 'formik';
-import { Button, LinearProgress } from '@material-ui/core';
-import { validateEdit } from '../config/validate';
+import { loadProduct } from '../actions/product';
+import EditProductForm from '../components/editProductForm';
 
 const EditWrapper = styled.div`
 `;
 
-const renderForm = ({ submitForm, isSubmitting }) => (
-  <Form>
-    <Field
-      component={ TextField }
-      name="email"
-      type="email"
-      label="Email"
-    />
-    <br />
-    <Field
-      component={ TextField }
-      type="password"
-      label="Password"
-      name="password"
-    />
-    {isSubmitting && <LinearProgress />}
-    <br />
-    <Button
-      variant="contained"
-      color="primary"
-      disabled={ isSubmitting }
-      onClick={ submitForm }
-    >
-      Submit
-    </Button>
-  </Form>
-);
-
-const onSubmit = (values, { setSubmitting }) => {
-  setTimeout(() => {
-    setSubmitting(false);
-    // eslint-disable-next-line no-alert
-    alert(JSON.stringify(values, null, 2));
-  }, 500);
-};
-
 const Edit = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadProduct('10000', 1));
+  });
   const initialValue = {
     email: '',
     password: '',
   };
   return (
     <EditWrapper>
-      <Formik
-        initialValues={ initialValue }
-        render={ renderForm }
-        validationSchema={ validateEdit }
-        onSubmit={ onSubmit }
-      />
+      <EditProductForm initialValue={ initialValue } />
     </EditWrapper>
   );
 };

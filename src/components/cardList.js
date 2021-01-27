@@ -22,6 +22,11 @@ const CardListWrapper = styled.ul`
     background: transparentize(#ccc, 0.5);
     box-shadow: inset 0 0 2px rgba(0,0,0,0.5); 
   }
+  @media screen and (max-width: 768px) {
+    /* body {
+      background-color: olive;
+    } */
+  }
 `;
 
 const CardList = ({ productList, isLoading }) => {

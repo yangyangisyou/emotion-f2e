@@ -24,6 +24,9 @@ const LandingWrapper = styled.div`
     display: flex;
     justify-content: space-around;
     .landing-intro {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       .landing-header {
           font-size: 40px;
       }
@@ -50,6 +53,22 @@ const LandingWrapper = styled.div`
         }
       }
     }
+
+    @media screen and (max-width: 768px) {
+      padding: 40px;
+      background-color: lightblue;
+      height: auto;
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: center;
+      align-items: center;
+      .landing-intro {
+        align-items: center;
+      }
+      .landing-intro + .landing-attract {
+        margin-bottom: 50px;
+      }
+  }
     
 `;
 
@@ -59,13 +78,12 @@ const Landing = ({ imageLink }) => {
       <div className="landing-intro">
         <h1 className="landing-header">Let&apos;s create design.</h1>
         <p className="landing-content">Just 3 steps make you colorful.</p>
-        <Button variant="contained" color="primary">Try it</Button>
+        <Button variant="contained" color="primary" disabled={ true }>Coming soon...</Button>
       </div>
       <div className="landing-attract">
         <div className="avatar">
           <a href="https://codepen.io/MarioDesigns/">
             <img src={ imageLink } alt="Skytsunami" />
-            {/* <img src="https://news.cgtn.com/news/77416a4e3145544d326b544d354d444d3355444f31457a6333566d54/img/37d598e5a04344da81c76621ba273915/37d598e5a04344da81c76621ba273915.jpg" alt="Skytsunami" /> */}
           </a>
         </div>
       </div>
