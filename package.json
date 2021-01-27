@@ -29,7 +29,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "webpack --mode production",
+    "build": "react-scripts build",
+    "build:ssr": "webpack --mode production",
     "dev": "webpack-dev-server --mode production",
     "build:prod": "webpack -d && cp public/index.html dist/index.html",
     "test": "react-scripts test",
