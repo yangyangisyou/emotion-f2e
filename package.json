@@ -25,7 +25,8 @@
     "style-loader": "^2.0.0",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4",
-    "yup": "^0.32.8"
+    "yup": "^0.32.8",
+    "eslint-config-airbnb": "^18.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
