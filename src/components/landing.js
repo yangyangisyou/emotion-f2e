@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 const float = keyframes`
   0% {
@@ -78,7 +79,7 @@ const Landing = ({ imageLink }) => {
       <div className="landing-intro">
         <h1 className="landing-header">Let&apos;s create design.</h1>
         <p className="landing-content">Just 3 steps make you colorful.</p>
-        <Button variant="contained" color="primary" disabled={ true }>Coming soon...</Button>
+        <Link to="/edit"><Button variant="contained" color="primary">Try...</Button></Link>
       </div>
       <div className="landing-attract">
         <div className="avatar">
