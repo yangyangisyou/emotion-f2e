@@ -6,6 +6,7 @@ import Landing from '../components/landing';
 import SearchBar from '../components/searchBar';
 import { loadProductList } from '../actions/product';
 import { landingImageTable, titleList } from '../config/table';
+import Modal from '../shared/components/Modal';
 
 const Home = () => {
   const [currentCat, setCurrentCat] = useState('10000');
@@ -21,6 +22,7 @@ const Home = () => {
       <Landing imageLink={ landingImageTable[currentCat] } />
       <SearchBar titleList={ titleList } setCurrentCat={ setCurrentCat } />
       <CardList productList={ productList } isLoading={ isLoadingProduct } />
+      <Modal />
     </>
   );
 };
