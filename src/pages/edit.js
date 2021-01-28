@@ -14,7 +14,7 @@ const Edit = () => {
   useEffect(() => {
     dispatch(loadProduct('10000', 1));
     dispatch(loadProductImage('cat'));
-  });
+  }, []);
   const initialValue = {
     productName: '',
     userName: '',

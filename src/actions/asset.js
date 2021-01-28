@@ -8,7 +8,6 @@ export const loadProductImage = (keyword) => {
     [RSAA]: {
       endpoint: `${API_PATH}/asset/images/${keyword}`,
       method: 'GET',
-      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       types: [
         'REQUEST_PRODUCT_IMAGES',
@@ -22,9 +21,8 @@ export const loadProductImage = (keyword) => {
 export const loadProductVideos = (keyword) => {
   return {
     [RSAA]: {
-      endpoint: `${API_PATH}/asset/video/${keyword}`,
+      endpoint: `${API_PATH}/asset/videos/${keyword}`,
       method: 'GET',
-      credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       types: [
         'REQUEST_PRODUCT_IMAGES',
