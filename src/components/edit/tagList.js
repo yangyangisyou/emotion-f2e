@@ -9,6 +9,10 @@ const TagListWrapper = styled.ul`
   overflow-y: hidden;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
   &::-webkit-scrollbar {
     width: 10px;
   }
@@ -30,12 +34,16 @@ const TagListWrapper = styled.ul`
   }
 `;
 
+const Tag = styled(Chip)`
+  margin: 5px;
+`;
+
 const tagList = ({ categoryNo, onSelect, selectedNo }) => {
   return (
     <>
       <TagListWrapper>
         { categories[categoryNo].map((element, key) => (
-          <Chip
+          <Tag
           // avatar={ <Avatar alt="Natacha" src="/static/images/avatar/1.jpg" /> }
             label={ element.label }
             color={ selectedNo === key ? 'primary' : '' }

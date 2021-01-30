@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
 const loading = keyframes`
   0% {
@@ -12,8 +12,7 @@ const loading = keyframes`
 const CardWrapper = styled.li`
   width: 250px;
   height: 150px;
-  margin: 20px;
-  padding: 20px;
+  margin: 10px;
   display: flex;
   flex: auto;
   flex-grow: 0;
@@ -29,68 +28,14 @@ const CardWrapper = styled.li`
     transform: scale(1.1);
     transition: all .5s;
   }
-  .card-header {
-    display: flex;
-    align-items: center;
-    .card-crapper {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      position: relative;
-      overflow: hidden;
-      .card-image {
-        display: inline;
-        margin: 0 auto;
-        height: 100%;
-        width: auto;
-      }
-    }
-    .card-crapper-loading {
-      width: 50px;
-      height: 50px;
-      -webkit-animation: ${loading} 1.4s ease infinite; 
-      animation: ${loading} 1.4s ease infinite;
-      background: -webkit-gradient(linear, left top, right top, color-stop(25%, rgba(190, 190, 190, 0.2)), color-stop(37%, rgba(129, 129, 129, 0.24)), color-stop(63%, rgba(190, 190, 190, 0.2)));
-      background: linear-gradient(90deg, rgba(190, 190, 190, 0.2) 25%, rgba(129, 129, 129, 0.24) 37%, rgba(190, 190, 190, 0.2) 63%);
-      background-size: 400% 100%;
-    }
-    .card-title {
-      font-size: 30px;
-    }
-    .card-title-loading {
-      width: 200px;
-      height: 20px;
-      -webkit-animation: ${loading} 1.4s ease infinite; 
-      animation: ${loading} 1.4s ease infinite;
-      background: -webkit-gradient(linear, left top, right top, color-stop(25%, rgba(190, 190, 190, 0.2)), color-stop(37%, rgba(129, 129, 129, 0.24)), color-stop(63%, rgba(190, 190, 190, 0.2)));
-      background: linear-gradient(90deg, rgba(190, 190, 190, 0.2) 25%, rgba(129, 129, 129, 0.24) 37%, rgba(190, 190, 190, 0.2) 63%);
-      background-size: 400% 100%;
-    }
-    .card-crapper + .card-title {
-      margin-left: 10px;
-    }
-  }
 
-  .card-footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 50%;
-    .card-content {
-      font-size: 20px;
-      white-space: normal;
-      word-break: break-all;
-      float: left;
-    }
-    .card-content-loading {
-      height: 20px;
-      -webkit-animation: ${loading} 1.4s ease infinite; 
-      animation: ${loading} 1.4s ease infinite;
-      background: -webkit-gradient(linear, left top, right top, color-stop(25%, rgba(190, 190, 190, 0.2)), color-stop(37%, rgba(129, 129, 129, 0.24)), color-stop(63%, rgba(190, 190, 190, 0.2)));
-      background: linear-gradient(90deg, rgba(190, 190, 190, 0.2) 25%, rgba(129, 129, 129, 0.24) 37%, rgba(190, 190, 190, 0.2) 63%);
-      background-size: 400% 100%;
-    }
-  }
+  ${(props) => props.isLoading && css`
+    -webkit-animation: ${loading} 1.4s ease infinite; 
+    animation: ${loading} 1.4s ease infinite;
+    background: -webkit-gradient(linear, left top, right top, color-stop(25%, rgba(190, 190, 190, 0.2)), color-stop(37%, rgba(129, 129, 129, 0.24)), color-stop(63%, rgba(190, 190, 190, 0.2)));
+    background: linear-gradient(90deg, rgba(190, 190, 190, 0.2) 25%, rgba(129, 129, 129, 0.24) 37%, rgba(190, 190, 190, 0.2) 63%);
+    background-size: 400% 100%;
+    `}
 `;
 
 const Card = ({
@@ -102,21 +47,10 @@ const Card = ({
       {
           isLoading
             ? (
-              <CardWrapper>
-                <div className="card-header">
-                  <div className="card-crapper card-crapper-loading">
-                    <div className="card-image card-image-loading" />
-                  </div>
-                  <p className="card-title card-title-loading" />
-                </div>
-                <div className="card-footer">
-                  <p className="card-content card-content-loading" />
-                  <p className="card-content card-content-loading" />
-                </div>
-              </CardWrapper>
+              <CardWrapper isLoading={ isLoading } className={ isLoading ? 'card-loading' : null } />
             )
             : (
-              <CardWrapper picture={ reviewImage } selected={ selected } onClick={ onSelect } />
+              <CardWrapper isLoading={ isLoading } picture={ reviewImage } selected={ selected } onClick={ onSelect } />
             )
       }
     </>

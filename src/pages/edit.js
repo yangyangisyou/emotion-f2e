@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import styled from 'styled-components';
-import { loadProduct } from '../actions/product';
 import { loadProductImage } from '../actions/asset';
+import { createProduct } from '../actions/product';
 import EditProductForm from '../components/edit/editProductForm';
+import Navbar from '../shared/components/Navbar';
 
 const EditWrapper = styled.div`
 `;
@@ -12,13 +12,14 @@ const Edit = () => {
   const dispatch = useDispatch();
   const recommandImages = useSelector((state) => state.asset.recommandImages);
   const loadingRecommandImages = useSelector((state) => state.asset.loadingRecommandImages);
-  useEffect(() => {
-    dispatch(loadProduct('10000', 1));
-    onSearchRecommendImage('cat');
-  }, []);
   const onSearchRecommendImage = (keywords) => {
     dispatch(loadProductImage(keywords));
   };
+
+  const onSubmitForm = () => {
+    dispatch(createProduct);
+  };
+
   const initialValue = {
     productName: '',
     userName: '',
@@ -33,10 +34,11 @@ const Edit = () => {
     email: '',
     password: '',
   };
-  console.log('recommandImages in edit', recommandImages);
+
   return (
     <EditWrapper>
-      <EditProductForm initialValue={ initialValue } recommandImages={ recommandImages } onSearchRecommendImage={ onSearchRecommendImage } loadingRecommandImages={ loadingRecommandImages } />
+      <Navbar />
+      <EditProductForm initialValue={ initialValue } recommandImages={ recommandImages } onSearchRecommendImage={ onSearchRecommendImage } loadingRecommandImages={ loadingRecommandImages } onSubmitForm={ onSubmitForm } />
     </EditWrapper>
   );
 };

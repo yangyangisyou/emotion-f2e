@@ -8,6 +8,7 @@ const CardListWrapper = styled.ul`
   overflow-y: hidden;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
+  width: 100vw;
   &::-webkit-scrollbar {
     width: 10px;
   }
