@@ -32,7 +32,6 @@ const CardListWrapper = styled.ul`
 const ImageCardList = ({
   imageList, selectedNo, onSelect, isLoading
 }) => {
-  console.log('imageList ', imageList);
   return (
     <>
       <CardListWrapper>

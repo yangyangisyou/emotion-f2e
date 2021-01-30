@@ -33,6 +33,12 @@ export const categories = {
   ],
 };
 
+export const largeCatTable = {
+  10000: 'Foodie',
+  20000: 'Travel',
+  30000: 'Cure',
+};
+
 export const titleList = [
   { productName: 'Foodie', productNo: '10000' },
   { productName: 'Travel', productNo: '20000' },

@@ -11,6 +11,7 @@ const EditWrapper = styled.div`
 const Edit = () => {
   const dispatch = useDispatch();
   const recommandImages = useSelector((state) => state.asset.recommandImages);
+  const loadingRecommandImages = useSelector((state) => state.asset.loadingRecommandImages);
   useEffect(() => {
     dispatch(loadProduct('10000', 1));
     onSearchRecommendImage('cat');
@@ -35,7 +36,7 @@ const Edit = () => {
   console.log('recommandImages in edit', recommandImages);
   return (
     <EditWrapper>
-      <EditProductForm initialValue={ initialValue } recommandImages={ recommandImages } onSearchRecommendImage={ onSearchRecommendImage } />
+      <EditProductForm initialValue={ initialValue } recommandImages={ recommandImages } onSearchRecommendImage={ onSearchRecommendImage } loadingRecommandImages={ loadingRecommandImages } />
     </EditWrapper>
   );
 };

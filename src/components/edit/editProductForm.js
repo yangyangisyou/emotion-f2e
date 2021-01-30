@@ -4,7 +4,7 @@ import {
   Button, FormControlLabel, Radio, RadioGroup, TextField
 } from '@material-ui/core';
 import { validateEdit } from '../../config/validate';
-import { titleList } from '../../config/table';
+import { titleList, largeCatTable } from '../../config/table';
 import DebugFormik from '../../util/debugFormik';
 import ImageCardList from './imageCardList';
 import TagList from './tagList';
@@ -42,11 +42,15 @@ const FormWrapper = styled(Form)`
   } */
 `;
 
-const Edit = ({ initialValue, recommandImages, onSearchRecommendImage }) => {
+const Edit = ({
+  initialValue, recommandImages, onSearchRecommendImage, loadingRecommandImages
+}) => {
   return (
     <Formik
       initialValues={ initialValue }
-      render={ (props) => renderForm({ ...props, recommandImages, onSearchRecommendImage }) }
+      render={ (props) => renderForm({
+        ...props, recommandImages, onSearchRecommendImage, loadingRecommandImages
+      }) }
       validationSchema={ validateEdit }
       onSubmit={ onSubmit }
       enableReinitialize
@@ -55,9 +59,10 @@ const Edit = ({ initialValue, recommandImages, onSearchRecommendImage }) => {
 };
 
 const renderForm = ({
-  submitForm, isSubmitting, recommandImages, onSearchRecommendImage, values, setFieldValue
+  submitForm, isSubmitting, recommandImages, onSearchRecommendImage, loadingRecommandImages, values, setFieldValue
 }) => {
   const imageList = recommandImages.map((element) => ({ reviewImage: element.previewURL, largeImage: element.largeImageURL }));
+  console.log('loadingRecommandImages ---', loadingRecommandImages);
   return (
     <FormWrapper className="edit-form">
       <div className="edit-field">
@@ -70,7 +75,7 @@ const renderForm = ({
       </div>
       <div className="edit-field">
         <span>Type：</span>
-        <RadioGroup className="edit-radiogroup" name="productType" aria-label="productType" onChange={ (element) => setFieldValue('productType', element.target.value) }>
+        <RadioGroup className="edit-radiogroup" name="productType" aria-label="productType" onChange={ (element) => { setFieldValue('productType', element.target.value); onSearchRecommendImage(largeCatTable[element.target.value]); } }>
           { titleList.map((element) => <FormControlLabel value={ element.productNo } label={ element.productName } control={ <Radio /> } />) }
         </RadioGroup>
       </div>
@@ -78,21 +83,24 @@ const renderForm = ({
       {
         values.productType !== null
           ? (
-            <div className="edit-field">
-              <span>Choose more specific tag：</span>
-              <TagList categoryNo="10000" selectedNo={ values.selectedTagNo } onSelect={ (tagNo, tagName) => { setFieldValue('selectedTagNo', tagNo); setFieldValue('selectedTag', tagName); onSearchRecommendImage(tagName); } } />
-            </div>
+            <>
+              <div className="edit-field">
+                <span>Choose more specific tag：</span>
+                <TagList categoryNo={ values.productType } selectedNo={ values.selectedTagNo } onSelect={ (tagNo, tagName) => { setFieldValue('selectedTagNo', tagNo); setFieldValue('selectedTag', tagName); onSearchRecommendImage(tagName); } } />
+              </div>
+              <div className="image-field">
+                <p>Recommend image：</p>
+                <ImageCardList
+                  imageList={ imageList }
+                  selectedNo={ values.selectedImageNo }
+                  isLoading={ loadingRecommandImages }
+                  onSelect={ (imageNo, imageLink) => { setFieldValue('selectedImage', imageLink); setFieldValue('selectedImageNo', imageNo); } }
+                />
+              </div>
+            </>
           ) : <></>
       }
-      {/* selectedTag */}
-      <div className="image-field">
-        <p>Recommend image：</p>
-        <ImageCardList
-          imageList={ imageList }
-          selectedNo={ values.selectedImageNo }
-          onSelect={ (imageNo, imageLink) => { setFieldValue('selectedImage', imageLink); setFieldValue('selectedImageNo', imageNo); } }
-        />
-      </div>
+
       <Button
         variant="contained"
         color="primary"
