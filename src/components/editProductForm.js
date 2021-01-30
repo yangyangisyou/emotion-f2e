@@ -1,52 +1,61 @@
 import styled from 'styled-components';
-import { TextField } from 'formik-material-ui';
-import { Formik, Form, Field } from 'formik';
-import { Button, LinearProgress } from '@material-ui/core';
+import { Formik, Form, } from 'formik';
+import {
+  Button, FormControlLabel, Radio, RadioGroup, TextField
+} from '@material-ui/core';
 import { validateEdit } from '../config/validate';
+import { titleList } from '../config/table';
+import DebugFormik from '../util/debugFormik';
 
-const EditWrapper = styled.div`
+const FormWrapper = styled(Form)`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  .edit-input {
+    width: 500px;
+  }
+  /* width: 500px; */
+  /* .edit-form {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+  } */
 `;
 
 const Edit = ({ initialValue }) => {
   return (
-    <EditWrapper>
-      <Formik
-        initialValues={ initialValue }
-        render={ renderForm }
-        validationSchema={ validateEdit }
-        onSubmit={ onSubmit }
-      />
-    </EditWrapper>
+    <Formik
+      initialValues={ initialValue }
+      render={ renderForm }
+      validationSchema={ validateEdit }
+      onSubmit={ onSubmit }
+    />
   );
 };
 
-const renderForm = ({ submitForm, isSubmitting }) => (
-  <Form>
-    <Field
-      component={ TextField }
-      name="email"
-      type="email"
-      label="Email"
-    />
-    <br />
-    <Field
-      component={ TextField }
-      type="password"
-      label="Password"
-      name="password"
-    />
-    {isSubmitting && <LinearProgress />}
-    <br />
-    <Button
-      variant="contained"
-      color="primary"
-      disabled={ isSubmitting }
-      onClick={ submitForm }
-    >
-      Submit
-    </Button>
-  </Form>
-);
+const renderForm = ({ submitForm, isSubmitting }) => {
+  const value = 'male';
+  return (
+    <FormWrapper className="edit-form">
+      <TextField className="edit-input" name="userName" label="Your name" />
+      <TextField className="edit-input" name="productName" label="Your title" />
+      <RadioGroup aria-label="productType" name="productType" value={ value }>
+        { titleList.map((element) => <FormControlLabel value={ element.productNo } label={ element.productName } control={ <Radio /> } />) }
+      </RadioGroup>
+      <Button
+        variant="contained"
+        color="primary"
+        disabled={ isSubmitting }
+        onClick={ submitForm }
+      >
+        Submit
+      </Button>
+      {/* {isSubmitting && <LinearProgress />} */}
+      <DebugFormik />
+    </FormWrapper>
+  );
+};
 
 const onSubmit = (values, { setSubmitting }) => {
   setTimeout(() => {
