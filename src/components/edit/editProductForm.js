@@ -1,8 +1,13 @@
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Formik, Form, } from 'formik';
+import { Formik, Form } from 'formik';
 import {
-  Button, FormControlLabel, Radio, RadioGroup, TextField
+  Button, FormControlLabel, Radio, RadioGroup, TextField, Dialog
 } from '@material-ui/core';
+// import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import { validateEdit } from '../../config/validate';
 import { titleList, largeCatTable } from '../../config/table';
 import DebugFormik from '../../util/debugFormik';
@@ -59,10 +64,10 @@ const Edit = ({
 };
 
 const renderForm = ({
-  submitForm, isSubmitting, recommandImages, onSearchRecommendImage, loadingRecommandImages, values, setFieldValue
+  isSubmitting, recommandImages, onSearchRecommendImage, loadingRecommandImages, values, setFieldValue// , submitForm
 }) => {
   const imageList = recommandImages.map((element) => ({ reviewImage: element.previewURL, largeImage: element.largeImageURL }));
-  console.log('loadingRecommandImages ---', loadingRecommandImages);
+  const [issubmit, setIsSubmit] = useState(false);
   return (
     <FormWrapper className="edit-form">
       <div className="edit-field">
@@ -100,12 +105,33 @@ const renderForm = ({
             </>
           ) : <></>
       }
-
+      <Dialog
+        open={ issubmit }
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">哩五炭即某</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <img src="https://p2.bahamut.com.tw/HOME/creationCover/29/0004566029_B.JPG" alt="" />
+            <iframe title="yt" width="560" height="315" src="https://www.youtube.com/embed/7R97mYB1Oog" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+          </DialogContentText>
+        </DialogContent>
+        {/* <DialogActions>
+          <Button onClick={ handleClose } color="primary">
+            Disagree
+          </Button>
+          <Button onClick={ handleClose } color="primary" autoFocus>
+            Agree
+          </Button>
+        </DialogActions> */}
+      </Dialog>
       <Button
         variant="contained"
         color="primary"
         disabled={ isSubmitting }
-        onClick={ submitForm }
+        onClick={ () => setIsSubmit(true) }
+        // onClick={ submitForm }
       >
         Submit
       </Button>
