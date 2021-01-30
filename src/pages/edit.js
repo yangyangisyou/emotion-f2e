@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import styled from 'styled-components';
 import { loadProduct } from '../actions/product';
 import { loadProductImage } from '../actions/asset';
-import EditProductForm from '../components/editProductForm';
+import EditProductForm from '../components/edit/editProductForm';
 
 const EditWrapper = styled.div`
 `;
@@ -24,6 +24,7 @@ const Edit = () => {
     email: '',
     password: '',
   };
+  console.log('recommandImages in edit', recommandImages);
   return (
     <EditWrapper>
       <EditProductForm initialValue={ initialValue } recommandImages={ recommandImages } />
