@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { loadProductImage } from '../actions/asset';
-import { createProduct } from '../actions/product';
+// import { createProduct } from '../actions/product';
 import EditProductForm from '../components/edit/editProductForm';
 import Navbar from '../shared/components/Navbar';
 
@@ -16,8 +16,26 @@ const Edit = () => {
     dispatch(loadProductImage(keywords));
   };
 
-  const onSubmitForm = () => {
-    dispatch(createProduct);
+  const onSubmitForm = (values, { setSubmitting }) => {
+    console.log('values ', values);
+    const {
+      userName, productName, productType, selectedImage, selectedTag
+    } = values;
+    const payload = {
+      userName: userName,
+      productName: productName,
+      productType: productType,
+      selectedTag: selectedTag,
+      selectedImage: selectedImage,
+    };
+    console.log('payload ', payload);
+    // dispatch(createProduct);
+    setTimeout(() => {
+      // eslint-disable-next-line no-alert
+      alert(JSON.stringify(values, null, 2));
+    }, 500);
+
+    setSubmitting(false);
   };
 
   const initialValue = {

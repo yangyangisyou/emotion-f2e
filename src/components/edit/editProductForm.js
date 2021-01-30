@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 import {
@@ -19,6 +18,7 @@ const FormWrapper = styled(Form)`
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
+  padding: 20px;
   .edit-field {
     display: flex;
     justify-content: flex-start;
@@ -27,10 +27,14 @@ const FormWrapper = styled(Form)`
   }
   .edit-field-image {
     width: 80%;
+    flex-direction: column;
+      align-items: flex-start;
   }
 
   .edit-field-tag {
     width: 80%;
+    flex-direction: column;
+      align-items: flex-start;
   }
   
   .edit-field + .edit-field {
@@ -44,28 +48,22 @@ const FormWrapper = styled(Form)`
   }
 
   @media screen and (max-width: 768px) {
-    padding: 20px;
-
     .edit-field {
       width: 100%;
     }
 
     .edit-field-tag {
       width: 100%;
-      flex-direction: column;
-      align-items: flex-start;
     }
 
     .edit-field-image {
       width: 100%;
-      flex-direction: column;
-      align-items: flex-start;
     }
   }
 `;
 
 const Edit = ({
-  initialValue, recommandImages, onSearchRecommendImage, loadingRecommandImages
+  initialValue, recommandImages, onSearchRecommendImage, loadingRecommandImages, onSubmitForm
 }) => {
   return (
     <Formik
@@ -74,56 +72,124 @@ const Edit = ({
         ...props, recommandImages, onSearchRecommendImage, loadingRecommandImages
       }) }
       validationSchema={ validateEdit }
-      onSubmit={ onSubmit }
+      onSubmit={ onSubmitForm }
       enableReinitialize
     />
   );
 };
 
 const renderForm = ({
-  isSubmitting, recommandImages, onSearchRecommendImage, loadingRecommandImages, values, setFieldValue// , submitForm
+  isSubmitting, recommandImages, onSearchRecommendImage, loadingRecommandImages, values, setFieldValue, submitForm, touched, errors
 }) => {
   const imageList = recommandImages.map((element) => ({ reviewImage: element.previewURL, largeImage: element.largeImageURL }));
-  const [issubmit, setIsSubmit] = useState(false);
   return (
     <FormWrapper className="edit-form">
       <div className="edit-field">
         <span className="edit-type">Nickname：</span>
-        <TextField className="edit-input" name="userName" label="Your name" variant="outlined" onChange={ (element) => setFieldValue('userName', element.target.value) } />
+        <TextField
+          className="edit-input"
+          label="Your name"
+          variant="outlined"
+          id="userName"
+          name="userName"
+          value={ values.userName }
+          error={ touched.userName && Boolean(errors.userName) }
+          helperText={ touched.userName ? errors.userName : '' }
+          onChange={ (element) => setFieldValue('userName', element.target.value) }
+        />
       </div>
       <div className="edit-field">
         <span className="edit-type">Title：</span>
-        <TextField className="edit-input" name="productName" label="Your title" variant="outlined" onChange={ (element) => setFieldValue('productName', element.target.value) } />
+        <TextField
+          className="edit-input"
+          label="Your title"
+          name="productName"
+          variant="outlined"
+          value={ values.productName }
+          error={ touched.productName && Boolean(errors.productName) }
+          helperText={ touched.productName ? errors.productName : '' }
+          onChange={ (element) => setFieldValue('productName', element.target.value) }
+        />
       </div>
       <div className="edit-field">
         <span className="edit-type">Type：</span>
-        <RadioGroup className="edit-radiogroup" name="productType" aria-label="productType" onChange={ (element) => { setFieldValue('productType', element.target.value); onSearchRecommendImage(largeCatTable[element.target.value]); } }>
+        <RadioGroup
+          className="edit-radiogroup"
+          name="productType"
+          aria-label="productType"
+          error={ touched.productType && Boolean(errors.productType) }
+          helperText={ touched.productType ? errors.productType : '' }
+          onChange={ (element) => {
+            const value = element.target.value;
+            setFieldValue('productType', value);
+            if (value !== '99999') { onSearchRecommendImage(largeCatTable[value]); }
+          }
+        }
+        >
           { titleList.map((element) => <FormControlLabel value={ element.productNo } label={ element.productName } control={ <Radio /> } />) }
         </RadioGroup>
       </div>
-
+      {
+          console.log('values.productType   ', values.productType)
+        }
       {
         values.productType !== null
           ? (
             <>
-              <div className="edit-field edit-field-tag">
-                <span className="edit-type">Choose more specific tag：</span>
-                <TagList categoryNo={ values.productType } selectedNo={ values.selectedTagNo } onSelect={ (tagNo, tagName) => { setFieldValue('selectedTagNo', tagNo); setFieldValue('selectedTag', tagName); onSearchRecommendImage(tagName); } } />
-              </div>
-              <div className="edit-field edit-field-image">
-                <p>Recommend image：</p>
-                <ImageCardList
-                  imageList={ imageList }
-                  selectedNo={ values.selectedImageNo }
-                  isLoading={ loadingRecommandImages }
-                  onSelect={ (imageNo, imageLink) => { setFieldValue('selectedImage', imageLink); setFieldValue('selectedImageNo', imageNo); } }
-                />
-              </div>
+              {
+                values.productType === '99999'
+                  ? (
+                    <div className="edit-field edit-field-tag">
+                      <span className="edit-type">Your custom tag：</span>
+                      <TextField
+                        className="edit-input"
+                        label="Other tag"
+                        name="selectedTag"
+                        variant="outlined"
+                        onBlur={ (element) => { setFieldValue('selectedTag', element.target.value); values.selectedTag && onSearchRecommendImage(element.target.value); } }
+                      />
+                      {
+                        values.selectedTag && (
+                        <div className="edit-field edit-field-image">
+                          <p className="edit-type">Recommend image：</p>
+                          <ImageCardList
+                            imageList={ imageList }
+                            selectedNo={ values.selectedImageNo }
+                            isLoading={ loadingRecommandImages }
+                            onSelect={ (imageNo, imageLink) => { setFieldValue('selectedImage', imageLink); setFieldValue('selectedImageNo', imageNo); } }
+                          />
+                        </div>
+                        )
+                      }
+                    </div>
+                  ) : (
+                    <>
+                      <div className="edit-field edit-field-tag">
+                        <span className="edit-type">Choose more specific tag：</span>
+                        <TagList
+                          categoryNo={ values.productType }
+                          selectedNo={ values.selectedTagNo }
+                          onSelect={ (tagNo, tagName) => { setFieldValue('selectedTagNo', tagNo); setFieldValue('selectedTag', tagName); onSearchRecommendImage(tagName); } }
+                        />
+                      </div>
+                      <div className="edit-field edit-field-image">
+                        <p className="edit-type">Recommend image：</p>
+                        <ImageCardList
+                          imageList={ imageList }
+                          selectedNo={ values.selectedImageNo }
+                          isLoading={ loadingRecommandImages }
+                          onSelect={ (imageNo, imageLink) => { setFieldValue('selectedImage', imageLink); setFieldValue('selectedImageNo', imageNo); } }
+                        />
+                      </div>
+                    </>
+                  )
+              }
+
             </>
           ) : <></>
       }
       <Dialog
-        open={ issubmit }
+        open={ false }
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -147,8 +213,8 @@ const renderForm = ({
         variant="contained"
         color="primary"
         disabled={ isSubmitting }
-        onClick={ () => setIsSubmit(true) }
-        // onClick={ submitForm }
+        // onClick={ () => setIsSubmit(true) }
+        onClick={ submitForm }
       >
         Submit
       </Button>
@@ -156,14 +222,6 @@ const renderForm = ({
       <DebugFormik />
     </FormWrapper>
   );
-};
-
-const onSubmit = (values, { setSubmitting }) => {
-  setTimeout(() => {
-    setSubmitting(false);
-    // eslint-disable-next-line no-alert
-    alert(JSON.stringify(values, null, 2));
-  }, 500);
 };
 
 export default Edit;

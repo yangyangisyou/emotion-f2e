@@ -43,4 +43,5 @@ export const titleList = [
   { productName: 'Foodie', productNo: '10000' },
   { productName: 'Travel', productNo: '20000' },
   { productName: 'Cure', productNo: '30000' },
+  { productName: 'Other', productNo: '99999' },
 ];

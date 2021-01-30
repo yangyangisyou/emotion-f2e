@@ -6,7 +6,6 @@ const HeaderWrapper = styled.header`
   justify-content: flex-start;
   align-items: center;
   height: 70px; 
-  background: #fff url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/header-icons.png") 1448px -2px no-repeat;
   border-bottom: 1px solid #eee;
   .header-list {
     margin-left: 30px;
@@ -24,8 +23,8 @@ const HeaderWrapper = styled.header`
         letter-spacing: 1px;
       }
       a:hover {
-        color:#000;
-        cursor:pointer;
+        color: #000;
+        cursor: pointer;
       }
     }
 
