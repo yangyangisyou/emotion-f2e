@@ -31,7 +31,20 @@ const DebugFormik = ({ title }) => (
   <DebugWrapper>
     <div className="debug-title">Formik State{title ? ` - ${title}` : ''}</div>
     <FormikConsumer>
-      { (formikState) => <pre className="debug-state">{JSON.stringify(formikState, null, 2)}</pre> }
+      {({
+        validationSchema, validate, onSubmit, ...rest
+      }) => (
+        <pre
+          style={ {
+            fontSize: '.65rem',
+            padding: '.25rem .5rem',
+            overflowX: 'scroll',
+          } }
+        >
+          {JSON.stringify(rest, null, 2)}
+        </pre>
+      )}
+      {/* { (formikState) => <pre className="debug-state">{JSON.stringify(formikState, null, 2)}</pre> } */}
     </FormikConsumer>
   </DebugWrapper>
 );

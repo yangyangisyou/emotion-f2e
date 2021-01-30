@@ -22,7 +22,7 @@ const CardWrapper = styled.li`
   justify-content: space-around;
   border: grey 1px solid;
   border-radius: 10%;
-  background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.7)), url(${(props) => props.picture});
+  background-image: linear-gradient(rgba(255,255,255,${(props) => (props.selected ? 0 : 0.5)}), rgba(255,255,255,${(props) => (props.selected ? 0 : 0.5)})), url(${(props) => props.picture});
   background-size: cover;
   cursor: pointer;
   &:hover {
@@ -93,10 +93,10 @@ const CardWrapper = styled.li`
   }
 `;
 
-const Card = ({ product, isLoading }) => {
-  const {
-    productName, description, avatar, picture
-  } = product;
+const Card = ({
+  images, selected, onSelect, isLoading
+}) => {
+  const { reviewImage } = images;
   return (
     <>
       {
@@ -116,17 +116,7 @@ const Card = ({ product, isLoading }) => {
               </CardWrapper>
             )
             : (
-              <CardWrapper picture={ picture } description={ description }>
-                <div className="card-header">
-                  <div className="card-crapper">
-                    <img className="card-image" src={ avatar } alt="avatar" />
-                  </div>
-                  <p className="card-title">{productName}</p>
-                </div>
-                <div className="card-footer">
-                  <p className="card-content">{description}</p>
-                </div>
-              </CardWrapper>
+              <CardWrapper picture={ reviewImage } selected={ selected } onClick={ onSelect } />
             )
       }
     </>

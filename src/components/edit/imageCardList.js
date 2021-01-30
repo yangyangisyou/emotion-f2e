@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Card from '../card';
+import Card from './imageCard';
 
 const CardListWrapper = styled.ul`
   display: flex;
@@ -29,12 +29,14 @@ const CardListWrapper = styled.ul`
   }
 `;
 
-const ImageCardList = ({ productList, isLoading }) => {
-  console.log('productList ', productList);
+const ImageCardList = ({
+  imageList, selectedNo, onSelect, isLoading
+}) => {
+  console.log('imageList ', imageList);
   return (
     <>
       <CardListWrapper>
-        { productList.map((product, key) => <Card product={ product } isLoading={ isLoading } key={ key } />) }
+        { imageList.map((images, key) => <Card images={ images } isLoading={ isLoading } key={ key } selected={ selectedNo === key } onSelect={ () => onSelect(key, images.largeImage) } />) }
       </CardListWrapper>
     </>
   );

@@ -6,6 +6,8 @@ import {
 import { validateEdit } from '../../config/validate';
 import { titleList } from '../../config/table';
 import DebugFormik from '../../util/debugFormik';
+import ImageCardList from './imageCardList';
+import TagList from './tagList';
 
 const FormWrapper = styled(Form)`
   display: flex;
@@ -14,14 +16,18 @@ const FormWrapper = styled(Form)`
   flex-direction: column;
   .edit-field {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    width: 80%;
+  }
+  .image-field {
+    width: 80%;
   }
   .edit-field + .edit-field {
     margin-top: 20px;
   }
   .edit-input {
-    width: 500px;
+    /* width: 500px; */
   }
   .edit-radiogroup {
     display: flex;
@@ -36,37 +42,57 @@ const FormWrapper = styled(Form)`
   } */
 `;
 
-const Edit = ({ initialValue, recommandImages }) => {
+const Edit = ({ initialValue, recommandImages, onSearchRecommendImage }) => {
   return (
     <Formik
       initialValues={ initialValue }
-      render={ (props) => renderForm({ ...props, recommandImages }) }
+      render={ (props) => renderForm({ ...props, recommandImages, onSearchRecommendImage }) }
       validationSchema={ validateEdit }
       onSubmit={ onSubmit }
+      enableReinitialize
     />
   );
 };
 
-const renderForm = ({ submitForm, isSubmitting, recommandImages }) => {
-  console.log('recommandImages ', recommandImages);
+const renderForm = ({
+  submitForm, isSubmitting, recommandImages, onSearchRecommendImage, values, setFieldValue
+}) => {
   const imageList = recommandImages.map((element) => ({ reviewImage: element.previewURL, largeImage: element.largeImageURL }));
-  console.log('imageList', imageList);
-  const value = 'male';
   return (
     <FormWrapper className="edit-form">
       <div className="edit-field">
-        <TextField className="edit-input" name="userName" label="Your name" variant="outlined" />
+        <span>Nickname：</span>
+        <TextField className="edit-input" name="userName" label="Your name" variant="outlined" onChange={ (element) => setFieldValue('userName', element.target.value) } />
       </div>
       <div className="edit-field">
-        <TextField className="edit-input" name="productName" label="Your title" variant="outlined" />
+        <span>Title：</span>
+        <TextField className="edit-input" name="productName" label="Your title" variant="outlined" onChange={ (element) => setFieldValue('productName', element.target.value) } />
       </div>
       <div className="edit-field">
         <span>Type：</span>
-        <RadioGroup className="edit-radiogroup" aria-label="productType" name="productType" value={ value }>
+        <RadioGroup className="edit-radiogroup" name="productType" aria-label="productType" onChange={ (element) => setFieldValue('productType', element.target.value) }>
           { titleList.map((element) => <FormControlLabel value={ element.productNo } label={ element.productName } control={ <Radio /> } />) }
         </RadioGroup>
       </div>
-      <div className="edit-field" />
+
+      {
+        values.productType !== null
+          ? (
+            <div className="edit-field">
+              <span>Choose more specific tag：</span>
+              <TagList categoryNo="10000" selectedNo={ values.selectedTagNo } onSelect={ (tagNo, tagName) => { setFieldValue('selectedTagNo', tagNo); setFieldValue('selectedTag', tagName); onSearchRecommendImage(tagName); } } />
+            </div>
+          ) : <></>
+      }
+      {/* selectedTag */}
+      <div className="image-field">
+        <p>Recommend image：</p>
+        <ImageCardList
+          imageList={ imageList }
+          selectedNo={ values.selectedImageNo }
+          onSelect={ (imageNo, imageLink) => { setFieldValue('selectedImage', imageLink); setFieldValue('selectedImageNo', imageNo); } }
+        />
+      </div>
       <Button
         variant="contained"
         color="primary"

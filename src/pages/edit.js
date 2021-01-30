@@ -13,21 +13,29 @@ const Edit = () => {
   const recommandImages = useSelector((state) => state.asset.recommandImages);
   useEffect(() => {
     dispatch(loadProduct('10000', 1));
-    dispatch(loadProductImage('cat'));
+    onSearchRecommendImage('cat');
   }, []);
+  const onSearchRecommendImage = (keywords) => {
+    dispatch(loadProductImage(keywords));
+  };
   const initialValue = {
     productName: '',
     userName: '',
     avatar: '',
     description: '',
     picture: '',
+    productType: null,
+    selectedImageNo: null,
+    selectedImage: null,
+    selectedTagNo: null,
+    selectedTag: null,
     email: '',
     password: '',
   };
   console.log('recommandImages in edit', recommandImages);
   return (
     <EditWrapper>
-      <EditProductForm initialValue={ initialValue } recommandImages={ recommandImages } />
+      <EditProductForm initialValue={ initialValue } recommandImages={ recommandImages } onSearchRecommendImage={ onSearchRecommendImage } />
     </EditWrapper>
   );
 };
