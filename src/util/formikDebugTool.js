@@ -27,7 +27,7 @@ const DebugWrapper = styled.div`
     }
 `;
 
-const DebugFormik = ({ title }) => (
+const FormikDebugTool = ({ title }) => (
   <DebugWrapper>
     <div className="debug-title">Formik State{title ? ` - ${title}` : ''}</div>
     <FormikConsumer>
@@ -49,4 +49,4 @@ const DebugFormik = ({ title }) => (
   </DebugWrapper>
 );
 
-export default DebugFormik;
+export default FormikDebugTool;

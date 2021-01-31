@@ -3,6 +3,7 @@ const routePath = {
   root: '/',
   product: '/product',
   edit: '/edit',
+  canvas: '/canvas',
 };
 
 export default routePath;

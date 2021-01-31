@@ -3,27 +3,40 @@ import FoodieImage from '../assets/image/yummy.png';
 import TravelImage from '../assets/image/cool.png';
 import CureImage from '../assets/image/hug.png';
 
+export const CATEGORIES = {
+  FOODIE: '10000',
+  TRAVEL: '20000',
+  CURE: '30000',
+  OTHER: '99999',
+};
+
+export const largeCatTable = {
+  [CATEGORIES.FOODIE]: 'Foodie',
+  [CATEGORIES.TRAVEL]: 'Travel',
+  [CATEGORIES.CURE]: 'Cure',
+};
+
 // https://pngtree.com/so/eggplant-emoji
 export const landingImageTable = {
-  10000: FoodieImage,
-  20000: TravelImage,
-  30000: CureImage,
+  [CATEGORIES.FOODIE]: FoodieImage,
+  [CATEGORIES.TRAVEL]: TravelImage,
+  [CATEGORIES.CURE]: CureImage,
 };
 
 export const categories = {
-  10000: [
+  [CATEGORIES.FOODIE]: [
     { label: 'fruit', value: 10100 },
     { label: 'dessert', value: 10200 },
     { label: 'candy', value: 10300 },
     { label: 'dessert', value: 10400 },
   ],
-  20000: [
+  [CATEGORIES.TRAVEL]: [
     { label: 'relax', value: 20100 },
     { label: 'business', value: 20200 },
     { label: 'western', value: 20300 },
     { label: 'eastern', value: 20400 },
   ],
-  30000: [
+  [CATEGORIES.CURE]: [
     { label: 'cat', value: 30100 },
     { label: 'pet', value: 30200 },
     { label: 'child', value: 30300 },
@@ -33,15 +46,15 @@ export const categories = {
   ],
 };
 
-export const largeCatTable = {
-  10000: 'Foodie',
-  20000: 'Travel',
-  30000: 'Cure',
-};
+export const catList = [
+  { productName: 'Foodie', productNo: CATEGORIES.FOODIE },
+  { productName: 'Travel', productNo: CATEGORIES.TRAVEL },
+  { productName: 'Cure', productNo: CATEGORIES.CURE },
+  { productName: 'Other', productNo: CATEGORIES.OTHER },
+];
 
 export const titleList = [
-  { productName: 'Foodie', productNo: '10000' },
-  { productName: 'Travel', productNo: '20000' },
-  { productName: 'Cure', productNo: '30000' },
-  { productName: 'Other', productNo: '99999' },
+  { productName: 'Foodie', productNo: CATEGORIES.FOODIE },
+  { productName: 'Travel', productNo: CATEGORIES.TRAVEL },
+  { productName: 'Cure', productNo: CATEGORIES.CURE },
 ];
