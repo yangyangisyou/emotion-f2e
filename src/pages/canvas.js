@@ -8,6 +8,7 @@ const Canvas = () => {
     userName: 'coco',
     productName: 'apple',
     description: 'hello',
+    picture: 'https://fairylolita.com/wp-content/uploads/DSCF4415.jpg',
   };
   useEffect(() => {
     console.log('go');

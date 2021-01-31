@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import {
-  Stage, Layer, Text, Image
+  Stage, Layer, Text, Image, Rect
 } from 'react-konva';
 import useImage from 'use-image';
 import cool from '../assets/image/cool.png';
@@ -9,6 +9,9 @@ import hug from '../assets/image/hug.png';
 import yummy from '../assets/image/yummy.png';
 
 const CanvasFrame = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .canvas-tool {
     display: flex;
     justify-content: space-around;
@@ -28,17 +31,20 @@ const CanvasFrame = styled.div`
 `;
 
 const Canvas = ({ data }) => {
-  const { productName, description } = data;
+  const initialWidth = window.innerWidth;
+  const initialHeight = window.innerHeight;
+
+  const { productName, description, picture } = data;
+  const canvasRef = useRef();
   const [iconList, setIconList] = useState([]);
-  console.log('iconList ', iconList);
   const [productNameCoord, setProductNameCoord] = useState({
-    x: 300,
-    y: 300,
+    x: initialWidth / 2 - 300,
+    y: initialHeight / 2 - 270,
     isDragging: false,
   });
   const [descriptionCoord, setDescriptionCoord] = useState({
-    x: 400,
-    y: 400,
+    x: initialWidth / 2 - 300,
+    y: initialHeight / 2 - 200,
     isDragging: false,
   });
   console.log('data ', data);
@@ -65,8 +71,17 @@ const Canvas = ({ data }) => {
           <img className="canvas-tool-icon" src={ yummy } alt="icon-3" />
         </li>
       </ul>
-      <Stage width={ window.innerWidth } height={ window.innerHeight }>
+      <Stage width={ initialWidth } height={ initialHeight - 300 } ref={ canvasRef }>
         <Layer>
+          <BackgroundImage width={ initialWidth } image={ { x: 0, y: 0, src: picture } } />
+          <Rect
+            x={ initialWidth / 2 - 400 }
+            y={ 100 }
+            width={ initialWidth / 2 }
+            height={ initialHeight - 500 }
+            fill="white"
+            shadowBlur={ 10 }
+          />
           { iconList.map((element) => <URLImage image={ element } />) }
           <Text
             text={ productName }
@@ -111,12 +126,25 @@ const URLImage = ({ image }) => {
       image={ img }
       x={ image.x }
       y={ image.y }
-      // I will use offset to set origin to the center of the image
       offsetX={ img ? img.width / 2 : 0 }
       offsetY={ img ? img.height / 2 : 0 }
       width={ 100 }
       height={ 100 }
       draggable
+    />
+  );
+};
+
+const BackgroundImage = ({ image, width }) => {
+  const [img] = useImage(image.src);
+  return (
+    <Image
+      image={ img }
+      x={ image.x }
+      y={ image.y }
+      width={ width }
+      fill={ true }
+      opacity="0.3"
     />
   );
 };
