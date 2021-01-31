@@ -7,6 +7,7 @@ import useImage from 'use-image';
 import cool from '../assets/image/cool.png';
 import hug from '../assets/image/hug.png';
 import yummy from '../assets/image/yummy.png';
+import useWindowDimensions from '../util/useWindowDimensions';
 
 const CanvasFrame = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ const CanvasFrame = styled.div`
   .canvas-tool {
     display: flex;
     justify-content: space-around;
-    width: 80vw;  
+    width: 80vw;
     margin: 20px;
     padding: 10px;
     border: black 1px solid;
@@ -33,24 +34,24 @@ const CanvasFrame = styled.div`
 const Canvas = ({ data }) => {
   const initialWidth = window.innerWidth;
   const initialHeight = window.innerHeight;
-
+  const { width, height } = useWindowDimensions();
   const { productName, description, picture } = data;
   const canvasRef = useRef();
   const [iconList, setIconList] = useState([]);
   const [productNameCoord, setProductNameCoord] = useState({
-    x: initialWidth / 2 - 300,
-    y: initialHeight / 2 - 270,
+    x: (width / 100) * 40,
+    y: (height / 100) * 20,
     isDragging: false,
   });
   const [descriptionCoord, setDescriptionCoord] = useState({
-    x: initialWidth / 2 - 300,
-    y: initialHeight / 2 - 200,
+    x: (width / 100) * 40,
+    y: (height / 100) * 30,
     isDragging: false,
   });
   console.log('data ', data);
   const onCreateIcon = (image) => {
-    const newX = Math.floor(Math.random() * Math.floor(window.innerWidth));
-    const newY = Math.floor(Math.random() * Math.floor(window.innerHeight));
+    const newX = Math.floor(Math.random() * ((width / 100) * 80 - (width / 100) * 20) + (width / 100) * 20);
+    const newY = Math.floor(Math.random() * ((height / 100) * 70 - (height / 100) * 30) + (height / 100) * 30);
     setIconList([
       ...iconList,
       {
@@ -59,7 +60,7 @@ const Canvas = ({ data }) => {
     ]);
   };
   return (
-    <CanvasFrame>
+    <CanvasFrame ref={ canvasRef }>
       <ul className="canvas-tool">
         <li className="canvas-tool-element" onClick={ () => onCreateIcon(cool) }>
           <img className="canvas-tool-icon" src={ cool } alt="icon-1" />
@@ -71,14 +72,14 @@ const Canvas = ({ data }) => {
           <img className="canvas-tool-icon" src={ yummy } alt="icon-3" />
         </li>
       </ul>
-      <Stage width={ initialWidth } height={ initialHeight - 300 } ref={ canvasRef }>
+      <Stage width={ initialWidth } height={ initialHeight - 300 }>
         <Layer>
           <BackgroundImage width={ initialWidth } image={ { x: 0, y: 0, src: picture } } />
           <Rect
-            x={ initialWidth / 2 - 400 }
+            x={ (width / 100) * 20 }
             y={ 100 }
-            width={ initialWidth / 2 }
-            height={ initialHeight - 500 }
+            width={ (width / 100) * 60 }
+            height={ (height / 100) * 40 }
             fill="white"
             shadowBlur={ 10 }
           />
