@@ -4,6 +4,7 @@ import {
   Stage, Layer, Text, Image, Rect
 } from 'react-konva';
 import useImage from 'use-image';
+import { useHistory } from 'react-router-dom';
 import cool from '../../assets/image/cool.png';
 import hug from '../../assets/image/hug.png';
 import yummy from '../../assets/image/yummy.png';
@@ -16,14 +17,25 @@ const CanvasFrame = styled.div`
   .canvas-tool {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     width: 80vw;
     margin: 20px;
     padding: 10px;
     border: black 1px solid;
     border-radius: 10px;
-    .canvas-tool-icon {
+    .canvas-icon {
       width: 50px;
       height: 50px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .canvas-tool {
+      width: 90vw;
+      margin: 10px;
+      .canvas-icon {
+        width: 40px;
+        height: 40px;
+      }
     }
   }
   /* width: 500px;
@@ -32,6 +44,7 @@ const CanvasFrame = styled.div`
 `;
 
 const Canvas = ({ data }) => {
+  const history = useHistory();
   const initialWidth = window.innerWidth;
   const initialHeight = window.innerHeight;
   const { width, height } = useWindowDimensions();
@@ -63,13 +76,16 @@ const Canvas = ({ data }) => {
     <CanvasFrame ref={ canvasRef }>
       <ul className="canvas-tool">
         <li className="canvas-tool-element" onClick={ () => onCreateIcon(cool) }>
-          <img className="canvas-tool-icon" src={ cool } alt="icon-1" />
+          <img className="canvas-icon" src={ cool } alt="icon-1" />
         </li>
-        <li className="canvas-tool-image" onClick={ () => onCreateIcon(hug) }>
-          <img className="canvas-tool-icon" src={ hug } alt="icon-2" />
+        <li className="canvas-tool-element" onClick={ () => onCreateIcon(hug) }>
+          <img className="canvas-icon" src={ hug } alt="icon-2" />
         </li>
-        <li className="canvas-tool-image" onClick={ () => onCreateIcon(yummy) }>
-          <img className="canvas-tool-icon" src={ yummy } alt="icon-3" />
+        <li className="canvas-tool-element" onClick={ () => onCreateIcon(yummy) }>
+          <img className="canvas-icon" src={ yummy } alt="icon-3" />
+        </li>
+        <li className="canvas-tool-element" onClick={ () => history.push('/publish') }>
+          <p>SUBMIT</p>
         </li>
       </ul>
       <Stage width={ initialWidth } height={ initialHeight - 300 }>
