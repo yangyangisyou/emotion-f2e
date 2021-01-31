@@ -4,7 +4,9 @@ import {
   Stage, Layer, Text, Image
 } from 'react-konva';
 import useImage from 'use-image';
-// import icon from '../assets/image/cool.png';
+import cool from '../assets/image/cool.png';
+import hug from '../assets/image/hug.png';
+import yummy from '../assets/image/yummy.png';
 
 const CanvasFrame = styled.div`
   .canvas-tool {
@@ -15,6 +17,10 @@ const CanvasFrame = styled.div`
     padding: 10px;
     border: black 1px solid;
     border-radius: 10px;
+    .canvas-tool-icon {
+      width: 50px;
+      height: 50px;
+    }
   }
   /* width: 500px;
   height: 500px;
@@ -22,62 +28,74 @@ const CanvasFrame = styled.div`
 `;
 
 const Canvas = ({ data }) => {
-  const [iconList] = useState(
-    [
-      {
-        x: 50, y: 50, content: ''
-      },
-    ]
-  );
+  const { productName, description } = data;
+  const [iconList, setIconList] = useState([]);
   console.log('iconList ', iconList);
-  const [isDragging, setIsDragging] = useState(false);
-  const [x, setX] = useState(50);
-  const [y, setY] = useState(50);
+  const [productNameCoord, setProductNameCoord] = useState({
+    x: 300,
+    y: 300,
+    isDragging: false,
+  });
+  const [descriptionCoord, setDescriptionCoord] = useState({
+    x: 400,
+    y: 400,
+    isDragging: false,
+  });
   console.log('data ', data);
-  // const onCreateIcon = () => {
-
-  // };
+  const onCreateIcon = (image) => {
+    const newX = Math.floor(Math.random() * Math.floor(window.innerWidth));
+    const newY = Math.floor(Math.random() * Math.floor(window.innerHeight));
+    setIconList([
+      ...iconList,
+      {
+        x: newX, y: newY, src: image, key: iconList.length + 1
+      }
+    ]);
+  };
   return (
     <CanvasFrame>
       <ul className="canvas-tool">
-        <li className="canvas-tool-image">
-          image no.1
+        <li className="canvas-tool-element" onClick={ () => onCreateIcon(cool) }>
+          <img className="canvas-tool-icon" src={ cool } alt="icon-1" />
         </li>
-        <li className="canvas-tool-image">
-          image no.2
+        <li className="canvas-tool-image" onClick={ () => onCreateIcon(hug) }>
+          <img className="canvas-tool-icon" src={ hug } alt="icon-2" />
         </li>
-        <li className="canvas-tool-image">
-          image no.3
+        <li className="canvas-tool-image" onClick={ () => onCreateIcon(yummy) }>
+          <img className="canvas-tool-icon" src={ yummy } alt="icon-3" />
         </li>
       </ul>
       <Stage width={ window.innerWidth } height={ window.innerHeight }>
         <Layer>
-          <URLImage
-            image={ {
-              x: 100,
-              y: 100,
-              src: 'https://konvajs.org/assets/lion.png',
-            } }
-            // x={ 100 }
-            // y={ 100 }
-            // image="https://konvajs.org/assets/lion.png"
-          />
-          {/* <Image
-            x={ 100 }
-            y={ 100 }
-            image="../assets/image/cool.png"
-          /> */}
+          { iconList.map((element) => <URLImage image={ element } />) }
           <Text
-            text="Draggable Text"
-            x={ x }
-            y={ y }
+            text={ productName }
+            fontSize={ 30 }
+            x={ productNameCoord.x }
+            y={ productNameCoord.y }
             draggable
-            fill={ isDragging ? 'green' : 'black' }
-            onDragStart={ () => setIsDragging(true) }
+            onDragStart={ () => setProductNameCoord({ ...productNameCoord, isDragging: true }) }
             onDragEnd={ (element) => {
-              setIsDragging(false);
-              setX(element.target.x());
-              setY(element.target.y());
+              setProductNameCoord({
+                x: element.target.x(),
+                y: element.target.y(),
+                isDragging: false,
+              });
+            } }
+          />
+          <Text
+            text={ description }
+            fontSize={ 24 }
+            x={ descriptionCoord.x }
+            y={ descriptionCoord.y }
+            draggable
+            onDragStart={ () => setDescriptionCoord({ ...descriptionCoord, isDragging: true }) }
+            onDragEnd={ (element) => {
+              setDescriptionCoord({
+                x: element.target.x(),
+                y: element.target.y(),
+                isDragging: false,
+              });
             } }
           />
         </Layer>
@@ -96,6 +114,9 @@ const URLImage = ({ image }) => {
       // I will use offset to set origin to the center of the image
       offsetX={ img ? img.width / 2 : 0 }
       offsetY={ img ? img.height / 2 : 0 }
+      width={ 100 }
+      height={ 100 }
+      draggable
     />
   );
 };
