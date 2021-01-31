@@ -131,8 +131,6 @@ const renderForm = ({
           helperText={ touched.productType ? errors.productType : '' }
           onChange={ (element) => {
             const value = element.target.value;
-            console.log('value ', value);
-            console.log(typeof value);
             setFieldValue('productType', value);
             if (value !== CATEGORIES.OTHER) { onSearchRecommendImage(largeCatTable[value]); }
           }

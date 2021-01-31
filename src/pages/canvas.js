@@ -4,9 +4,10 @@ import Navbar from '../shared/components/Navbar';
 
 const Canvas = () => {
   const data = {
+    productType: '10000',
     userName: 'coco',
     productName: 'apple',
-    productType: '10000',
+    description: 'hello',
   };
   useEffect(() => {
     console.log('go');
