@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import CanvasBoard from '../components/canvas';
+import CanvasBoard from '../components/canvas/canvas';
 import Navbar from '../shared/components/Navbar';
+import StepFooter from '../shared/components/stepFooter';
 
 const Canvas = () => {
   const [data, setData] = useState({
@@ -22,6 +23,7 @@ const Canvas = () => {
     <>
       <Navbar />
       <CanvasBoard data={ data } />
+      <StepFooter activeStep={ 1 } />
     </>
   );
 };

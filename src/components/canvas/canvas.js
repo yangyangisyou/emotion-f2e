@@ -4,10 +4,10 @@ import {
   Stage, Layer, Text, Image, Rect
 } from 'react-konva';
 import useImage from 'use-image';
-import cool from '../assets/image/cool.png';
-import hug from '../assets/image/hug.png';
-import yummy from '../assets/image/yummy.png';
-import useWindowDimensions from '../util/useWindowDimensions';
+import cool from '../../assets/image/cool.png';
+import hug from '../../assets/image/hug.png';
+import yummy from '../../assets/image/yummy.png';
+import useWindowDimensions from '../../util/useWindowDimensions';
 
 const CanvasFrame = styled.div`
   display: flex;

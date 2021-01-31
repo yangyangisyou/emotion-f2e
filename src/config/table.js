@@ -58,3 +58,5 @@ export const titleList = [
   { productName: 'Travel', productNo: CATEGORIES.TRAVEL },
   { productName: 'Cure', productNo: CATEGORIES.CURE },
 ];
+
+export const editSteps = ['Filling', 'Painting', 'Publish'];

@@ -3,15 +3,14 @@ import { Formik, Form } from 'formik';
 import {
   Button, FormControlLabel, Radio, RadioGroup, TextField, Dialog, TextareaAutosize
 } from '@material-ui/core';
-// import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { validateEdit } from '../../config/validate';
 import { catList, largeCatTable, CATEGORIES } from '../../config/table';
-import FormikDebugTool from '../../util/formikDebugTool';
 import ImageCardList from './imageCardList';
+import { validateEdit } from '../../config/validate';
 import TagList from './tagList';
+// import FormikDebugTool from '../../util/formikDebugTool';
 
 const FormWrapper = styled(Form)`
   display: flex;
@@ -38,6 +37,11 @@ const FormWrapper = styled(Form)`
     }
   }
 
+  .edit-field-submit {
+    justify-content: center;
+    margin-bottom: 100px;
+  }
+
   .edit-field + .edit-field {
     margin-top: 20px;
   }
@@ -49,11 +53,11 @@ const FormWrapper = styled(Form)`
 
   @media screen and (max-width: 768px) {
     .edit-field {
-      width: 100vw;
+      width: 90vw;
     }
 
     .edit-field-newline {
-      width: 100vw;
+      width: 90vw;
     }
   }
 `;
@@ -225,17 +229,19 @@ const renderForm = ({
           </Button>
         </DialogActions> */}
       </Dialog>
-      <Button
-        variant="contained"
-        color="primary"
-        disabled={ isSubmitting }
+      <div className="edit-field edit-field-submit">
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={ isSubmitting }
         // onClick={ () => setIsSubmit(true) }
-        onClick={ submitForm }
-      >
-        Submit
-      </Button>
+          onClick={ submitForm }
+        >
+          Submit
+        </Button>
+      </div>
       {/* {isSubmitting && <LinearProgress />} */}
-      <FormikDebugTool />
+      {/* <FormikDebugTool /> */}
     </FormWrapper>
   );
 };

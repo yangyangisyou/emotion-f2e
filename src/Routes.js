@@ -3,6 +3,7 @@ import routePath from './config/routePath';
 import Home from './pages/home';
 import Product from './pages/product';
 import Edit from './pages/edit';
+import Publish from './pages/publish';
 import Canvas from './pages/canvas';
 import { initialHomeData } from './actions/SSR';
 
@@ -25,6 +26,10 @@ const Routes = [
   {
     path: routePath.canvas,
     component: Canvas,
+  },
+  {
+    path: routePath.publish,
+    component: Publish,
   },
 ];
 

@@ -5,6 +5,7 @@ import { loadProductImage } from '../actions/asset';
 // import { createProduct } from '../actions/product';
 import EditProductForm from '../components/edit/editProductForm';
 import Navbar from '../shared/components/Navbar';
+import StepFooter from '../shared/components/stepFooter';
 
 const EditWrapper = styled.div`
 `;
@@ -62,6 +63,7 @@ const Edit = () => {
     <EditWrapper>
       <Navbar />
       <EditProductForm initialValue={ initialValue } recommandImages={ recommandImages } onSearchRecommendImage={ onSearchRecommendImage } loadingRecommandImages={ loadingRecommandImages } onSubmitForm={ onSubmitForm } />
+      <StepFooter activeStep={ 0 } />
     </EditWrapper>
   );
 };
