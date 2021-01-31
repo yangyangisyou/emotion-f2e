@@ -111,14 +111,14 @@ const renderForm = ({
         <span className="edit-type">Description：</span>
         <TextareaAutosize
           className="edit-input"
-          name="decription"
-          value={ values.decription }
+          name="description"
+          value={ values.description }
           aria-label="Description"
           placeholder="Describe your share"
           rowsMin={ 6 }
-          error={ touched.decription && Boolean(errors.decription) }
-          helperText={ touched.decription ? errors.decription : '' }
-          onChange={ (element) => setFieldValue('decription', element.target.value) }
+          error={ touched.description && Boolean(errors.description) }
+          helperText={ touched.description ? errors.description : '' }
+          onChange={ (element) => setFieldValue('description', element.target.value) }
         />
       </div>
       <div className="edit-field edit-field-newline">

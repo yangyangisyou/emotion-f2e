@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import { loadProductImage } from '../actions/asset';
 // import { createProduct } from '../actions/product';
 import EditProductForm from '../components/edit/editProductForm';
@@ -9,6 +10,7 @@ const EditWrapper = styled.div`
 `;
 
 const Edit = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const recommandImages = useSelector((state) => state.asset.recommandImages);
   const loadingRecommandImages = useSelector((state) => state.asset.loadingRecommandImages);
@@ -19,22 +21,25 @@ const Edit = () => {
   const onSubmitForm = (values, { setSubmitting }) => {
     console.log('values ', values);
     const {
-      userName, productName, productType, selectedImage, selectedTag
+      userName, productName, productType, selectedImage, selectedTag, description
     } = values;
     const payload = {
       userName: userName,
       productName: productName,
+      description: description,
       productType: productType,
-      selectedTag: selectedTag,
-      selectedImage: selectedImage,
+      tag: selectedTag,
+      picture: selectedImage,
     };
+    localStorage.setItem('editStorage', JSON.stringify(payload));
     console.log('payload ', payload);
     // dispatch(createProduct);
-    setTimeout(() => {
-      // eslint-disable-next-line no-alert
-      alert(JSON.stringify(values, null, 2));
-    }, 500);
+    // setTimeout(() => {
+    //   // eslint-disable-next-line no-alert
+    //   alert(JSON.stringify(values, null, 2));
+    // }, 500);
 
+    history.push('/canvas');
     setSubmitting(false);
   };
 
