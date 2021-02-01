@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from '../shared/components/Navbar';
 import useQuery from '../util/query';
 import { loadProduct } from '../actions/product';
-import ProductInfo from '../components/productInfo';
+import ProductInfo from '../components/product/productInfo';
 
 const Product = () => {
   const query = useQuery();

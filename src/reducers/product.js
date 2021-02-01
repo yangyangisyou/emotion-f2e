@@ -4,10 +4,23 @@ const initState = {
   item: {},
   isLoadingItem: false,
   isLoadingProduct: false,
+  isSubmitting: false,
 };
 
 const productReducer = (state = initState, action) => {
   switch (action.type) {
+    case 'REQUEST_CREATE_PRODUCT': {
+      return {
+        ...state,
+        isSubmitting: true,
+      };
+    }
+    case 'CREATE_PRODUCT_SUCCESS': {
+      return {
+        ...state,
+        isSubmitting: false,
+      };
+    }
     case 'REQUEST_HOT_PRODUCT': {
       return state;
     }
@@ -40,7 +53,6 @@ const productReducer = (state = initState, action) => {
       };
     }
     case 'PRODUCT_LIST_SUCCESS': {
-      console.log('payload: ', action.payload);
       return {
         ...state,
         data: action.payload.data,

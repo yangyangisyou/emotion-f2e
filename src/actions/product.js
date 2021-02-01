@@ -1,6 +1,21 @@
 import { RSAA } from 'redux-api-middleware';
 import { API_PATH } from '../config/setting';
 
+export const createProduct = (payload) => {
+  return {
+    [RSAA]: {
+      endpoint: `${API_PATH}/product/create`,
+      method: 'POST',
+      body: JSON.stringify({ product: payload }),
+      types: [
+        'REQUEST_CREATE_PRODUCT',
+        'CREATE_PRODUCT_SUCCESS',
+        'FAILURE'
+      ]
+    }
+  };
+};
+
 export const loadHotProductsTitle = () => {
   return {
     [RSAA]: {
