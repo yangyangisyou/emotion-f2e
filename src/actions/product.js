@@ -7,7 +7,9 @@ export const uploadImage = (canvasImage) => {
     [RSAA]: {
       endpoint: `${API_PATH}/product/upload/image`,
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ image: canvasImage }),
+      // body: JSON.stringify({ image: canvasImage }),
       types: [
         'REQUEST_UPLOAD_IMAGE',
         'UPLOAD_IMAGE_SUCCESS',

@@ -19,7 +19,7 @@ const Edit = () => {
     dispatch(loadProductImage(keywords));
   };
 
-  const onSubmitForm = (values, { setSubmitting }) => {
+  const onSubmitForm = async (values, { setSubmitting }) => {
     const {
       userName, productName, productType, selectedImage, selectedTag, description
     } = values;
@@ -31,7 +31,7 @@ const Edit = () => {
       tag: selectedTag,
       picture: selectedImage,
     };
-    const result = dispatch(createProduct(payload));
+    const result = await new Promise((resolve) => resolve(dispatch(createProduct(payload))));
     if (result.payload && result.payload.success) {
       const productId = result.payload && result.payload.productId;
       localStorage.setItem('editStorage', JSON.stringify(payload));
