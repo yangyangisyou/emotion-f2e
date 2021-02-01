@@ -9,6 +9,15 @@ const initState = {
 
 const productReducer = (state = initState, action) => {
   switch (action.type) {
+    case 'REQUEST_UPLOAD_IMAGE': {
+      console.log('uploading...');
+      return state;
+    }
+    case 'UPLOAD_IMAGE_SUCCESS': {
+      console.log('success upload image');
+      console.log(action.payload);
+      return state;
+    }
     case 'REQUEST_CREATE_PRODUCT': {
       return {
         ...state,
