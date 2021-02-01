@@ -17,12 +17,16 @@ const FormWrapper = styled(Form)`
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  padding: 20px;
+  padding: 25px;
   .edit-field {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     width: 400px;
+  }
+
+  .edit-type {
+    white-space: nowrap;
   }
 
   .edit-input {
@@ -151,8 +155,8 @@ const renderForm = ({
                 values.productType === CATEGORIES.OTHER
                   ? (
                     <>
-                      <div className="edit-field edit-field-newline">
-                        <span className="edit-type">Your custom tag：</span>
+                      <div className="edit-field">
+                        <span className="edit-type">Custom tag：</span>
                         <TextField
                           className="edit-input"
                           label="Other tag"
