@@ -2,7 +2,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import Routes from './Routes';
 import SEORoute from './components/SEORoute';
-import './sass/all.scss';
+// import './sass/all.scss';
 
 const App = () => Routes.map((route, key) => {
   // match, location, history
