@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { TextField, Button } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
 
 const PublishWrapper = styled.div`
     display: flex;
@@ -29,8 +28,6 @@ const PublishWrapper = styled.div`
 `;
 
 const Publish = ({ publishLink }) => {
-  const history = useHistory();
-
   const onCopyText = () => {
     try {
       const text = document.getElementById('publishLink');

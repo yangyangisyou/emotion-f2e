@@ -1,5 +1,4 @@
-import { Route, Redirect } from 'react-router-dom';
-import { withRouter } from 'react-router';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 import Routes from './Routes';
 import SEORoute from './shared/SEORoute';
 import './sass/all.scss';

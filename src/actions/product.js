@@ -48,22 +48,19 @@ export const loadHotProductsTitle = () => {
   };
 };
 
-export const loadProduct = (productCat, productNo) => {
-  console.log(productCat, productNo);
+export const loadProduct = (productId) => {
+  console.log(productId);
   return {
-    type: 'PRODUCT_ITEM_SUCCESS'
+    [RSAA]: {
+      endpoint: `${API_PATH}/product/item/${productId}`,
+      method: 'GET',
+      types: [
+        'REQUEST_PRODUCT_ITEM',
+        'PRODUCT_ITEM_SUCCESS',
+        'FAILURE'
+      ]
+    }
   };
-  // return {
-  //   [RSAA]: {
-  //     endpoint: `${API_PATH}/product/item/${productCat}/${productNo}`,
-  //     method: 'GET',
-  //     types: [
-  //       'REQUEST_PRODUCT_ITEM',
-  //       'PRODUCT_ITEM_SUCCESS',
-  //       'FAILURE'
-  //     ]
-  //   }
-  // };
 };
 
 export const loadProductList = (productCat) => {
