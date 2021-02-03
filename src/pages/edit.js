@@ -58,7 +58,13 @@ const Edit = () => {
   return (
     <EditWrapper>
       <Navbar />
-      <EditProductForm initialValue={ initialValue } recommandImages={ recommandImages } onSearchRecommendImage={ onSearchRecommendImage } loadingRecommandImages={ loadingRecommandImages } onSubmitForm={ onSubmitForm } />
+      <EditProductForm
+        initialValue={ initialValue }
+        recommandImages={ recommandImages }
+        onSearchRecommendImage={ onSearchRecommendImage }
+        loadingRecommandImages={ loadingRecommandImages }
+        onSubmitForm={ onSubmitForm }
+      />
       <StepFooter activeStep={ 0 } />
     </EditWrapper>
   );

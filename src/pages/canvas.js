@@ -11,6 +11,7 @@ const Canvas = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const router = useRouter();
+  const productId = router.query.productId;
   const [data, setData] = useState({
     productType: '10000',
     userName: 'coco',
@@ -20,8 +21,6 @@ const Canvas = () => {
   });
   useEffect(() => {
     const dataFromStorage = localStorage.getItem('editStorage');
-    console.log('dataFromStorage ', dataFromStorage);
-    const productId = router.query.productId;
     if (dataFromStorage) {
       setData(JSON.parse(dataFromStorage));
     } else {
@@ -34,13 +33,13 @@ const Canvas = () => {
   }, []);
 
   const onUploadCanvas = async (canvasRef) => {
-    console.log('canvasRef ', canvasRef);
     const canvasImage = canvasRef.current.toDataURL();
-    console.log('canvasImage ', canvasImage);
-    const result = await new Promise((resolve) => resolve(dispatch(uploadImage(canvasImage))));
-    console.log('result ', result);
-    if (result.payload.success) {
-      const productId = result.payload.productId;
+    const uploadPayload = {
+      image: canvasImage,
+      productId: productId,
+    };
+    const result = await new Promise((resolve) => resolve(dispatch(uploadImage(uploadPayload))));
+    if (result.payload && result.payload.success) {
       history.push(`/publish?productId=${productId}`);
     }
   };

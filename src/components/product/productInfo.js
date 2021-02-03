@@ -11,6 +11,7 @@ const ProductInfoWrapper = styled.div`
 
 const ProductInfo = ({ item, isLoadingItem }) => {
   console.log('item ', item);
+  console.log('isLoadingItem ', isLoadingItem);
   if (isLoadingItem) {
     return <></>;
   } else {

@@ -30,7 +30,6 @@ const CardListWrapper = styled.ul`
 `;
 
 const CardList = ({ productList, isLoading }) => {
-  console.log('productList ', productList);
   return (
     <>
       <CardListWrapper>

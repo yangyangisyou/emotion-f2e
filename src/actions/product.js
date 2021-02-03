@@ -1,15 +1,14 @@
 import { RSAA } from 'redux-api-middleware';
 import { API_PATH } from '../config/setting';
 
-export const uploadImage = (canvasImage) => {
-  console.log('====>', { image: canvasImage });
+export const uploadImage = (payload) => {
+  console.log('====>', payload);
   return {
     [RSAA]: {
       endpoint: `${API_PATH}/product/upload/image`,
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ image: canvasImage }),
-      // body: JSON.stringify({ image: canvasImage }),
+      body: JSON.stringify(payload),
       types: [
         'REQUEST_UPLOAD_IMAGE',
         'UPLOAD_IMAGE_SUCCESS',
@@ -24,7 +23,8 @@ export const createProduct = (payload) => {
     [RSAA]: {
       endpoint: `${API_PATH}/product/create`,
       method: 'POST',
-      body: JSON.stringify({ payload }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
       types: [
         'REQUEST_CREATE_PRODUCT',
         'CREATE_PRODUCT_SUCCESS',

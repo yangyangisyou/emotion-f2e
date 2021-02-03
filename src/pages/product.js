@@ -1,18 +1,18 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import Navbar from '../shared/components/Navbar';
-import useQuery from '../util/query';
 import { loadProduct } from '../actions/product';
 import ProductInfo from '../components/product/productInfo';
+import useRouter from '../util/useRouter';
 
 const Product = () => {
-  const query = useQuery();
   const dispatch = useDispatch();
+  const router = useRouter();
   const item = useSelector((state) => state.product.item);
   const isLoadingItem = useSelector((state) => state.product.isLoadingItem);
-  const productNo = query.value.productNo;
+  const productId = router.query.productId;
   useEffect(() => {
-    dispatch(loadProduct('10000', productNo));
+    dispatch(loadProduct(productId));
   }, []);
   return (
     <>

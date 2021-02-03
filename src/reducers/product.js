@@ -2,7 +2,7 @@ const initState = {
   data: [{}, {}, {}, {}, {}, {}],
   titleList: [],
   item: {},
-  isLoadingItem: false,
+  isLoadingItem: true,
   isLoadingProduct: false,
   isSubmitting: false,
 };
@@ -46,12 +46,10 @@ const productReducer = (state = initState, action) => {
       };
     }
     case 'PRODUCT_ITEM_SUCCESS': {
-      const data = {
-        productName: 'Tofu', productNo: 5, description: 'It tastes like the pudding.', userName: 'Joanne', productCat: '10000', imageLink: 'https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png',
-      };
+      console.log('action.payload ', action.payload);
       return {
         ...state,
-        item: data,
+        item: action.payload.data,
         isLoadingItem: false,
       };
     }
