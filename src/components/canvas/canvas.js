@@ -1,13 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import {
   Stage, Layer, Text, Image, Rect
 } from 'react-konva';
 import useImage from 'use-image';
-import cool from '../../assets/image/cool.png';
-import hug from '../../assets/image/hug.png';
-import yummy from '../../assets/image/yummy.png';
+// import cool from '../../assets/image/cool.png';
+// import hug from '../../assets/image/hug.png';
+// import yummy from '../../assets/image/yummy.png';
 import useWindowDimensions from '../../util/useWindowDimensions';
+import { emojiList } from '../../config/table';
 
 const CanvasFrame = styled.div`
   display: flex;
@@ -42,12 +43,40 @@ const CanvasFrame = styled.div`
   border: black 1px solid; */
 `;
 
-const Canvas = ({ data, onUploadCanvas }) => {
+const EmojiList = styled.div`
+  display: flex;
+  flex: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  width: 80vw;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar:horizontal {
+    height: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparentize(#ccc, 0.7);
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: transparentize(#ccc, 0.5);
+    box-shadow: inset 0 0 2px rgba(0,0,0,0.5); 
+  }
+  .canvas-emoji {
+    margin-left: 20px;
+    cursor: pointer;
+    font-size: 40px;
+  }
+`;
+
+const Canvas = ({ data, onUploadCanvas, canvasRef }) => {
   const initialWidth = window.innerWidth;
   const initialHeight = window.innerHeight;
   const { width, height } = useWindowDimensions();
   const { productName, description, picture } = data;
-  let canvasRef = useRef(null);
   const [iconList, setIconList] = useState([]);
   const [productNameCoord, setProductNameCoord] = useState({
     x: (width / 100) * 40,
@@ -59,21 +88,22 @@ const Canvas = ({ data, onUploadCanvas }) => {
     y: (height / 100) * 30,
     isDragging: false,
   });
-  console.log('data ', data);
-  console.log('canvasRef ', canvasRef);
-  const onCreateIcon = (image) => {
-    const newX = Math.floor(Math.random() * ((width / 100) * 80 - (width / 100) * 20) + (width / 100) * 20);
-    const newY = Math.floor(Math.random() * ((height / 100) * 70 - (height / 100) * 30) + (height / 100) * 30);
-    setIconList([
-      ...iconList,
-      {
-        x: newX, y: newY, src: image, key: iconList.length + 1
-      }
-    ]);
-  };
+  // const onCreateIcon = (image) => {
+  //   const newX = Math.floor(Math.random() * ((width / 100) * 80 - (width / 100) * 20) + (width / 100) * 20);
+  //   const newY = Math.floor(Math.random() * ((height / 100) * 70 - (height / 100) * 30) + (height / 100) * 30);
+  //   setIconList([
+  //     ...iconList,
+  //     {
+  //       x: newX, y: newY, src: image, key: iconList.length + 1
+  //     }
+  //   ]);
+  // };
   return (
     <CanvasFrame>
-      <ul className="canvas-tool">
+      <EmojiList>
+        { emojiList.emotion.map((emoji) => <span className="canvas-emoji">{emoji}</span>) }
+      </EmojiList>
+      {/* <ul className="canvas-tool">
         <li className="canvas-tool-element" onClick={ () => onCreateIcon(cool) }>
           <img className="canvas-icon" src={ cool } alt="icon-1" />
         </li>
@@ -86,7 +116,7 @@ const Canvas = ({ data, onUploadCanvas }) => {
         <li className="canvas-tool-element" onClick={ () => onUploadCanvas(canvasRef) }>
           <p>SUBMIT</p>
         </li>
-      </ul>
+      </ul> */}
       <Stage width={ initialWidth } height={ initialHeight - 300 } ref={ canvasRef }>
         <Layer>
           <BackgroundImage width={ initialWidth } image={ { x: 0, y: 0, src: picture } } />

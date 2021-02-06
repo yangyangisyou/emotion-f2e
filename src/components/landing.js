@@ -38,7 +38,7 @@ const LandingWrapper = styled.div`
     }
     
     .landing-attract {
-      .avatar {
+      .landing-image {
         width: 150px;
         height: 150px;
         box-sizing: border-box;
@@ -82,10 +82,8 @@ const Landing = ({ imageLink }) => {
         <Link to="/edit"><Button variant="contained" color="primary">Try...</Button></Link>
       </div>
       <div className="landing-attract">
-        <div className="avatar">
-          <a href="https://codepen.io/MarioDesigns/">
-            <img src={ imageLink } alt="Skytsunami" />
-          </a>
+        <div className="landing-image">
+          <img src={ imageLink } alt="Skytsunami" />
         </div>
       </div>
     </LandingWrapper>

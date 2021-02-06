@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import CanvasBoard from '../components/canvas/canvas';
@@ -11,6 +11,7 @@ const Canvas = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const router = useRouter();
+  let canvasRef = useRef(null);
   const productId = router.query.productId;
   const [data, setData] = useState({
     productType: '10000',
@@ -32,8 +33,8 @@ const Canvas = () => {
     }
   }, []);
 
-  const onUploadCanvas = async (canvasRef) => {
-    const canvasImage = canvasRef.current.toDataURL();
+  const onUploadCanvas = async (ref) => {
+    const canvasImage = ref.current.toDataURL();
     const uploadPayload = {
       image: canvasImage,
       productId: productId,
@@ -46,8 +47,8 @@ const Canvas = () => {
   return (
     <>
       <Navbar />
-      <CanvasBoard data={ data } onUploadCanvas={ onUploadCanvas } />
-      <StepFooter activeStep={ 1 } />
+      <CanvasBoard data={ data } onUploadCanvas={ onUploadCanvas } canvasRef={ canvasRef } />
+      <StepFooter activeStep={ 1 } canvasRef={ canvasRef } onUploadCanvas={ onUploadCanvas } />
     </>
   );
 };
