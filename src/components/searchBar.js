@@ -24,10 +24,10 @@ const SearchBarWrapper = styled.div`
     }
 `;
 
-const SearchBar = ({ setCurrentCat, titleList }) => {
+const SearchBar = ({ setCurrentCat, titleList, onSnowingEmoji }) => {
   return (
     <SearchBarWrapper>
-      { titleList.map((record, key) => <div className="searchbar-link" key={ key } onClick={ () => setCurrentCat(record.productNo) }><p>{record.productName}</p></div>) }
+      { titleList.map((record, key) => <div className="searchbar-link" key={ key } onClick={ () => { setCurrentCat(record.productNo); onSnowingEmoji(); } }><p>{record.productName}</p></div>) }
     </SearchBarWrapper>
   );
 };
