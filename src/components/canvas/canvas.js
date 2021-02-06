@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import styled, { css } from 'styled-components';
 import {
   Stage, Layer, Text, Image, Rect
 } from 'react-konva';
@@ -28,6 +28,10 @@ const CanvasFrame = styled.div`
       height: 50px;
     }
   }
+  ${(props) => (props.currentCursor && props.currentCursor.emoji
+    ? css`cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='58' viewport='0 0 100 100' style='fill:black;font-size:30px;'><text y='50%'>${props.currentCursor.emoji}</text></svg>")16 0, auto;`
+    : css`cursor: pointer;`)}
+
   @media screen and (max-width: 768px) {
     .canvas-tool {
       width: 90vw;
@@ -72,11 +76,14 @@ const EmojiList = styled.div`
   }
 `;
 
-const Canvas = ({ data, onUploadCanvas, canvasRef }) => {
+const Canvas = ({ data, canvasRef }) => {
   const initialWidth = window.innerWidth;
   const initialHeight = window.innerHeight;
   const { width, height } = useWindowDimensions();
   const { productName, description, picture } = data;
+  const [currentCursor, setCurrentCursor] = useState(null);
+  const [mouseX, setMouseX] = useState();
+  const [mouseY, setmouseY] = useState();
   const [iconList, setIconList] = useState([]);
   const [productNameCoord, setProductNameCoord] = useState({
     x: (width / 100) * 40,
@@ -88,6 +95,32 @@ const Canvas = ({ data, onUploadCanvas, canvasRef }) => {
     y: (height / 100) * 30,
     isDragging: false,
   });
+  // console.log('currentCursor ', currentCursor);
+  console.log('iconList ', iconList);
+  useEffect(() => {
+    const update = (element) => {
+      setMouseX(element.x);
+      setmouseY(element.y);
+    };
+    window.addEventListener('mousemove', update);
+    window.addEventListener('touchmove', update);
+    return () => {
+      window.removeEventListener('mousemove', update);
+      window.removeEventListener('touchmove', update);
+    };
+  }, [setMouseX, setmouseY]);
+
+  const onCreateIcon = (cursor, x, y) => {
+    const icon = cursor.emoji;
+    const newX = x;
+    const newY = y;
+    setIconList([
+      ...iconList,
+      {
+        x: newX, y: newY, src: icon, key: iconList.length + 1
+      }
+    ]);
+  };
   // const onCreateIcon = (image) => {
   //   const newX = Math.floor(Math.random() * ((width / 100) * 80 - (width / 100) * 20) + (width / 100) * 20);
   //   const newY = Math.floor(Math.random() * ((height / 100) * 70 - (height / 100) * 30) + (height / 100) * 30);
@@ -99,9 +132,9 @@ const Canvas = ({ data, onUploadCanvas, canvasRef }) => {
   //   ]);
   // };
   return (
-    <CanvasFrame>
+    <CanvasFrame currentCursor={ currentCursor }>
       <EmojiList>
-        { emojiList.emotion.map((emoji) => <span className="canvas-emoji">{emoji}</span>) }
+        { emojiList.emotion.map((emoji, index) => <span className="canvas-emoji" onClick={ (e) => setCurrentCursor({ emoji: e.target.textContent, index: index }) }>{emoji}</span>) }
       </EmojiList>
       {/* <ul className="canvas-tool">
         <li className="canvas-tool-element" onClick={ () => onCreateIcon(cool) }>
@@ -117,7 +150,7 @@ const Canvas = ({ data, onUploadCanvas, canvasRef }) => {
           <p>SUBMIT</p>
         </li>
       </ul> */}
-      <Stage width={ initialWidth } height={ initialHeight - 300 } ref={ canvasRef }>
+      <Stage width={ initialWidth } height={ initialHeight - 300 } ref={ canvasRef } onClick={ () => currentCursor && onCreateIcon(currentCursor, mouseX, mouseY) }>
         <Layer>
           <BackgroundImage width={ initialWidth } image={ { x: 0, y: 0, src: picture } } />
           <Rect
