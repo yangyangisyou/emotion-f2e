@@ -16,9 +16,12 @@ const Home = () => {
   useEffect(() => {
     dispatch(loadProductList(currentCat));
   }, [currentCat]);
+  const linkList = [
+    { link: '/edit', text: 'CREATE' },
+  ];
   return (
     <>
-      <Navbar />
+      <Navbar linkList={ linkList } />
       <Landing imageLink={ landingImageTable[currentCat] } />
       <SearchBar titleList={ titleList } setCurrentCat={ setCurrentCat } />
       <CardList productList={ productList } isLoading={ isLoadingProduct } />

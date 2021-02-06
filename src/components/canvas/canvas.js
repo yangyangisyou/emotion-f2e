@@ -96,7 +96,7 @@ const Canvas = ({ data, canvasRef }) => {
     isDragging: false,
   });
   // console.log('currentCursor ', currentCursor);
-  console.log('iconList ', iconList);
+  console.log(mouseX, mouseY);
   useEffect(() => {
     const update = (element) => {
       setMouseX(element.x);
@@ -113,7 +113,7 @@ const Canvas = ({ data, canvasRef }) => {
   const onCreateIcon = (cursor, x, y) => {
     const icon = cursor.emoji;
     const newX = x;
-    const newY = y;
+    const newY = y - 100;
     setIconList([
       ...iconList,
       {
@@ -131,6 +131,7 @@ const Canvas = ({ data, canvasRef }) => {
   //     }
   //   ]);
   // };
+  console.log('iconList ', iconList);
   return (
     <CanvasFrame currentCursor={ currentCursor }>
       <EmojiList>
@@ -161,7 +162,10 @@ const Canvas = ({ data, canvasRef }) => {
             fill="white"
             shadowBlur={ 10 }
           />
-          { iconList.map((element) => <URLImage image={ element } />) }
+          { iconList.map((element) => {
+            return <Text text={ element.src } x={ element.x } y={ element.y } fontSize={ 40 } draggable />;
+          }) }
+          {/* { iconList.map((element) => <URLImage image={ element } />) } */}
           <Text
             text={ productName }
             fontSize={ 30 }
@@ -198,21 +202,21 @@ const Canvas = ({ data, canvasRef }) => {
   );
 };
 
-const URLImage = ({ image }) => {
-  const [img] = useImage(image.src, 'Anonymous');
-  return (
-    <Image
-      image={ img }
-      x={ image.x }
-      y={ image.y }
-      offsetX={ img ? img.width / 2 : 0 }
-      offsetY={ img ? img.height / 2 : 0 }
-      width={ 100 }
-      height={ 100 }
-      draggable
-    />
-  );
-};
+// const URLImage = ({ image }) => {
+//   const [img] = useImage(image.src, 'Anonymous');
+//   return (
+//     <Image
+//       image={ img }
+//       x={ image.x }
+//       y={ image.y }
+//       offsetX={ img ? img.width / 2 : 0 }
+//       offsetY={ img ? img.height / 2 : 0 }
+//       width={ 100 }
+//       height={ 100 }
+//       draggable
+//     />
+//   );
+// };
 
 const BackgroundImage = ({ image, width }) => {
   const [img] = useImage(image.src, 'Anonymous');

@@ -1,6 +1,7 @@
 import styled, { keyframes } from 'styled-components';
-import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { color } from '../config/var';
+// import Button from '@material-ui/core/Button';
+// import { Link } from 'react-router-dom';
 
 const float = keyframes`
   0% {
@@ -18,22 +19,24 @@ const float = keyframes`
 `;
 
 const LandingWrapper = styled.div`
-    padding-top: 80px;
-    padding-left: 100px;
-    background-color: lightblue;
-    height: 250px;
+    padding: 5vw 10vw;
+    background-color: ${color.primary};
     display: flex;
     justify-content: space-around;
+    font-family: 'Montserrat', sans-serif;
     .landing-intro {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       .landing-header {
           font-size: 40px;
+          font-weight: 700;
       }
       .landing-content {
           font-size: 24px;
-          margin: 20px auto;
+      }
+      .landing-header + .landing-content {
+        margin-top: 20px;
       }
     }
     
@@ -56,13 +59,12 @@ const LandingWrapper = styled.div`
     }
 
     @media screen and (max-width: 768px) {
-      padding: 40px;
-      background-color: lightblue;
       height: auto;
       display: flex;
       flex-direction: column-reverse;
       justify-content: center;
       align-items: center;
+      padding: 10vw;
       .landing-intro {
         align-items: center;
       }
@@ -77,9 +79,9 @@ const Landing = ({ imageLink }) => {
   return (
     <LandingWrapper>
       <div className="landing-intro">
-        <h1 className="landing-header">Let&apos;s create design.</h1>
-        <p className="landing-content">Just 3 steps make you colorful.</p>
-        <Link to="/edit"><Button variant="contained" color="primary">Try...</Button></Link>
+        <h1 className="landing-header">Showing your emotion！</h1>
+        <p className="landing-content">Enjoy sharing and creative.</p>
+        {/* <Link to="/edit"><Button variant="contained" color="primary">Try...</Button></Link> */}
       </div>
       <div className="landing-attract">
         <div className="landing-image">

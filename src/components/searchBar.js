@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import { color } from '../config/var';
 
 const SearchBarWrapper = styled.div`
-    height: 100px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    background-color: grey;
+    padding: 30px 10px;
+    background-color: ${color.secondary};
     .searchbar-link {
       display: flex;
       justify-content: center;
