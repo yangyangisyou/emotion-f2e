@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import CardList from '../components/home/cardList';
+import Guide from '../components/home/guide';
 import Navbar from '../shared/components/Navbar';
 import EmojiRain from '../shared/components/emojiRain';
 import Landing from '../components/landing';
@@ -8,7 +9,6 @@ import SearchBar from '../components/searchBar';
 import { loadProductList } from '../actions/product';
 import { landingImageTable, titleList } from '../config/table';
 import { onSnowingEmoji } from '../util/decorator';
-// import Modal from '../shared/components/Modal';
 
 const Home = () => {
   const [currentCat, setCurrentCat] = useState('10000');
@@ -27,8 +27,8 @@ const Home = () => {
       <Landing imageLink={ landingImageTable[currentCat] } />
       <SearchBar titleList={ titleList } setCurrentCat={ setCurrentCat } onSnowingEmoji={ onSnowingEmoji } />
       <CardList productList={ productList } isLoading={ isLoadingProduct } />
+      <Guide />
       <EmojiRain />
-      {/* <Modal /> */}
     </>
   );
 };

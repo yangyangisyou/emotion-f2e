@@ -1,6 +1,8 @@
 const initState = {
   recommandImages: [{}, {}, {}, {}, {}],
   loadingRecommandImages: true,
+  newsList: [],
+  loadingNewsList: false,
 };
 
 const productReducer = (state = initState, action) => {
@@ -16,6 +18,19 @@ const productReducer = (state = initState, action) => {
         ...state,
         recommandImages: action.payload.hits,
         loadingRecommandImages: false,
+      };
+    }
+    case 'REQUEST_NEWS_LIST': {
+      return {
+        ...state,
+        loadingNewsList: true,
+      };
+    }
+    case 'NEWS_LIST_SUCCESS': {
+      return {
+        ...state,
+        newsList: action.payload.data,
+        loadingNewsList: false,
       };
     }
     default: {

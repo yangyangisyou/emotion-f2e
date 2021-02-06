@@ -15,8 +15,9 @@ const SearchBarWrapper = styled.div`
       cursor: pointer;
       height: 100%;
       width: 150px;
-      & > p {
-        font-size: 20px;
+      .searchbar-link-text {
+        font-size: 16px;
+        text-transform: uppercase;
       }
     }
     .searchbar-link + .searchbar-link {
@@ -27,7 +28,7 @@ const SearchBarWrapper = styled.div`
 const SearchBar = ({ setCurrentCat, titleList, onSnowingEmoji }) => {
   return (
     <SearchBarWrapper>
-      { titleList.map((record, key) => <div className="searchbar-link" key={ key } onClick={ () => { setCurrentCat(record.productNo); onSnowingEmoji(record.productNo); } }><p>{record.productName}</p></div>) }
+      { titleList.map((record, key) => <div className="searchbar-link" key={ key } onClick={ () => { setCurrentCat(record.productNo); onSnowingEmoji(record.productNo); } }><h2 className="searchbar-link-text">{record.productName}</h2></div>) }
     </SearchBarWrapper>
   );
 };

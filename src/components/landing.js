@@ -19,7 +19,7 @@ const float = keyframes`
 `;
 
 const LandingWrapper = styled.div`
-    padding: 5vw 10vw;
+    padding: 10vh 10vw;
     background-color: ${color.primary};
     display: flex;
     justify-content: space-around;

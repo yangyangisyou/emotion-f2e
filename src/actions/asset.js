@@ -32,3 +32,18 @@ export const loadProductVideos = (keyword) => {
     }
   };
 };
+
+export const loadNewsList = (keyword) => {
+  return {
+    [RSAA]: {
+      endpoint: `${API_PATH}/asset/news/${keyword}`,
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      types: [
+        'REQUEST_NEWS_LIST',
+        'NEWS_LIST_SUCCESS',
+        'FAILURE'
+      ]
+    }
+  };
+};
