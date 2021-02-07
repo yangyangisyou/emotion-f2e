@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import styled, { css } from 'styled-components';
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import {
-  Stage, Layer, Text, Image, Rect
+  Stage, Layer, Text, Rect
 } from 'react-konva';
-import useImage from 'use-image';
-// import cool from '../../assets/image/cool.png';
-// import hug from '../../assets/image/hug.png';
-// import yummy from '../../assets/image/yummy.png';
 import useWindowDimensions from '../../util/useWindowDimensions';
-import { emojiList } from '../../config/table';
+import { emojiSelect } from '../../config/table';
+import BackgroundImage from '../../shared/components/backgroundImage';
+import { color } from '../../config/var';
 
 const CanvasFrame = styled.div`
   display: flex;
@@ -28,9 +26,6 @@ const CanvasFrame = styled.div`
       height: 50px;
     }
   }
-  ${(props) => (props.currentCursor && props.currentCursor.emoji
-    ? css`cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='58' viewport='0 0 100 100' style='fill:black;font-size:30px;'><text y='50%'>${props.currentCursor.emoji}</text></svg>")16 0, auto;`
-    : css`cursor: pointer;`)}
 
   @media screen and (max-width: 768px) {
     .canvas-tool {
@@ -42,37 +37,58 @@ const CanvasFrame = styled.div`
       }
     }
   }
-  /* width: 500px;
-  height: 500px;
-  border: black 1px solid; */
 `;
 
-const EmojiList = styled.div`
+const ToolsWrapper = styled.div`
   display: flex;
-  flex: auto;
-  overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-  width: 80vw;
-  &::-webkit-scrollbar {
-    width: 10px;
-  }
-  &::-webkit-scrollbar:horizontal {
-    height: 10px;
-  }
-  &::-webkit-scrollbar-track {
-    background-color: transparentize(#ccc, 0.7);
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: transparentize(#ccc, 0.5);
-    box-shadow: inset 0 0 2px rgba(0,0,0,0.5); 
-  }
-  .canvas-emoji {
-    margin-left: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  .tools-button {
+    padding: 10px 15px;
+    border-radius: 15px;
+    background-color: ${color.colorDark};
+    color: white;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 40px;
+  }
+  .tools-list {
+    display: flex;
+    flex: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    width: 80vw;
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+    &::-webkit-scrollbar:horizontal {
+      height: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: transparentize(#ccc, 0.7);
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background: transparentize(#ccc, 0.5);
+      box-shadow: inset 0 0 2px rgba(0,0,0,0.5); 
+    }
+    .canvas-emoji {
+      margin-left: 20px;
+      cursor: pointer;
+      font-size: 40px;
+    }
+  }
+
+  .tools-button + .tools-list {
+    margin-left: 20px;
+  }
+  @media screen and (max-width: 768px) {
+    padding: auto 2vw;
+    .tools-button + .tools-list {
+      margin-left: 0;
+    }
   }
 `;
 
@@ -81,9 +97,7 @@ const Canvas = ({ data, canvasRef }) => {
   const initialHeight = window.innerHeight;
   const { width, height } = useWindowDimensions();
   const { productName, description, picture } = data;
-  const [currentCursor, setCurrentCursor] = useState(null);
-  const [mouseX, setMouseX] = useState();
-  const [mouseY, setmouseY] = useState();
+  const [iconIndex, setIconIndex] = useState(0);
   const [iconList, setIconList] = useState([]);
   const [productNameCoord, setProductNameCoord] = useState({
     x: (width / 100) * 40,
@@ -95,25 +109,11 @@ const Canvas = ({ data, canvasRef }) => {
     y: (height / 100) * 30,
     isDragging: false,
   });
-  // console.log('currentCursor ', currentCursor);
-  console.log(mouseX, mouseY);
-  useEffect(() => {
-    const update = (element) => {
-      setMouseX(element.x);
-      setmouseY(element.y);
-    };
-    window.addEventListener('mousemove', update);
-    window.addEventListener('touchmove', update);
-    return () => {
-      window.removeEventListener('mousemove', update);
-      window.removeEventListener('touchmove', update);
-    };
-  }, [setMouseX, setmouseY]);
 
-  const onCreateIcon = (cursor, x, y) => {
-    const icon = cursor.emoji;
-    const newX = x;
-    const newY = y - 100;
+  const onCreateIcon = (image) => {
+    const icon = image;
+    const newX = Math.floor(Math.random() * ((width / 100) * 80 - (width / 100) * 20) + (width / 100) * 20);
+    const newY = Math.floor(Math.random() * ((height / 100) * 70 - (height / 100) * 30) + (height / 100) * 30);
     setIconList([
       ...iconList,
       {
@@ -121,22 +121,14 @@ const Canvas = ({ data, canvasRef }) => {
       }
     ]);
   };
-  // const onCreateIcon = (image) => {
-  //   const newX = Math.floor(Math.random() * ((width / 100) * 80 - (width / 100) * 20) + (width / 100) * 20);
-  //   const newY = Math.floor(Math.random() * ((height / 100) * 70 - (height / 100) * 30) + (height / 100) * 30);
-  //   setIconList([
-  //     ...iconList,
-  //     {
-  //       x: newX, y: newY, src: image, key: iconList.length + 1
-  //     }
-  //   ]);
-  // };
-  console.log('iconList ', iconList);
   return (
-    <CanvasFrame currentCursor={ currentCursor }>
-      <EmojiList>
-        { emojiList.emotion.map((emoji, index) => <span className="canvas-emoji" onClick={ (e) => setCurrentCursor({ emoji: e.target.textContent, index: index }) }>{emoji}</span>) }
-      </EmojiList>
+    <CanvasFrame>
+      <ToolsWrapper>
+        <div className="tools-button" onClick={ () => setIconIndex((iconIndex + 1) % 6) }>Change</div>
+        <div className="tools-list">
+          { emojiSelect[iconIndex].map((emoji, key) => <span className="canvas-emoji" onClick={ () => onCreateIcon(emoji) } key={ key }>{emoji}</span>) }
+        </div>
+      </ToolsWrapper>
       {/* <ul className="canvas-tool">
         <li className="canvas-tool-element" onClick={ () => onCreateIcon(cool) }>
           <img className="canvas-icon" src={ cool } alt="icon-1" />
@@ -151,7 +143,7 @@ const Canvas = ({ data, canvasRef }) => {
           <p>SUBMIT</p>
         </li>
       </ul> */}
-      <Stage width={ initialWidth } height={ initialHeight - 300 } ref={ canvasRef } onClick={ () => currentCursor && onCreateIcon(currentCursor, mouseX, mouseY) }>
+      <Stage width={ initialWidth } height={ initialHeight - 300 } ref={ canvasRef }>
         <Layer>
           <BackgroundImage width={ initialWidth } image={ { x: 0, y: 0, src: picture } } />
           <Rect
@@ -199,36 +191,6 @@ const Canvas = ({ data, canvasRef }) => {
         </Layer>
       </Stage>
     </CanvasFrame>
-  );
-};
-
-// const URLImage = ({ image }) => {
-//   const [img] = useImage(image.src, 'Anonymous');
-//   return (
-//     <Image
-//       image={ img }
-//       x={ image.x }
-//       y={ image.y }
-//       offsetX={ img ? img.width / 2 : 0 }
-//       offsetY={ img ? img.height / 2 : 0 }
-//       width={ 100 }
-//       height={ 100 }
-//       draggable
-//     />
-//   );
-// };
-
-const BackgroundImage = ({ image, width }) => {
-  const [img] = useImage(image.src, 'Anonymous');
-  return (
-    <Image
-      image={ img }
-      x={ image.x }
-      y={ image.y }
-      width={ width }
-      fill={ true }
-      opacity="0.3"
-    />
   );
 };
 

@@ -13,13 +13,14 @@ const Canvas = () => {
   const router = useRouter();
   let canvasRef = useRef(null);
   const productId = router.query.productId;
-  const [data, setData] = useState({
-    productType: '10000',
-    userName: 'coco',
-    productName: 'apple',
-    description: 'hello',
-    picture: 'https://fairylolita.com/wp-content/uploads/DSCF4415.jpg',
-  });
+  const [data, setData] = useState(null);
+  // {
+  //   productType: '10000',
+  //   userName: 'coco',
+  //   productName: 'apple',
+  //   description: 'hello',
+  //   picture: 'https://fairylolita.com/wp-content/uploads/DSCF4415.jpg',
+  // }
   useEffect(() => {
     const dataFromStorage = localStorage.getItem('editStorage');
     if (dataFromStorage) {
@@ -47,8 +48,8 @@ const Canvas = () => {
   return (
     <>
       <Navbar />
-      <CanvasBoard data={ data } onUploadCanvas={ onUploadCanvas } canvasRef={ canvasRef } />
-      <StepFooter activeStep={ 1 } stepRef={ canvasRef } onUploadCanvas={ onUploadCanvas } />
+      {data && <CanvasBoard data={ data } onUploadCanvas={ onUploadCanvas } canvasRef={ canvasRef } />}
+      <StepFooter activeStep={ 1 } stepRef={ canvasRef } onUploadCanvas={ onUploadCanvas } router={ router } />
     </>
   );
 };

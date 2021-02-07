@@ -44,6 +44,11 @@ const StepFooterWrapper = styled.div`
   }
 
   @media screen and (max-width: 768px) {
+    .footer-step-list {
+      margin-left: 0;
+      margin-right: 0;
+      padding: 0;
+    }
   }
 `;
 
@@ -59,9 +64,9 @@ const Button = styled.div`
 const renderLeftButton = (step, router) => {
   const productId = router.query.productId;
   if (step === 1) {
-    return <Button onClick={ () => { router.history.push(`/edit?productId=${productId}`); } }>Back</Button>;
+    return <Button onClick={ () => { router.history.push(`/edit?productId=${productId}`); } }>BACK</Button>;
   } else if (step === 2) {
-    return <Button onClick={ () => { router.history.push(`/canvas?productId=${productId}`); } }>Back</Button>;
+    return <Button onClick={ () => { router.history.push(`/canvas?productId=${productId}`); } }>BACK</Button>;
   } else {
     return <></>;
   }
@@ -74,7 +79,7 @@ const renderRightButton = (step, stepRef, onSubmitForm, onUploadCanvas) => {
         const { values } = stepRef.current;
         onSubmitForm(values);
       } }
-      >SUBMIT
+      >NEXT
       </Button>
     );
   } else if (step === 1) {
