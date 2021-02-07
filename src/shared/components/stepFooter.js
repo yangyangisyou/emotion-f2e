@@ -48,7 +48,17 @@ const StepFooterWrapper = styled.div`
   }
 `;
 
-const StepFooter = ({ activeStep, canvasRef, onUploadCanvas }) => {
+const StepFooter = ({
+  activeStep, stepRef, onUploadCanvas// onSubmitForm
+}) => {
+  const stepFunction = (step) => {
+    if (step === 0) {
+      const { values } = stepRef.current;
+      onSubmitForm(values);
+    } else if (step === 1) {
+      onUploadCanvas(stepRef);
+    }
+  };
   return (
     <StepFooterWrapper>
       <Stepper className="footer-step-list" activeStep={ activeStep }>
@@ -60,7 +70,7 @@ const StepFooter = ({ activeStep, canvasRef, onUploadCanvas }) => {
           );
         })}
       </Stepper>
-      <div onClick={ () => onUploadCanvas(canvasRef) }>SUBMIT</div>
+      <div onClick={ () => stepFunction(activeStep) }>SUBMIT</div>
     </StepFooterWrapper>
   );
 };

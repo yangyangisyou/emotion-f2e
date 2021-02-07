@@ -48,7 +48,7 @@ const Canvas = () => {
     <>
       <Navbar />
       <CanvasBoard data={ data } onUploadCanvas={ onUploadCanvas } canvasRef={ canvasRef } />
-      <StepFooter activeStep={ 1 } canvasRef={ canvasRef } onUploadCanvas={ onUploadCanvas } />
+      <StepFooter activeStep={ 1 } stepRef={ canvasRef } onUploadCanvas={ onUploadCanvas } />
     </>
   );
 };

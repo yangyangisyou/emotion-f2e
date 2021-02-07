@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 import {
-  Button, FormControlLabel, Radio, RadioGroup, TextField, Dialog, TextareaAutosize
+  FormControlLabel, Radio, RadioGroup, TextField, Dialog, TextareaAutosize
 } from '@material-ui/core';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -55,6 +55,11 @@ const FormWrapper = styled(Form)`
     flex-direction: row;
   }
 
+  .edit-error {
+    color: #f44336;
+    font-size: 0.75rem;
+  }
+
   @media screen and (max-width: 768px) {
     .edit-field {
       width: 90vw;
@@ -67,10 +72,12 @@ const FormWrapper = styled(Form)`
 `;
 
 const Edit = ({
-  initialValue, recommandImages, onSearchRecommendImage, loadingRecommandImages, onSubmitForm
+  initialValue, recommandImages, onSearchRecommendImage, loadingRecommandImages, onSubmitForm, editRef
 }) => {
   return (
     <Formik
+      innerRef={ editRef }
+      // ref={ (e) => { editRef.current = e; } }
       initialValues={ initialValue }
       render={ (props) => renderForm({
         ...props, recommandImages, onSearchRecommendImage, loadingRecommandImages
@@ -83,7 +90,7 @@ const Edit = ({
 };
 
 const renderForm = ({
-  isSubmitting, recommandImages, onSearchRecommendImage, loadingRecommandImages, values, setFieldValue, submitForm, touched, errors
+  recommandImages, onSearchRecommendImage, loadingRecommandImages, values, setFieldValue, touched, errors
 }) => {
   const imageList = recommandImages.map((element) => ({ reviewImage: element.previewURL, largeImage: element.largeImageURL }));
   return (
@@ -116,9 +123,10 @@ const renderForm = ({
         />
       </div>
       <div className="edit-field edit-field-newline">
-        <span className="edit-type">Description：</span>
+        <span className="edit-type">Description：<span className="edit-error">{touched.description ? errors.description : ''}</span></span>
         <TextareaAutosize
           className="edit-input"
+          id="description"
           name="description"
           value={ values.description }
           aria-label="Description"
@@ -130,7 +138,7 @@ const renderForm = ({
         />
       </div>
       <div className="edit-field edit-field-newline">
-        <span className="edit-type">Type：</span>
+        <span className="edit-type">Type：<span className="edit-error">{touched.selectedImage ? errors.selectedImage : ''}</span></span>
         <RadioGroup
           className="edit-input edit-input-radiogroup"
           name="productType"
@@ -233,7 +241,7 @@ const renderForm = ({
           </Button>
         </DialogActions> */}
       </Dialog>
-      <div className="edit-field edit-field-submit">
+      {/* <div className="edit-field edit-field-submit">
         <Button
           variant="contained"
           color="primary"
@@ -243,7 +251,7 @@ const renderForm = ({
         >
           Submit
         </Button>
-      </div>
+      </div> */}
       {/* {isSubmitting && <LinearProgress />} */}
       {/* <FormikDebugTool /> */}
     </FormWrapper>

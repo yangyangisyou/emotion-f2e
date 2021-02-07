@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
@@ -13,13 +14,14 @@ const EditWrapper = styled.div`
 const Edit = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const editRef = useRef(null);
   const recommandImages = useSelector((state) => state.asset.recommandImages);
   const loadingRecommandImages = useSelector((state) => state.asset.loadingRecommandImages);
   const onSearchRecommendImage = (keywords) => {
     dispatch(loadProductImage(keywords));
   };
 
-  const onSubmitForm = async (values, { setSubmitting }) => {
+  const onSubmitForm = async (values) => {
     const {
       userName, productName, productType, selectedImage, selectedTag, description
     } = values;
@@ -37,7 +39,6 @@ const Edit = () => {
       localStorage.setItem('editStorage', JSON.stringify(payload));
       history.push(`/canvas${productId ? `?productId=${productId}` : ''}`);
     }
-    setSubmitting(false);
   };
 
   const initialValue = {
@@ -48,11 +49,9 @@ const Edit = () => {
     picture: '',
     productType: null,
     selectedImageNo: null,
-    selectedImage: null,
+    selectedImage: '',
     selectedTagNo: null,
     selectedTag: null,
-    email: '',
-    password: '',
   };
 
   return (
@@ -64,8 +63,10 @@ const Edit = () => {
         onSearchRecommendImage={ onSearchRecommendImage }
         loadingRecommandImages={ loadingRecommandImages }
         onSubmitForm={ onSubmitForm }
+        editRef={ editRef }
+        // ref={ (e) => { editRef.current = e; } }
       />
-      <StepFooter activeStep={ 0 } />
+      <StepFooter activeStep={ 0 } stepRef={ editRef } onSubmitForm={ onSubmitForm } />
     </EditWrapper>
   );
 };
