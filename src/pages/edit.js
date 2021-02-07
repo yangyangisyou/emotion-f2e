@@ -7,11 +7,13 @@ import { createProduct } from '../actions/product';
 import EditProductForm from '../components/edit/editProductForm';
 import Navbar from '../shared/components/Navbar';
 import StepFooter from '../shared/components/stepFooter';
+import useRouter from '../util/useRouter';
 
 const EditWrapper = styled.div`
 `;
 
 const Edit = () => {
+  const router = useRouter();
   const history = useHistory();
   const dispatch = useDispatch();
   const editRef = useRef(null);
@@ -53,7 +55,6 @@ const Edit = () => {
     selectedTagNo: null,
     selectedTag: null,
   };
-
   return (
     <EditWrapper>
       <Navbar />
@@ -64,9 +65,8 @@ const Edit = () => {
         loadingRecommandImages={ loadingRecommandImages }
         onSubmitForm={ onSubmitForm }
         editRef={ editRef }
-        // ref={ (e) => { editRef.current = e; } }
       />
-      <StepFooter activeStep={ 0 } stepRef={ editRef } onSubmitForm={ onSubmitForm } />
+      <StepFooter activeStep={ 0 } stepRef={ editRef } onSubmitForm={ onSubmitForm } router={ router } />
     </EditWrapper>
   );
 };

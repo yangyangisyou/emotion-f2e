@@ -3,6 +3,7 @@ import {
   Stepper, StepLabel, Step
 } from '@material-ui/core';
 import { editSteps } from '../../config/table';
+import { color } from '../../config/var';
 
 const StepFooterWrapper = styled.div`
   position: fixed;
@@ -14,11 +15,9 @@ const StepFooterWrapper = styled.div`
   bottom: 0px;
   width: 100vw;
   background-color: white;
-  .footer-step-route {
 
-  }
   .footer-step-list {
-    width: 80vw;
+    width: 60vw;
     margin-left: 30px;
     margin-right: 30px;
     .header-link {
@@ -48,19 +47,49 @@ const StepFooterWrapper = styled.div`
   }
 `;
 
+const Button = styled.div`
+  padding: 10px 15px;
+  border-radius: 15px;
+  background-color: ${color.colorDark};
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+`;
+
+const renderLeftButton = (step, router) => {
+  const productId = router.query.productId;
+  if (step === 1) {
+    return <Button onClick={ () => { router.history.push(`/edit?productId=${productId}`); } }>Back</Button>;
+  } else if (step === 2) {
+    return <Button onClick={ () => { router.history.push(`/canvas?productId=${productId}`); } }>Back</Button>;
+  } else {
+    return <></>;
+  }
+};
+
+const renderRightButton = (step, stepRef, onUploadCanvas) => {
+  if (step === 0) {
+    return (
+      <Button onClick={ () => {
+        const { values } = stepRef.current;
+        onSubmitForm(values);
+      } }
+      >SUBMIT
+      </Button>
+    );
+  } else if (step === 1) {
+    return <Button onClick={ () => onUploadCanvas(stepRef) }>SUBMIT</Button>;
+  } else {
+    return <></>;
+  }
+};
+
 const StepFooter = ({
-  activeStep, stepRef, onUploadCanvas// onSubmitForm
+  activeStep, stepRef, onUploadCanvas, router
 }) => {
-  const stepFunction = (step) => {
-    if (step === 0) {
-      const { values } = stepRef.current;
-      onSubmitForm(values);
-    } else if (step === 1) {
-      onUploadCanvas(stepRef);
-    }
-  };
   return (
     <StepFooterWrapper>
+      { renderLeftButton(activeStep, router) }
       <Stepper className="footer-step-list" activeStep={ activeStep }>
         {editSteps.map((label) => {
           return (
@@ -70,7 +99,7 @@ const StepFooter = ({
           );
         })}
       </Stepper>
-      <div onClick={ () => stepFunction(activeStep) }>SUBMIT</div>
+      { renderRightButton(activeStep, stepRef, onUploadCanvas) }
     </StepFooterWrapper>
   );
 };

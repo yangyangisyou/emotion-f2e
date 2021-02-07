@@ -66,7 +66,7 @@ const Navbar = () => {
         <ul className="header-list">
           { linkList.map((element, key) => <li className="header-link" key={ key }><Link to={ element.link }>{element.text}</Link></li>) }
         </ul>
-        <div className="header-link header-link-action"><Link to="/">create</Link></div>
+        <div className="header-link header-link-action"><Link to="/edit">create</Link></div>
       </div>
     </HeaderWrapper>
   );

@@ -18,6 +18,7 @@ const FormWrapper = styled(Form)`
   align-items: flex-start;
   flex-direction: column;
   padding: 25px;
+  margin-bottom: 10vh;
   .edit-field {
     display: flex;
     justify-content: flex-start;
@@ -77,7 +78,6 @@ const Edit = ({
   return (
     <Formik
       innerRef={ editRef }
-      // ref={ (e) => { editRef.current = e; } }
       initialValues={ initialValue }
       render={ (props) => renderForm({
         ...props, recommandImages, onSearchRecommendImage, loadingRecommandImages
