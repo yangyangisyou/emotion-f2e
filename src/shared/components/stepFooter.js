@@ -65,8 +65,6 @@ const renderLeftButton = (step, router) => {
   const productId = router.query.productId;
   if (step === 1) {
     return <Button onClick={ () => { router.history.push(`/edit?productId=${productId}`); } }>BACK</Button>;
-  } else if (step === 2) {
-    return <Button onClick={ () => { router.history.push(`/canvas?productId=${productId}`); } }>BACK</Button>;
   } else {
     return <></>;
   }
@@ -89,23 +87,39 @@ const renderRightButton = (step, stepRef, onSubmitForm, onUploadCanvas) => {
   }
 };
 
+const onCopyText = (text) => {
+  try {
+    navigator.clipboard.writeText(text);
+    // const text = document.getElementById('publishLink');
+    // text.select();
+    // document.execCommand('Copy');
+  } catch (err) {
+    console.log('not copy');
+  }
+};
+
 const StepFooter = ({
-  activeStep, stepRef, onUploadCanvas, router, onSubmitForm
+  activeStep, stepRef, onUploadCanvas, router, onSubmitForm, publishLink
 }) => {
-  return (
-    <StepFooterWrapper>
-      { renderLeftButton(activeStep, router) }
-      <Stepper className="footer-step-list" activeStep={ activeStep }>
-        {editSteps.map((label) => {
-          return (
-            <Step key={ label }>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          );
-        })}
-      </Stepper>
-      { renderRightButton(activeStep, stepRef, onSubmitForm, onUploadCanvas) }
-    </StepFooterWrapper>
-  );
+  const isFinished = activeStep === 2;
+  if (isFinished) {
+    return <StepFooterWrapper><Button onClick={ () => onCopyText(publishLink) }>Copy your link</Button></StepFooterWrapper>;
+  } else {
+    return (
+      <StepFooterWrapper>
+        { renderLeftButton(activeStep, router) }
+        <Stepper className="footer-step-list" activeStep={ activeStep }>
+          {editSteps.map((label) => {
+            return (
+              <Step key={ label }>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            );
+          })}
+        </Stepper>
+        { renderRightButton(activeStep, stepRef, onSubmitForm, onUploadCanvas) }
+      </StepFooterWrapper>
+    );
+  }
 };
 export default StepFooter;

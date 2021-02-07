@@ -15,8 +15,8 @@ const Publish = () => {
   return (
     <>
       <Navbar />
-      <PublishProduct publishLink={ productLink } />
-      <StepFooter activeStep={ 2 } />
+      <PublishProduct />
+      <StepFooter activeStep={ 2 } publishLink={ productLink } router={ router } />
     </>
   );
 };
