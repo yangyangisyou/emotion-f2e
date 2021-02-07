@@ -1,4 +1,7 @@
 import styled, { keyframes } from 'styled-components';
+import { useEffect } from 'react';
+import { onSnowingEmoji } from '../../util/decorator';
+import EmojiRain from '../../shared/components/emojiRain';
 
 const float = keyframes`
   0% {
@@ -49,8 +52,15 @@ const PublishWrapper = styled.div`
 `;
 
 const Publish = () => {
+  useEffect(() => {
+    onSnowingEmoji('30000', 30);
+  }, []);
+  setInterval(() => {
+    onSnowingEmoji('30000', 10);
+  }, 3000);
   return (
     <PublishWrapper>
+      <EmojiRain />
       <p className="publish-attractText">🥳️</p>
       <h1 className="publish-field publish-field-title">Cheers, You finished your sharing！</h1>
       <p className="publish-field publish-field-content">You can simply download or just share the link to your friends.</p>

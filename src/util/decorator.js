@@ -1,7 +1,7 @@
-import { emojiList, largeCatTable } from '../config/table';
+import { emojiList, largeCatTable, CATEGORIES } from '../config/table';
 
-export const generateDrops = (searchType) => {
-  const selectedEmojiList = emojiList[largeCatTable[searchType]];
+export const generateDrops = (type) => {
+  const selectedEmojiList = emojiList[largeCatTable[type || CATEGORIES.OTHER]];
   const drop = document.createElement('div');
   drop.classList.add('drop');
   drop.innerText = selectedEmojiList[Math.floor(Math.random() * selectedEmojiList.length)];
@@ -10,8 +10,8 @@ export const generateDrops = (searchType) => {
   document.getElementsByClassName('rain')[0].appendChild(drop);
 };
 
-export const onSnowingEmoji = (searchType, count) => {
+export const onSnowingEmoji = (type, count) => {
   for (let i = 0; i <= (count || 50); i++) {
-    generateDrops(searchType);
+    generateDrops(type);
   }
 };
