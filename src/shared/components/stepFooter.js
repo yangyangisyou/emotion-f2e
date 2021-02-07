@@ -67,7 +67,7 @@ const renderLeftButton = (step, router) => {
   }
 };
 
-const renderRightButton = (step, stepRef, onUploadCanvas) => {
+const renderRightButton = (step, stepRef, onSubmitForm, onUploadCanvas) => {
   if (step === 0) {
     return (
       <Button onClick={ () => {
@@ -85,7 +85,7 @@ const renderRightButton = (step, stepRef, onUploadCanvas) => {
 };
 
 const StepFooter = ({
-  activeStep, stepRef, onUploadCanvas, router
+  activeStep, stepRef, onUploadCanvas, router, onSubmitForm
 }) => {
   return (
     <StepFooterWrapper>
@@ -99,7 +99,7 @@ const StepFooter = ({
           );
         })}
       </Stepper>
-      { renderRightButton(activeStep, stepRef, onUploadCanvas) }
+      { renderRightButton(activeStep, stepRef, onSubmitForm, onUploadCanvas) }
     </StepFooterWrapper>
   );
 };

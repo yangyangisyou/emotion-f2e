@@ -81,13 +81,14 @@ const Edit = ({
     <Formik
       innerRef={ editRef }
       initialValues={ initialValue }
-      render={ (props) => renderForm({
-        ...props, recommandImages, onSearchRecommendImage, loadingRecommandImages
-      }) }
       validationSchema={ validateEdit }
       onSubmit={ onSubmitForm }
-      enableReinitialize
-    />
+      enableReinitialize={ true }
+    >
+      { (props) => renderForm({
+        ...props, recommandImages, onSearchRecommendImage, loadingRecommandImages
+      }) }
+    </Formik>
   );
 };
 
@@ -136,7 +137,6 @@ const renderForm = ({
             placeholder="Describe your share"
             rowsMin={ 6 }
             error={ touched.description && Boolean(errors.description) }
-            helperText={ touched.description ? errors.description : '' }
             onChange={ (element) => setFieldValue('description', element.target.value) }
           />
         </div>
@@ -147,7 +147,6 @@ const renderForm = ({
             name="productType"
             aria-label="productType"
             error={ touched.productType && Boolean(errors.productType) }
-            helperText={ touched.productType ? errors.productType : '' }
             onChange={ (element) => {
               const value = element.target.value;
               setFieldValue('productType', value);
@@ -155,7 +154,7 @@ const renderForm = ({
             }
         }
           >
-            { catList.map((element) => <FormControlLabel value={ element.productNo } label={ element.productName } control={ <Radio /> } />) }
+            { catList.map((element, key) => <FormControlLabel value={ element.productNo } label={ element.productName } key={ key } control={ <Radio /> } />) }
           </RadioGroup>
         </div>
       </div>
