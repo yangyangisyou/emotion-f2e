@@ -24,20 +24,67 @@ const CardListWrapper = styled.ul`
     box-shadow: inset 0 0 2px rgba(0,0,0,0.5); 
   }
   @media screen and (max-width: 768px) {
-    /* body {
-      background-color: olive;
-    } */
   }
 `;
 
+const EmptyCardListWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10vh 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  line-height: 40px;
+  font-weight: bold;
+  .emptycardlist-emoji {
+    font-size: 60px;
+  }
+
+  .emptycardlist-textWrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .emptycardlist-emoji + .emptycardlist-textWrap {
+    margin-left: 5vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    .emptycardlist-emoji + .emptycardlist-textWrap {
+      margin-left: 0;
+      margin-top: 5vh;
+
+    }
+  }
+
+`;
+
 const CardList = ({ productList, isLoading }) => {
-  return (
-    <>
-      <CardListWrapper>
-        { productList.map((product, key) => <Card product={ product } isLoading={ isLoading } key={ key } />) }
-      </CardListWrapper>
-    </>
-  );
+  const productCount = productList.length;
+  console.log('productCount ', productCount);
+  if (productCount) {
+    return (
+      <>
+        <CardListWrapper>
+          { productList.map((product, key) => <Card product={ product } isLoading={ isLoading } key={ key } />) }
+        </CardListWrapper>
+      </>
+    );
+  } else {
+    return (
+      <EmptyCardListWrapper>
+        <p className="emptycardlist-emoji">🤔</p>
+        <div className="emptycardlist-textWrap">
+          <p>It seems like nobody share this category.</p>
+          <p>Let&apos;s be the first person to share！</p>
+        </div>
+      </EmptyCardListWrapper>
+    );
+  }
 };
 
 export default CardList;

@@ -7,6 +7,7 @@ const fall = keyframes`
 `;
 
 const RainWrapper = styled.div`
+    position: fixed;
   min-height: 105vh;
   display: flex;
   align-items: center;

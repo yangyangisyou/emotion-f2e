@@ -1,8 +1,5 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import styled from 'styled-components';
 import { color } from '../../config/var';
-import { loadNewsList } from '../../actions/asset';
 
 const GuideWrapper = styled.div`
     background-color: ${color.mutedBlue};
@@ -14,6 +11,8 @@ const GuideWrapper = styled.div`
     .guide-title {
         font-size: 30px;
         font-weight: 600;
+        text-align: center;
+        display: flex;
     }
     .guide-news-list {
         display: flex;
@@ -42,6 +41,12 @@ const GuideWrapper = styled.div`
     .guide-title + .guide-news-list {
         margin-top: 50px;
     }
+
+    @media screen and (max-width: 768px) {
+      .guide-title {
+        flex-direction: column;
+      }
+    }
 `;
 
 const NewsWrapper = styled.li`
@@ -59,23 +64,21 @@ const NewsWrapper = styled.li`
         font-weight: bold;
         font-size: 24px;
         color: white;
+        text-align: center;
     }
 `;
 
 // https://newsapi.org/
-const Guide = () => {
-  const dispatch = useDispatch();
-  const newsList = useSelector((state) => state.asset.newsList);
-  console.log('newsList ', newsList);
-  useEffect(() => {
-    dispatch(loadNewsList('foodie'));
-  }, []);
+const Guide = ({ newsList }) => {
   return (
     <GuideWrapper>
-      <h3 className="guide-title">No ideas？ Check out today&apos;s news below</h3>
+      <h3 className="guide-title">
+        <p>No ideas？</p>
+        <p>Check out related news</p>
+      </h3>
       <ul className="guide-news-list">
-        { newsList.map((news) => (
-          <NewsWrapper onClick={ () => open(news.url, '_blank') } image={ news.image }>
+        { newsList.map((news, key) => (
+          <NewsWrapper onClick={ () => open(news.url, '_blank') } image={ news.image } key={ key }>
             <h4 className="guide-news-title">{news.title}</h4>
           </NewsWrapper>
         )) }

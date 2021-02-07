@@ -62,7 +62,7 @@ const productReducer = (state = initState, action) => {
     case 'PRODUCT_LIST_SUCCESS': {
       return {
         ...state,
-        data: action.payload.data,
+        data: action.payload.data.Items,
         isLoadingProduct: false,
       };
     }

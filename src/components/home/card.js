@@ -1,4 +1,6 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
+import catAvatar from '../../assets/image/catAvatar.png';
+import defaultCard from '../../assets/image/defaultCard.jpeg';
 
 const loading = keyframes`
   0% {
@@ -22,7 +24,9 @@ const CardWrapper = styled.li`
   justify-content: space-around;
   border: grey 1px solid;
   border-radius: 10%;
-  background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.7)), url(${(props) => props.picture});
+  ${(props) => props.isLoading === false && css`
+  background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.7)), url(${props.picture || defaultCard});
+  `}
   background-size: cover;
   cursor: pointer;
   &:hover {
@@ -116,10 +120,10 @@ const Card = ({ product, isLoading }) => {
               </CardWrapper>
             )
             : (
-              <CardWrapper picture={ picture } description={ description }>
+              <CardWrapper picture={ picture } description={ description } isLoading={ isLoading }>
                 <div className="card-header">
                   <div className="card-crapper">
-                    <img className="card-image" src={ avatar } alt="avatar" />
+                    <img className="card-image" src={ avatar || catAvatar } alt="avatar" />
                   </div>
                   <p className="card-title">{productName}</p>
                 </div>

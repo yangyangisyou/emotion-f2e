@@ -54,14 +54,17 @@ const HeaderWrapper = styled.header`
     width: 100%;
   }
 `;
+const linkList = [
+  { link: '/edit', text: 'CREATE' },
+];
 
-const Navbar = ({ linkList }) => {
+const Navbar = () => {
   return (
     <HeaderWrapper>
       <div className="header-link header-link-home"><Link to="/">Emotion</Link></div>
       <div className="header-around">
         <ul className="header-list">
-          { linkList.map((element) => <li className="header-link"><Link to={ element.link }>{element.text}</Link></li>) }
+          { linkList.map((element, key) => <li className="header-link" key={ key }><Link to={ element.link }>{element.text}</Link></li>) }
         </ul>
         <div className="header-link header-link-action"><Link to="/">create</Link></div>
       </div>
