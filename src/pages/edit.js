@@ -1,9 +1,9 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { loadProductImage } from '../actions/asset';
-import { createProduct } from '../actions/product';
+import { createProduct, loadProduct } from '../actions/product';
 import EditProductForm from '../components/edit/editProductForm';
 import Navbar from '../shared/components/Navbar';
 import StepFooter from '../shared/components/stepFooter';
@@ -19,6 +19,36 @@ const Edit = () => {
   const editRef = useRef(null);
   const recommandImages = useSelector((state) => state.asset.recommandImages);
   const loadingRecommandImages = useSelector((state) => state.asset.loadingRecommandImages);
+  const [initialData, setInitialData] = useState(null);
+  useEffect(() => {
+    const productId = router.query.productId;
+    if (productId) {
+      const dataFromStorage = localStorage.getItem('editStorage');
+      if (dataFromStorage) {
+        setInitialData(JSON.parse(dataFromStorage));
+      } else {
+        const result = dispatch(loadProduct(productId));
+        if (result.payload && result.payload.success) {
+          const payload = result.payload;
+          setInitialData(JSON.parse(payload));
+        }
+      }
+    } else {
+      setInitialData({
+        productName: '',
+        userName: '',
+        avatar: '',
+        description: '',
+        picture: '',
+        productType: null,
+        selectedImageNo: null,
+        selectedImage: '',
+        selectedTagNo: null,
+        selectedTag: null,
+      });
+    }
+  }, []);
+
   const onSearchRecommendImage = (keywords) => {
     dispatch(loadProductImage(keywords));
   };
@@ -42,30 +72,19 @@ const Edit = () => {
       history.push(`/canvas${productId ? `?productId=${productId}` : ''}`);
     }
   };
-
-  const initialValue = {
-    productName: '',
-    userName: '',
-    avatar: '',
-    description: '',
-    picture: '',
-    productType: null,
-    selectedImageNo: null,
-    selectedImage: '',
-    selectedTagNo: null,
-    selectedTag: null,
-  };
   return (
     <EditWrapper>
       <Navbar />
+      {initialData && (
       <EditProductForm
-        initialValue={ initialValue }
+        initialValue={ initialData }
         recommandImages={ recommandImages }
         onSearchRecommendImage={ onSearchRecommendImage }
         loadingRecommandImages={ loadingRecommandImages }
         onSubmitForm={ onSubmitForm }
         editRef={ editRef }
       />
+      )}
       <StepFooter activeStep={ 0 } stepRef={ editRef } onSubmitForm={ onSubmitForm } router={ router } />
     </EditWrapper>
   );

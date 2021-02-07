@@ -14,8 +14,6 @@ import TagList from './tagList';
 
 const FormWrapper = styled(Form)`
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
   flex-direction: column;
   padding: 25px;
   margin-bottom: 10vh;
@@ -61,6 +59,10 @@ const FormWrapper = styled(Form)`
     font-size: 0.75rem;
   }
 
+  .edit-wrap-center {
+    align-items: center;
+  }
+
   @media screen and (max-width: 768px) {
     .edit-field {
       width: 90vw;
@@ -95,65 +97,67 @@ const renderForm = ({
   const imageList = recommandImages.map((element) => ({ reviewImage: element.previewURL, largeImage: element.largeImageURL }));
   return (
     <FormWrapper className="edit-form">
-      <div className="edit-field">
-        <span className="edit-type">Nickname：</span>
-        <TextField
-          className="edit-input"
-          label="Your name"
-          variant="outlined"
-          id="userName"
-          name="userName"
-          value={ values.userName }
-          error={ touched.userName && Boolean(errors.userName) }
-          helperText={ touched.userName ? errors.userName : '' }
-          onChange={ (element) => setFieldValue('userName', element.target.value) }
-        />
-      </div>
-      <div className="edit-field">
-        <span className="edit-type">Title：</span>
-        <TextField
-          className="edit-input"
-          label="Your title"
-          name="productName"
-          variant="outlined"
-          value={ values.productName }
-          error={ touched.productName && Boolean(errors.productName) }
-          helperText={ touched.productName ? errors.productName : '' }
-          onChange={ (element) => setFieldValue('productName', element.target.value) }
-        />
-      </div>
-      <div className="edit-field edit-field-newline">
-        <span className="edit-type">Description：<span className="edit-error">{touched.description ? errors.description : ''}</span></span>
-        <TextareaAutosize
-          className="edit-input"
-          id="description"
-          name="description"
-          value={ values.description }
-          aria-label="Description"
-          placeholder="Describe your share"
-          rowsMin={ 6 }
-          error={ touched.description && Boolean(errors.description) }
-          helperText={ touched.description ? errors.description : '' }
-          onChange={ (element) => setFieldValue('description', element.target.value) }
-        />
-      </div>
-      <div className="edit-field edit-field-newline">
-        <span className="edit-type">Type：<span className="edit-error">{touched.selectedImage ? errors.selectedImage : ''}</span></span>
-        <RadioGroup
-          className="edit-input edit-input-radiogroup"
-          name="productType"
-          aria-label="productType"
-          error={ touched.productType && Boolean(errors.productType) }
-          helperText={ touched.productType ? errors.productType : '' }
-          onChange={ (element) => {
-            const value = element.target.value;
-            setFieldValue('productType', value);
-            if (value !== CATEGORIES.OTHER) { onSearchRecommendImage(largeCatTable[value]); }
-          }
+      <div className="edit-wrap-center">
+        <div className="edit-field">
+          <span className="edit-type">Nickname：</span>
+          <TextField
+            className="edit-input"
+            label="Your name"
+            variant="outlined"
+            id="userName"
+            name="userName"
+            value={ values.userName }
+            error={ touched.userName && Boolean(errors.userName) }
+            helperText={ touched.userName ? errors.userName : '' }
+            onChange={ (element) => setFieldValue('userName', element.target.value) }
+          />
+        </div>
+        <div className="edit-field">
+          <span className="edit-type">Title：</span>
+          <TextField
+            className="edit-input"
+            label="Your title"
+            name="productName"
+            variant="outlined"
+            value={ values.productName }
+            error={ touched.productName && Boolean(errors.productName) }
+            helperText={ touched.productName ? errors.productName : '' }
+            onChange={ (element) => setFieldValue('productName', element.target.value) }
+          />
+        </div>
+        <div className="edit-field edit-field-newline">
+          <span className="edit-type">Description：<span className="edit-error">{touched.description ? errors.description : ''}</span></span>
+          <TextareaAutosize
+            className="edit-input"
+            id="description"
+            name="description"
+            value={ values.description }
+            aria-label="Description"
+            placeholder="Describe your share"
+            rowsMin={ 6 }
+            error={ touched.description && Boolean(errors.description) }
+            helperText={ touched.description ? errors.description : '' }
+            onChange={ (element) => setFieldValue('description', element.target.value) }
+          />
+        </div>
+        <div className="edit-field edit-field-newline">
+          <span className="edit-type">Type：<span className="edit-error">{touched.selectedImage ? errors.selectedImage : ''}</span></span>
+          <RadioGroup
+            className="edit-input edit-input-radiogroup"
+            name="productType"
+            aria-label="productType"
+            error={ touched.productType && Boolean(errors.productType) }
+            helperText={ touched.productType ? errors.productType : '' }
+            onChange={ (element) => {
+              const value = element.target.value;
+              setFieldValue('productType', value);
+              if (value !== CATEGORIES.OTHER) { onSearchRecommendImage(largeCatTable[value]); }
+            }
         }
-        >
-          { catList.map((element) => <FormControlLabel value={ element.productNo } label={ element.productName } control={ <Radio /> } />) }
-        </RadioGroup>
+          >
+            { catList.map((element) => <FormControlLabel value={ element.productNo } label={ element.productName } control={ <Radio /> } />) }
+          </RadioGroup>
+        </div>
       </div>
       {
         values.productType !== null
@@ -216,7 +220,6 @@ const renderForm = ({
                     </>
                   )
               }
-
             </>
           ) : <></>
       }
