@@ -98,13 +98,14 @@ const GuideWrapper = styled.ul`
         display: flex;
         .guide-block {
           height: 50vw;
+          .guide-intro {
+            opacity: 1;
+            transition: visibility 0s, opacity 0.2s linear;
+            left: 15%;
+            top: 30%;
+          }
         }
-        .guide-intro {
-          opacity: 1;
-          transition: visibility 0s, opacity 0.2s linear;
-          left: 15%;
-          top: 30%;
-        }
+        
       }
     }
 `;
