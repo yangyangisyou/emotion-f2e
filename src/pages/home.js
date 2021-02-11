@@ -9,8 +9,10 @@ import SearchBar from '../components/searchBar';
 import { loadProductList } from '../actions/product';
 import { landingImageTable, titleList } from '../config/table';
 import { onSnowingEmoji } from '../util/decorator';
+import useRouter from '../util/useRouter';
 
 const Home = () => {
+  const router = useRouter();
   const [currentProductType, setCurrentProductType] = useState('10000');
   const isLoadingProduct = useSelector((state) => state.product.isLoadingProduct);
   const productList = useSelector((state) => state.product.data);
@@ -25,7 +27,7 @@ const Home = () => {
       <Landing imageLink={ landingImageTable[currentProductType] } />
       <SearchBar titleList={ titleList } setCurrentProductType={ setCurrentProductType } onSnowingEmoji={ onSnowingEmoji } />
       <CardList productList={ productList } isLoading={ isLoadingProduct } />
-      <Guide />
+      <Guide router={ router } />
 
     </>
   );

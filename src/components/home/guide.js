@@ -24,7 +24,6 @@ const GuideWrapper = styled.ul`
           transition: visibility 0s, opacity 0.2s linear;
           left: 30%;
           top: 40%;
-          line-height: 24px;
           .guide-intro-content {
             color: white;
             font-weight: bold;
@@ -74,7 +73,7 @@ const GuideWrapper = styled.ul`
 
       .guide-block-image {
         background-color: ${color.mutedBlue};
-        .guide-block-background {
+        .guide-background {
           display: block;
           width: 100%; 
           height: 100%;
@@ -98,15 +97,21 @@ const GuideWrapper = styled.ul`
       .guideStep {
         display: flex;
         .guide-block {
-          width: 50vw;
           height: 50vw;
+        }
+        .guide-intro {
+          opacity: 1;
+          transition: visibility 0s, opacity 0.2s linear;
+          left: 15%;
+          top: 30%;
         }
       }
     }
 `;
 // https://images.pexels.com/photos/3854816/pexels-photo-3854816.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 // https://newsapi.org/
-const Guide = () => {
+const Guide = ({ router }) => {
+  const goToCreatePage = () => router.history.push('/edit');
   return (
     <GuideWrapper>
       <li className="guideStep">
@@ -115,10 +120,10 @@ const Guide = () => {
           <p className="guide-content">Fill out your form.</p>
         </div>
         <div className="guide-block guide-block-image">
-          <img className="guide-block-background" src="https://images.pexels.com/photos/3854816/pexels-photo-3854816.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="1" />
+          <img className="guide-background" src="https://images.pexels.com/photos/3854816/pexels-photo-3854816.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="1" />
           <div className="guide-intro">
             <p className="guide-intro-content">Thinking and imagine.</p>
-            <p className="guide-button">CREATE</p>
+            <p className="guide-button" onClick={ goToCreatePage }>CREATE</p>
           </div>
         </div>
       </li>
@@ -128,10 +133,10 @@ const Guide = () => {
           <p className="guide-content">Design your idea.</p>
         </div>
         <div className="guide-block guide-block-image">
-          <img className="guide-block-background" src="https://images.pexels.com/photos/542555/pexels-photo-542555.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="1" />
+          <img className="guide-background" src="https://images.pexels.com/photos/542555/pexels-photo-542555.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="1" />
           <div className="guide-intro">
             <p className="guide-intro-content">Painting your creative.</p>
-            <p className="guide-button">CREATE</p>
+            <p className="guide-button" onClick={ goToCreatePage }>CREATE</p>
           </div>
         </div>
       </li>
@@ -141,10 +146,10 @@ const Guide = () => {
           <p className="guide-content">Just share it.</p>
         </div>
         <div className="guide-block guide-block-image">
-          <img className="guide-block-background" src="https://images.pexels.com/photos/3764496/pexels-photo-3764496.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="1" />
+          <img className="guide-background" src="https://images.pexels.com/photos/3764496/pexels-photo-3764496.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="1" />
           <div className="guide-intro">
             <p className="guide-intro-content">Sharing and enjoy.</p>
-            <p className="guide-button">CREATE</p>
+            <p className="guide-button" onClick={ goToCreatePage }>CREATE</p>
           </div>
         </div>
       </li>

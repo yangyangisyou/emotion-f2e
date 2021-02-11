@@ -1,7 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
 import { loadProductImage } from '../actions/asset';
 import { createProduct, loadProduct } from '../actions/product';
 import EditProductForm from '../components/edit/editProductForm';
@@ -14,7 +13,6 @@ const EditWrapper = styled.div`
 
 const Edit = () => {
   const router = useRouter();
-  const history = useHistory();
   const dispatch = useDispatch();
   const editRef = useRef(null);
   const recommandImages = useSelector((state) => state.asset.recommandImages);
@@ -69,7 +67,7 @@ const Edit = () => {
     if (result.payload && result.payload.success) {
       const productId = result.payload && result.payload.productId;
       localStorage.setItem('editStorage', JSON.stringify(payload));
-      history.push(`/canvas${productId ? `?productId=${productId}` : ''}`);
+      router.history.push(`/canvas${productId ? `?productId=${productId}` : ''}`);
     }
   };
   return (
