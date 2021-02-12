@@ -116,7 +116,7 @@ const Guide = ({ router }) => {
   return (
     <GuideWrapper>
       <li className="guideStep">
-        <div className="guide-block guide-block-title">
+        <div className="guide-block guide-block-title" data-aos="zoom-in">
           <h4 className="guide-title">Step 1</h4>
           <p className="guide-content">Fill out your form.</p>
         </div>

@@ -13,9 +13,8 @@ const loading = keyframes`
 
 const CardWrapper = styled.li`
   width: 250px;
-  height: 150px;
-  margin: 20px;
-  padding: 20px;
+  margin: 2.5vh 10px;
+  padding: 2.5vh 10px;
   display: flex;
   flex: auto;
   flex-grow: 0;
@@ -94,6 +93,9 @@ const CardWrapper = styled.li`
       background: linear-gradient(90deg, rgba(190, 190, 190, 0.2) 25%, rgba(129, 129, 129, 0.24) 37%, rgba(190, 190, 190, 0.2) 63%);
       background-size: 400% 100%;
     }
+  }
+  @media screen and (max-width: 768px) {
+    width: 70vw;
   }
 `;
 

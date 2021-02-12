@@ -56,6 +56,7 @@ const productReducer = (state = initState, action) => {
     case 'REQUEST_PRODUCT_LIST': {
       return {
         ...state,
+        data: [{}, {}, {}, {}, {}, {}],
         isLoadingProduct: true,
       };
     }

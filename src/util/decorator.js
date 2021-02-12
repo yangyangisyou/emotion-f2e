@@ -6,7 +6,6 @@ export const generateDrops = (type) => {
   drop.classList.add('drop');
   drop.innerText = selectedEmojiList[Math.floor(Math.random() * selectedEmojiList.length)];
   drop.style.left = Math.random() * 100 + 'vw';
-  drop.style.zIndex = 99999;
   drop.style.animationDuration = Math.random() * 2 + 2 + 's';
   document.getElementsByClassName('rain')[0].appendChild(drop);
 };

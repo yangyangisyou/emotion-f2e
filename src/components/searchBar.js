@@ -16,7 +16,8 @@ const SearchBarWrapper = styled.div`
       height: 100%;
       width: 150px;
       .searchbar-link-text {
-        font-size: 16px;
+        font-size: 20px;
+        font-weight: 600;
         text-transform: uppercase;
       }
     }

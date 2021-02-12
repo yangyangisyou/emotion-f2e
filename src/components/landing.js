@@ -64,7 +64,7 @@ const LandingWrapper = styled.div`
       flex-direction: column-reverse;
       justify-content: center;
       align-items: center;
-      padding: 10vw;
+      padding: 6vh 10vw;
       .landing-intro {
         align-items: center;
       }

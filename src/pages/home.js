@@ -4,7 +4,9 @@ import CardList from '../components/home/cardList';
 import Guide from '../components/home/guide';
 import Navbar from '../shared/components/Navbar';
 import EmojiRain from '../shared/components/emojiRain';
+import Divider from '../shared/components/divider';
 import Landing from '../components/landing';
+import About from '../components/home/about';
 import SearchBar from '../components/searchBar';
 import { loadProductList } from '../actions/product';
 import { landingImageTable, titleList } from '../config/table';
@@ -27,6 +29,8 @@ const Home = () => {
       <Landing imageLink={ landingImageTable[currentProductType] } />
       <SearchBar titleList={ titleList } setCurrentProductType={ setCurrentProductType } onSnowingEmoji={ onSnowingEmoji } />
       <CardList productList={ productList } isLoading={ isLoadingProduct } />
+      <About />
+      <Divider title="See more info below" />
       <Guide router={ router } />
 
     </>

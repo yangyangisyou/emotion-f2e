@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import styled from 'styled-components';
 import Card from './card';
 
@@ -8,7 +9,7 @@ const CardListWrapper = styled.ul`
   overflow-y: hidden;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
-  padding: 10px auto;
+  height: 25vh;
   &::-webkit-scrollbar {
     width: 10px;
   }
@@ -23,68 +24,82 @@ const CardListWrapper = styled.ul`
     background: transparentize(#ccc, 0.5);
     box-shadow: inset 0 0 2px rgba(0,0,0,0.5); 
   }
-  @media screen and (max-width: 768px) {
-  }
-`;
-
-const EmptyCardListWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10vh 10px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 24px;
-  line-height: 40px;
-  font-weight: bold;
-  .emptycardlist-emoji {
-    font-size: 60px;
-  }
-
-  .emptycardlist-textWrap {
+  .cardlist-notice {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-  }
+    padding: 10vh 20vw;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    line-height: 40px;
+    font-weight: bold;
+    .emptycardlist-emoji {
+      font-size: 60px;
+    }
 
-  .emptycardlist-emoji + .emptycardlist-textWrap {
-    margin-left: 5vw;
-  }
+    .emptycardlist-textWrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
 
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
     .emptycardlist-emoji + .emptycardlist-textWrap {
-      margin-left: 0;
-      margin-top: 5vh;
+      margin-left: 5vw;
+    }
 
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      .emptycardlist-emoji + .emptycardlist-textWrap {
+        margin-left: 0;
+        margin-top: 5vh;
+
+      }
     }
   }
 
+  @media screen and (max-width: 768px) {
+    height: 30vh;
+  }
 `;
 
 const CardList = ({ productList, isLoading }) => {
   const productCount = productList.length;
   console.log('productCount ', productCount);
-  if (productCount) {
-    return (
-      <>
-        <CardListWrapper>
-          { productList.map((product, key) => <Card product={ product } isLoading={ isLoading } key={ key } />) }
-        </CardListWrapper>
-      </>
-    );
-  } else {
-    return (
-      <EmptyCardListWrapper>
-        <p className="emptycardlist-emoji">🤔</p>
-        <div className="emptycardlist-textWrap">
-          <p>It seems like nobody share this category.</p>
-          <p>Let&apos;s be the first person to share！</p>
-        </div>
-      </EmptyCardListWrapper>
-    );
-  }
+  return (
+    <CardListWrapper>
+      { productCount
+        ? productList.map((product, key) => <Card product={ product } isLoading={ isLoading } key={ key } />)
+        : (
+          <li className="cardlist-notice">
+            <p className="emptycardlist-emoji">🤔</p>
+            <div className="emptycardlist-textWrap">
+              <p>It seems like nobody share this category.</p>
+              <p>Let&apos;s be the first person to share！</p>
+            </div>
+          </li>
+        )
+    }
+    </CardListWrapper>
+  );
+  // if (productCount) {
+  //   return (
+  //     <CardListWrapper>
+  //       { productList.map((product, key) => <Card product={ product } isLoading={ isLoading } key={ key } />) }
+  //     </CardListWrapper>
+  //   );
+  // } else {
+  //   return (
+  //     <EmptyCardListWrapper>
+  //       <p className="emptycardlist-emoji">🤔</p>
+  //       <div className="emptycardlist-textWrap">
+  //         <p>It seems like nobody share this category.</p>
+  //         <p>Let&apos;s be the first person to share！</p>
+  //       </div>
+  //     </EmptyCardListWrapper>
+  //   );
+  // }
 };
 
 export default CardList;
