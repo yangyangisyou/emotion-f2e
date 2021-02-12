@@ -5,10 +5,25 @@ const initState = {
   isLoadingItem: true,
   isLoadingProduct: false,
   isSubmitting: false,
+  canvasImage: null,
+  isLoadingCanvasImage: false,
 };
 
 const productReducer = (state = initState, action) => {
   switch (action.type) {
+    case 'REQUEST_PRODUCT_CANVAS': {
+      return {
+        ...state,
+        isLoadingCanvasImage: true,
+      };
+    }
+    case 'PRODUCT_CANVAS_SUCCESS': {
+      return {
+        ...state,
+        canvasImage: action.payload.data,
+        isLoadingCanvasImage: true,
+      };
+    }
     case 'REQUEST_UPLOAD_IMAGE': {
       console.log('uploading...');
       return state;

@@ -2,7 +2,6 @@ import { RSAA } from 'redux-api-middleware';
 import { API_PATH } from '../config/setting';
 
 export const uploadImage = (payload) => {
-  console.log('====>', payload);
   return {
     [RSAA]: {
       endpoint: `${API_PATH}/product/upload/image`,
@@ -42,6 +41,20 @@ export const loadHotProductsTitle = () => {
       types: [
         'REQUEST_HOT_PRODUCTS',
         'HOT_PRODUCTS_SUCCESS',
+        'FAILURE'
+      ]
+    }
+  };
+};
+
+export const loadCanvas = (imageName) => {
+  return {
+    [RSAA]: {
+      endpoint: `${API_PATH}/product/canvas/${imageName}`,
+      method: 'GET',
+      types: [
+        'REQUEST_PRODUCT_CANVAS',
+        'PRODUCT_CANVAS_SUCCESS',
         'FAILURE'
       ]
     }

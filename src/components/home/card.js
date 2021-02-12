@@ -101,7 +101,7 @@ const CardWrapper = styled.li`
 
 const Card = ({ product, isLoading }) => {
   const {
-    productName, description, avatar, picture
+    productName, description, avatar, picture, productId, router
   } = product;
   return (
     <>
@@ -122,7 +122,7 @@ const Card = ({ product, isLoading }) => {
               </CardWrapper>
             )
             : (
-              <CardWrapper picture={ picture } description={ description } isLoading={ isLoading }>
+              <CardWrapper picture={ picture } description={ description } isLoading={ isLoading } onClick={ () => router.history.push(`/product?productId=${productId}`) }>
                 <div className="card-header">
                   <div className="card-crapper">
                     <img className="card-image" src={ avatar || catAvatar } alt="avatar" />

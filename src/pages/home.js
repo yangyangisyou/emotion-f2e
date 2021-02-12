@@ -28,7 +28,7 @@ const Home = () => {
       <Navbar />
       <Landing imageLink={ landingImageTable[currentProductType] } />
       <SearchBar titleList={ titleList } setCurrentProductType={ setCurrentProductType } onSnowingEmoji={ onSnowingEmoji } />
-      <CardList productList={ productList } isLoading={ isLoadingProduct } />
+      <CardList productList={ productList } isLoading={ isLoadingProduct } router={ router } />
       <About />
       <Divider title="See more info below" />
       <Guide router={ router } />

@@ -64,13 +64,13 @@ const CardListWrapper = styled.ul`
   }
 `;
 
-const CardList = ({ productList, isLoading }) => {
+const CardList = ({ productList, isLoading, router }) => {
   const productCount = productList.length;
   console.log('productCount ', productCount);
   return (
     <CardListWrapper>
       { productCount
-        ? productList.map((product, key) => <Card product={ product } isLoading={ isLoading } key={ key } />)
+        ? productList.map((product, key) => <Card product={ product } isLoading={ isLoading } key={ key } router={ router } />)
         : (
           <li className="cardlist-notice">
             <p className="emptycardlist-emoji">🤔</p>
