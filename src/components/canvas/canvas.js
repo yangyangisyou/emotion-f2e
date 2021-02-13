@@ -93,8 +93,8 @@ const ToolsWrapper = styled.div`
 `;
 
 const Canvas = ({ data, canvasRef }) => {
-  const initialWidth = window.innerWidth;
-  const initialHeight = window.innerHeight;
+  const initialWidth = window && window.innerWidth;
+  const initialHeight = window && window.innerHeight;
   const { width, height } = useWindowDimensions();
   const { productName, description, picture } = data;
   const [iconIndex, setIconIndex] = useState(0);

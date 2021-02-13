@@ -41,7 +41,7 @@ const movePath = {
     // { x: 110, y: 200 },
     // { x: 230, y: 300 },
     { x: 80, y: 500 },
-    { x: 200, y: innerHeight },
+    { x: 200, y: window && window.innerHeight },
     // { x: 600, y: 100 },
     // { x: 800, y: 0 },
     // { x: 0, y: -250 },
@@ -68,7 +68,7 @@ const About = () => {
       .addTo(controller);
   }, []);
   return (
-    <Background className="about-animation">
+    <Background id="about-animation" className="about-animation">
       <p className="about-title">Follow me, I tell you more.</p>
       <img className="about-guide" src={ image } alt="img" />
     </Background>

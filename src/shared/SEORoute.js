@@ -11,14 +11,14 @@ const SEORoute = ({
   const currentPage = 'root';
   console.log('seoRouteMeta[currentPage] ', seoRouteMeta[currentPage]);
   const {
-    title, description, keywords, author, link, imgLink, copyright, pageType, itemType
+    title, description, keywords, author, link, imgLink, copyright, pageType// , itemType
   } = seoRouteMeta[currentPage];
   return (
     <>
       <Route key={ path } path={ path } exact={ exact } component={ component } initalData={ initalData } />
       <Helmet>
         {/* Update your html tag to include the itemscope and itemtype attributes. */}
-        <html lang="zh" itemScope itemType={ `http://schema.org/${itemType}` } />
+        {/* <html lang="zh" itemScope itemType={ `http://schema.org/${itemType}` } /> */}
         <title>{title}</title>
         <meta name="description" content={ description } />
         <meta name="keywords" content={ keywords } />

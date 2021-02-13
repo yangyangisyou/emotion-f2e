@@ -1,15 +1,12 @@
 import { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 import { loadProductImage } from '../actions/asset';
 import { createProduct, loadProduct } from '../actions/product';
 import EditProductForm from '../components/edit/editProductForm';
 import Navbar from '../shared/components/Navbar';
 import StepFooter from '../shared/components/stepFooter';
 import useRouter from '../util/useRouter';
-
-const EditWrapper = styled.div`
-`;
+import LoadingModal from '../shared/components/loadingModal';
 
 const Edit = () => {
   const router = useRouter();
@@ -71,7 +68,7 @@ const Edit = () => {
     }
   };
   return (
-    <EditWrapper>
+    <>
       <Navbar />
       {initialData && (
       <EditProductForm
@@ -83,8 +80,9 @@ const Edit = () => {
         editRef={ editRef }
       />
       )}
+      <LoadingModal />
       <StepFooter activeStep={ 0 } stepRef={ editRef } onSubmitForm={ onSubmitForm } router={ router } />
-    </EditWrapper>
+    </>
   );
 };
 

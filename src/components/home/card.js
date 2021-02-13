@@ -99,9 +99,9 @@ const CardWrapper = styled.li`
   }
 `;
 
-const Card = ({ product, isLoading }) => {
+const Card = ({ product, isLoading, router }) => {
   const {
-    productName, description, avatar, picture, productId, router
+    productName, description, avatar, picture, productId
   } = product;
   return (
     <>

@@ -6,7 +6,7 @@ import Navbar from '../shared/components/Navbar';
 import EmojiRain from '../shared/components/emojiRain';
 import Divider from '../shared/components/divider';
 import Landing from '../components/landing';
-import About from '../components/home/about';
+// import About from '../components/home/about';
 import SearchBar from '../components/searchBar';
 import { loadProductList } from '../actions/product';
 import { landingImageTable, titleList } from '../config/table';
@@ -21,6 +21,10 @@ const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadProductList(currentProductType));
+    // return () => {
+    //   const someNode = document.getElementById('about-animation');
+    //   someNode.parentNode.removeChild(someNode);
+    // };
   }, [currentProductType]);
   return (
     <>
@@ -29,7 +33,7 @@ const Home = () => {
       <Landing imageLink={ landingImageTable[currentProductType] } />
       <SearchBar titleList={ titleList } setCurrentProductType={ setCurrentProductType } onSnowingEmoji={ onSnowingEmoji } />
       <CardList productList={ productList } isLoading={ isLoadingProduct } router={ router } />
-      <About />
+      {/* <About /> */}
       <Divider title="See more info below" />
       <Guide router={ router } />
 

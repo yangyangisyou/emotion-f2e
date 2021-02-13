@@ -13,6 +13,9 @@ const webpackNodeExternals = require('webpack-node-externals');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// require('global');
+// require('global/document');
+// require('global/window');
 
 const publicPath = '/';
 const shouldUseRelativeAssetPaths = publicPath === './';
@@ -69,17 +72,19 @@ module.exports = {
   // entry: ['./server/server.js'],
   entry: ['@babel/polyfill', './src/server.js'],
   output: {
-    filename: 'server.js',
+    filename: 'server.mjs',
     path: path.resolve(__dirname, '..', 'server'),
+    globalObject: 'this',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     modules: [path.resolve(__dirname, '..', 'src'), 'node_modules']
   },
   node: {
-    __dirname: false
+    __dirname: false,
+    fs: 'empty',
   },
-  target: 'node',
+  target: 'web',
   externals: [webpackNodeExternals({
     allowlist: [
     // 其他项..
@@ -102,7 +107,8 @@ module.exports = {
           },
           {
             test: /\.jsx?$/,
-            exclude: /(\/|\\)node_modules(\/|\\)(?!material-ui)(?!@material-ui)/,
+            exclude: /node_modules/,
+            // exclude: /(\/|\\)node_modules(\/|\\)(?!material-ui)(?!@material-ui)/,
             // include: path.resolve(__dirname, '..', 'src'),
             use: {
               loader: 'babel-loader'
@@ -156,6 +162,10 @@ module.exports = {
             options: {
               name: 'static/media/[name].[hash:8].[ext]'
             }
+          },
+          {
+            test: /\.js$/,
+            use: ['script-loader']
           }
           // ** STOP ** Are you adding a new loader?
           // Make sure to add the new loader(s) before the "file" loader.
@@ -163,11 +173,14 @@ module.exports = {
       }],
   },
   plugins: [
+    // new webpack.ProvidePlugin({
+    //   window: 'global/window',
+    // }),
     new webpack.NoEmitOnErrorsPlugin(),
     new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-      'process.env.BABEL_ENV': 'node'
+      'process.env.BABEL_ENV': 'node',
     }),
     new ExtractTextPlugin({
       filename: 'css/style.[hash].css',

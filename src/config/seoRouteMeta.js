@@ -1,13 +1,21 @@
 const seoRouteMeta = {
   root: {
-    title: '我的首頁',
-    description: '這是我的首頁',
-    keywords: '美食, 旅遊',
+    title: 'Emotion｜sharing and enjoy our moods',
+    description: 'sharing and enjoy our moods',
+    keywords: 'foodie, travel, cure, share',
     author: 'YangYang',
     copyright: 'YangYang',
-    link: '#',
+    link: 'http://canvas-app.yyisyou.tw/',
     imgLink: '#',
-    pageType: 'food',
+    pageType: 'emotion',
+    itemType: 'Website',
+  },
+  product: {
+    title: '｜sharing and enjoy our moods',
+    description: 'sharing and enjoy our moods',
+    keywords: 'foodie, travel, cure, share',
+    link: 'http://canvas-app.yyisyou.tw/',
+    pageType: 'emotion',
     itemType: 'Website',
   },
 };
