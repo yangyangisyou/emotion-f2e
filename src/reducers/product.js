@@ -7,6 +7,7 @@ const initState = {
   isSubmitting: false,
   canvasImage: null,
   isLoadingCanvasImage: false,
+  isLoadingUploadCanvas: false,
 };
 
 const productReducer = (state = initState, action) => {
@@ -21,17 +22,20 @@ const productReducer = (state = initState, action) => {
       return {
         ...state,
         canvasImage: action.payload.data,
-        isLoadingCanvasImage: true,
+        isLoadingCanvasImage: false,
       };
     }
     case 'REQUEST_UPLOAD_IMAGE': {
-      console.log('uploading...');
-      return state;
+      return {
+        ...state,
+        isLoadingUploadCanvas: true,
+      };
     }
     case 'UPLOAD_IMAGE_SUCCESS': {
-      console.log('success upload image');
-      console.log(action.payload);
-      return state;
+      return {
+        ...state,
+        isLoadingUploadCanvas: false,
+      };
     }
     case 'REQUEST_CREATE_PRODUCT': {
       return {

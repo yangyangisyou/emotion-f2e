@@ -1,26 +1,21 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import CanvasBoard from '../components/canvas/canvas';
 import Navbar from '../shared/components/Navbar';
 import StepFooter from '../shared/components/stepFooter';
 import { uploadImage, loadProduct } from '../actions/product';
 import useRouter from '../util/useRouter';
+import LoadingModal from '../shared/components/loadingModal';
 
 const Canvas = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const isLoadingUploadCanvas = useSelector((state) => state.product.isLoadingUploadCanvas);
   const router = useRouter();
   let canvasRef = useRef(null);
   const productId = router.query.productId;
   const [data, setData] = useState(null);
-  // {
-  //   productType: '10000',
-  //   userName: 'coco',
-  //   productName: 'apple',
-  //   description: 'hello',
-  //   picture: 'https://fairylolita.com/wp-content/uploads/DSCF4415.jpg',
-  // }
   useEffect(() => {
     const dataFromStorage = localStorage.getItem('editStorage');
     if (dataFromStorage) {
@@ -48,6 +43,7 @@ const Canvas = () => {
   return (
     <>
       <Navbar />
+      {isLoadingUploadCanvas && <LoadingModal />}
       {data && <CanvasBoard data={ data } onUploadCanvas={ onUploadCanvas } canvasRef={ canvasRef } />}
       <StepFooter activeStep={ 1 } stepRef={ canvasRef } onUploadCanvas={ onUploadCanvas } router={ router } />
     </>

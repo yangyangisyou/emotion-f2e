@@ -41,6 +41,10 @@ const StepFooterWrapper = styled.div`
     .header-link-home > a {
       font-size: 16px;
     }
+
+  }
+  .footer-button + .footer-button {
+    margin-left: 20px;
   }
 
   @media screen and (max-width: 768px) {
@@ -103,7 +107,12 @@ const StepFooter = ({
 }) => {
   const isFinished = activeStep === 2;
   if (isFinished) {
-    return <StepFooterWrapper><Button onClick={ () => onCopyText(publishLink) }>Copy your link</Button></StepFooterWrapper>;
+    return (
+      <StepFooterWrapper>
+        <Button className="footer-button" onClick={ () => onCopyText(publishLink) }>Copy your link</Button>
+        <Button className="footer-button" onClick={ () => open(publishLink, '_blank') }>Go to link</Button>
+      </StepFooterWrapper>
+    );
   } else {
     return (
       <StepFooterWrapper>

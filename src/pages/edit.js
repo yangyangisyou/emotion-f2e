@@ -12,6 +12,7 @@ const Edit = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const editRef = useRef(null);
+  const isSubmitting = useSelector((state) => state.product.isSubmitting);
   const recommandImages = useSelector((state) => state.asset.recommandImages);
   const loadingRecommandImages = useSelector((state) => state.asset.loadingRecommandImages);
   const [initialData, setInitialData] = useState(null);
@@ -80,7 +81,7 @@ const Edit = () => {
         editRef={ editRef }
       />
       )}
-      <LoadingModal />
+      {isSubmitting && <LoadingModal />}
       <StepFooter activeStep={ 0 } stepRef={ editRef } onSubmitForm={ onSubmitForm } router={ router } />
     </>
   );

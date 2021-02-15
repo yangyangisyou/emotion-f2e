@@ -4,6 +4,7 @@ import Navbar from '../shared/components/Navbar';
 import { loadProduct, loadCanvas } from '../actions/product';
 import ProductInfo from '../components/product/productInfo';
 import useRouter from '../util/useRouter';
+import LoadingModal from '../shared/components/loadingModal';
 
 const Product = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const Product = () => {
   return (
     <>
       <Navbar />
+      {isLoadingCanvasImage && <LoadingModal />}
       <ProductInfo item={ item } canvasImage={ canvasImage } isLoadingItem={ isLoadingItem } isLoadingCanvasImage={ isLoadingCanvasImage } />
     </>
   );
