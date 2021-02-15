@@ -13,12 +13,12 @@ const LoadingModalWrapper = styled.div`
     justify-content: center;
     align-items: center;
     .loading-body {
-        width: 60vw;
-        height: 60vh;
-        background-color: white;
-        display: flex;
-    justify-content: center;
-    align-items: center;
+      width: 60vw;
+      height: 60vh;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 `;
 
