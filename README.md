@@ -56,7 +56,7 @@ npm run build:server
 ```
 npm run start:server
 ```
-
+3. Go to http://localhost:3000
 
 
 
