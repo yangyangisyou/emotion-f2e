@@ -1,4 +1,6 @@
 # Emotion website
+Emotion is a creative and sharing platform that you can share some idea and put an image you like on the website.
+You can also browse many kinds of idea, just choose what kinds category you like.
 
 ## Demo
 Version 1.0: 
@@ -32,7 +34,7 @@ Version 1.0:
 * [Airbnb Lint](https://github.com/airbnb/javascript)  
 <img src="https://i.imgur.com/A2XaNqc.png"> 
 
-## How to run
+## How to run on local
 1. install related dev tools
 ```
 npm install
@@ -43,5 +45,18 @@ npm install
 npm run start
 ```
 3. Go to http://localhost:3000
+
+## How to build server-side prerender application
+1. build web bundle using webpack
+```
+npm run build:server
+```
+
+2. run the application within SSR
+```
+npm run start:server
+```
+
+
 
 
