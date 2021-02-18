@@ -46,6 +46,15 @@ Version 1.0:
 * [Airbnb Lint](https://github.com/airbnb/javascript)  
 <img src="https://i.imgur.com/A2XaNqc.png"> 
 
+### Design principals
+1. Pure function
+  - To prevent side effect, pure function could be 
+2. Stateless component always focused on design
+  - To design component more easily, only dress CSS in the specific component. 
+3. paged-based component always focused on data flow
+  - Most of state managed by page-based container, because data flow always connects with container.
+
+ 
 ## How to run on local
 1. install related dev tools
 ```
