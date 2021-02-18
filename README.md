@@ -54,6 +54,8 @@ Version 1.0:
 3. Paged-based component always focused on data flow
   - Most of state managed by page-based container, because data flow always connects with container.
 
+### Version 2.0 in the future
+To build a SEO friendly platform, I'm going to use webpack to build a server-side bundle for SSR.
  
 ## How to run on local
 1. install related dev tools
