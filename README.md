@@ -1,4 +1,4 @@
-# Emotion website
+# Emotion website - F2E
 Emotion is a creative and sharing platform that you can share some idea and put an image you like on the website.
 You can also browse many kinds of idea, just choose what kinds category you like.
 
@@ -17,6 +17,7 @@ Version 1.0:
 </p>
 
 ## Tech stack - Backend 
+[More about emotion-api](https://github.com/yangyangisyou/emotion-api)
 <p float="left" margin="10px">
   <img src="https://miro.medium.com/max/568/1*NVCQ4tTrPoAYDAkXCTFe8A.png" height="100px"> 
   <img src="https://miro.medium.com/max/640/0*6qOgnDDBnPDiANOY.png" height="100px">
