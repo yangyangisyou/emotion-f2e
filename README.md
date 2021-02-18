@@ -9,11 +9,11 @@ Version 1.0:
 
 ## About 
 <p float="left" margin="10px">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" width="100px"> 
-  <img src="https://raw.githubusercontent.com/styled-components/brand/master/styled-components.png" width="100px">
-  <img src="https://sass-lang.com/assets/img/logos/logo-b6e1ef6e.svg" width="100px">  
-  <img src="https://avatars.githubusercontent.com/u/10717820?s=400&v=4" width="150px">
-  <img src="https://magiclen.org/wp-content/uploads/2019/06/webpack.png" width="150px">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" height="100px"> 
+  <img src="https://raw.githubusercontent.com/styled-components/brand/master/styled-components.png" height="100px">
+  <img src="https://sass-lang.com/assets/img/logos/logo-b6e1ef6e.svg" height="100px">  
+  <img src="https://avatars.githubusercontent.com/u/10717820?s=400&v=4" height="100px">
+  <img src="https://magiclen.org/wp-content/uploads/2019/06/webpack.png" height="100px">
 </p>
 
 ### F2E
