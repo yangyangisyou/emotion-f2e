@@ -51,7 +51,7 @@ Version 1.0:
   - To prevent **unexpected side effect**, pure function could helps developer trace and debug the code more easily. 
 2. Stateless component always focused on design
   - To design component more easily, only dress CSS in the specific component. 
-3. paged-based component always focused on data flow
+3. Paged-based component always focused on data flow
   - Most of state managed by page-based container, because data flow always connects with container.
 
  
