@@ -46,7 +46,7 @@ Version 1.0:
 * [Airbnb Lint](https://github.com/airbnb/javascript)  
 <img src="https://i.imgur.com/A2XaNqc.png"> 
 
-### Design principals
+### Design principles
 1. Pure function
   - To prevent side effect, pure function could be 
 2. Stateless component always focused on design
