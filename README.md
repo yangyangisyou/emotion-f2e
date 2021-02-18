@@ -48,7 +48,7 @@ Version 1.0:
 
 ### Design principles
 1. Pure function
-  - To prevent side effect, pure function could be 
+  - To prevent **unexpected side effect**, pure function could helps developer trace and debug the code more easily. 
 2. Stateless component always focused on design
   - To design component more easily, only dress CSS in the specific component. 
 3. paged-based component always focused on data flow
