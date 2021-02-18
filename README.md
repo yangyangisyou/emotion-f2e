@@ -4,7 +4,7 @@ You can also browse many kinds of idea, just choose what kinds category you like
 
 ## Demo
 Version 1.0: 
-- Avalible in [Emotion platform](http://emotion-app.yyisyou.tw/)
+- F2E Avalible in [Emotion platform](http://emotion-app.yyisyou.tw/)
 
 ## Tech stack - F2E 
 <p float="left" margin="10px">
