@@ -59,6 +59,8 @@ const CardWrapper = styled.li`
     }
     .card-title {
       font-size: 30px;
+      font-weight: 500;
+      text-overflow: ellipsis;
     }
     .card-title-loading {
       width: 200px;
@@ -81,6 +83,7 @@ const CardWrapper = styled.li`
     height: 50%;
     .card-content {
       font-size: 20px;
+      font-weight: 500;
       white-space: normal;
       word-break: break-all;
       float: left;
@@ -93,9 +96,6 @@ const CardWrapper = styled.li`
       background: linear-gradient(90deg, rgba(190, 190, 190, 0.2) 25%, rgba(129, 129, 129, 0.24) 37%, rgba(190, 190, 190, 0.2) 63%);
       background-size: 400% 100%;
     }
-  }
-  @media screen and (max-width: 768px) {
-    width: 70vw;
   }
 `;
 
@@ -130,7 +130,8 @@ const Card = ({ product, isLoading, router }) => {
                   <p className="card-title">{productName}</p>
                 </div>
                 <div className="card-footer">
-                  <p className="card-content">{description}</p>
+                  {/* <p className="card-content">{description}</p> */}
+                  <p className="card-content">See more...</p>
                 </div>
               </CardWrapper>
             )

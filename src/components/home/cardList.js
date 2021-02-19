@@ -1,6 +1,6 @@
-/* eslint-disable no-unused-vars */
 import styled from 'styled-components';
 import Card from './card';
+import { color } from '../../config/var';
 
 const CardListWrapper = styled.ul`
   display: flex;
@@ -10,6 +10,7 @@ const CardListWrapper = styled.ul`
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
   height: 25vh;
+  background-color: ${color.mutedBlue};
   &::-webkit-scrollbar {
     width: 10px;
   }
@@ -51,10 +52,11 @@ const CardListWrapper = styled.ul`
 
     @media screen and (max-width: 768px) {
       flex-direction: column;
+      padding: 0 0;
+      width: 100vw;
       .emptycardlist-emoji + .emptycardlist-textWrap {
         margin-left: 0;
         margin-top: 5vh;
-
       }
     }
   }
@@ -66,7 +68,6 @@ const CardListWrapper = styled.ul`
 
 const CardList = ({ productList, isLoading, router }) => {
   const productCount = productList.length;
-  console.log('productCount ', productCount);
   return (
     <CardListWrapper>
       { productCount
@@ -75,31 +76,14 @@ const CardList = ({ productList, isLoading, router }) => {
           <li className="cardlist-notice">
             <p className="emptycardlist-emoji">🤔</p>
             <div className="emptycardlist-textWrap">
-              <p>It seems like nobody share this category.</p>
-              <p>Let&apos;s be the first person to share！</p>
+              <p>Nobody share this category.</p>
+              <p>Let&apos;s be the first person！</p>
             </div>
           </li>
         )
     }
     </CardListWrapper>
   );
-  // if (productCount) {
-  //   return (
-  //     <CardListWrapper>
-  //       { productList.map((product, key) => <Card product={ product } isLoading={ isLoading } key={ key } />) }
-  //     </CardListWrapper>
-  //   );
-  // } else {
-  //   return (
-  //     <EmptyCardListWrapper>
-  //       <p className="emptycardlist-emoji">🤔</p>
-  //       <div className="emptycardlist-textWrap">
-  //         <p>It seems like nobody share this category.</p>
-  //         <p>Let&apos;s be the first person to share！</p>
-  //       </div>
-  //     </EmptyCardListWrapper>
-  //   );
-  // }
 };
 
 export default CardList;
