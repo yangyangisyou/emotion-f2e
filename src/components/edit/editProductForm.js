@@ -108,8 +108,8 @@ const renderForm = ({
             id="userName"
             name="userName"
             value={ values.userName }
-            error={ touched.userName && Boolean(errors.userName) }
-            helperText={ touched.userName ? errors.userName : '' }
+            error={ Boolean(errors.userName) }
+            helperText={ errors.userName || '' }
             onChange={ (element) => setFieldValue('userName', element.target.value) }
           />
         </div>
@@ -121,8 +121,8 @@ const renderForm = ({
             name="productName"
             variant="outlined"
             value={ values.productName }
-            error={ touched.productName && Boolean(errors.productName) }
-            helperText={ touched.productName ? errors.productName : '' }
+            error={ Boolean(errors.productName) }
+            helperText={ errors.productName || '' }
             onChange={ (element) => setFieldValue('productName', element.target.value) }
           />
         </div>
@@ -136,7 +136,6 @@ const renderForm = ({
             aria-label="Description"
             placeholder="Describe your share"
             rowsMin={ 6 }
-            error={ touched.description && Boolean(errors.description) }
             onChange={ (element) => setFieldValue('description', element.target.value) }
           />
         </div>
@@ -146,7 +145,6 @@ const renderForm = ({
             className="edit-input edit-input-radiogroup"
             name="productType"
             aria-label="productType"
-            error={ touched.productType && Boolean(errors.productType) }
             onChange={ (element) => {
               const value = element.target.value;
               setFieldValue('productType', value);
