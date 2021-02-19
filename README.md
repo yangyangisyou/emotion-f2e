@@ -49,7 +49,7 @@ Version 1.0:
 1. Pure function
   - To prevent **unexpected side effect**, pure function could helps developer trace and debug the code more easily. 
 2. OOCSS
-  - Design skeleton for root and dressing for spread.
+  - Root class selector is used to skeleton and its spread class selector is used to dressing.
   - e.g. card-title and card-title-loading
 3. Stateless component always focused on design
   - To design component more easily, only dress CSS in the specific component. 
