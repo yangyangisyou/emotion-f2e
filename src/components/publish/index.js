@@ -51,7 +51,7 @@ const PublishWrapper = styled.div`
       }
 `;
 
-const Publish = () => {
+const PublishProduct = () => {
   useEffect(() => {
     onSnowingEmoji('30000', 30);
   }, []);
@@ -68,4 +68,4 @@ const Publish = () => {
   );
 };
 
-export default Publish;
+export default PublishProduct;

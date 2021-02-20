@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadProductImage } from '../actions/asset';
 import { createProduct, loadProduct } from '../actions/product';
-import EditProductForm from '../components/edit/editProductForm';
+import EditProductForm from '../components/edit';
 import Navbar from '../shared/components/Navbar';
 import StepFooter from '../shared/components/stepFooter';
 import useRouter from '../util/useRouter';

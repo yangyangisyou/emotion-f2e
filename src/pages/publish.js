@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Navbar from '../shared/components/Navbar';
 import StepFooter from '../shared/components/stepFooter';
-import PublishProduct from '../components/publish/publish';
+import PublishProduct from '../components/publish';
 import useRouter from '../util/useRouter';
 import { SITE_PATH } from '../config/setting';
 

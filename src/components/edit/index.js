@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 import {
-  FormControlLabel, Radio, RadioGroup, TextField, Dialog, TextareaAutosize
+  FormControlLabel, Radio, RadioGroup, TextField, TextareaAutosize
 } from '@material-ui/core';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { catList, largeCatTable, CATEGORIES } from '../../config/table';
 import ImageCardList from './imageCardList';
 import { validateEdit } from '../../config/validate';
@@ -74,7 +71,7 @@ const FormWrapper = styled(Form)`
   }
 `;
 
-const Edit = ({
+const EditProductForm = ({
   initialValue, recommandImages, onSearchRecommendImage, loadingRecommandImages, onSubmitForm, editRef
 }) => {
   return (
@@ -220,42 +217,9 @@ const renderForm = ({
             </>
           ) : <></>
       }
-      <Dialog
-        open={ false }
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">哩五炭即某</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            <img src="https://p2.bahamut.com.tw/HOME/creationCover/29/0004566029_B.JPG" alt="" />
-            <iframe title="yt" width="560" height="315" src="https://www.youtube.com/embed/7R97mYB1Oog" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
-          </DialogContentText>
-        </DialogContent>
-        {/* <DialogActions>
-          <Button onClick={ handleClose } color="primary">
-            Disagree
-          </Button>
-          <Button onClick={ handleClose } color="primary" autoFocus>
-            Agree
-          </Button>
-        </DialogActions> */}
-      </Dialog>
-      {/* <div className="edit-field edit-field-submit">
-        <Button
-          variant="contained"
-          color="primary"
-          disabled={ isSubmitting }
-        // onClick={ () => setIsSubmit(true) }
-          onClick={ submitForm }
-        >
-          Submit
-        </Button>
-      </div> */}
-      {/* {isSubmitting && <LinearProgress />} */}
       {/* <FormikDebugTool /> */}
     </FormWrapper>
   );
 };
 
-export default Edit;
+export default EditProductForm;

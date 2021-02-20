@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import Navbar from '../shared/components/Navbar';
 import { loadProduct, loadCanvas } from '../actions/product';
-import ProductInfo from '../components/product/productInfo';
+import ProductInfo from '../components/product';
 import useRouter from '../util/useRouter';
 import LoadingModal from '../shared/components/loadingModal';
 
