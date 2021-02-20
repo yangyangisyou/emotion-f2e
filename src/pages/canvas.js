@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import CanvasBoard from '../components/canvas/canvas';
 import Navbar from '../shared/components/Navbar';
 import StepFooter from '../shared/components/stepFooter';
@@ -9,25 +8,24 @@ import useRouter from '../util/useRouter';
 import LoadingModal from '../shared/components/loadingModal';
 
 const Canvas = () => {
-  const history = useHistory();
   const dispatch = useDispatch();
-  const isLoadingUploadCanvas = useSelector((state) => state.product.isLoadingUploadCanvas);
+  const canvasDataFromServer = useSelector((state) => state.product.item);
   const router = useRouter();
   let canvasRef = useRef(null);
   const productId = router.query.productId;
   const [data, setData] = useState(null);
   useEffect(() => {
     const dataFromStorage = localStorage.getItem('editStorage');
-    if (dataFromStorage) {
+    if (productId) {
+      dispatch(loadProduct(productId));
+    } else if (dataFromStorage) {
       setData(JSON.parse(dataFromStorage));
-    } else {
-      const result = dispatch(loadProduct(productId));
-      if (result.payload && result.payload.success) {
-        const payload = result.payload;
-        setData(JSON.parse(payload));
-      }
     }
   }, []);
+
+  useEffect(() => {
+    setData(canvasDataFromServer);
+  }, [canvasDataFromServer]);
 
   const onUploadCanvas = async (ref) => {
     const canvasImage = ref.current.toDataURL();
@@ -37,14 +35,13 @@ const Canvas = () => {
     };
     const result = await new Promise((resolve) => resolve(dispatch(uploadImage(uploadPayload))));
     if (result.payload && result.payload.success) {
-      history.push(`/publish?productId=${productId}`);
+      router.history.push(`/publish?productId=${productId}`);
     }
   };
   return (
     <>
       <Navbar />
-      {isLoadingUploadCanvas && <LoadingModal />}
-      {data && <CanvasBoard data={ data } onUploadCanvas={ onUploadCanvas } canvasRef={ canvasRef } />}
+      {data ? <CanvasBoard data={ data } onUploadCanvas={ onUploadCanvas } canvasRef={ canvasRef } /> : <LoadingModal />}
       <StepFooter activeStep={ 1 } stepRef={ canvasRef } onUploadCanvas={ onUploadCanvas } router={ router } />
     </>
   );

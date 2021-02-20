@@ -96,17 +96,24 @@ const Canvas = ({ data, canvasRef }) => {
   const initialWidth = window && window.innerWidth;
   const initialHeight = window && window.innerHeight;
   const { width, height } = useWindowDimensions();
-  const { productName, description, picture } = data;
+  const {
+    productName, description, picture, userName
+  } = data;
   const [iconIndex, setIconIndex] = useState(0);
   const [iconList, setIconList] = useState([]);
   const [productNameCoord, setProductNameCoord] = useState({
-    x: (width / 100) * 40,
-    y: (height / 100) * 20,
+    x: (width / 100) * 24,
+    y: (height / 100) * 15,
     isDragging: false,
   });
   const [descriptionCoord, setDescriptionCoord] = useState({
-    x: (width / 100) * 40,
-    y: (height / 100) * 30,
+    x: (width / 100) * 24,
+    y: (height / 100) * 20,
+    isDragging: false,
+  });
+  const [userCoord, setUserCoord] = useState({
+    x: (width / 100) * 70,
+    y: (height / 100) * 45,
     isDragging: false,
   });
 
@@ -129,20 +136,6 @@ const Canvas = ({ data, canvasRef }) => {
           { emojiSelect[iconIndex].map((emoji, key) => <span className="canvas-emoji" onClick={ () => onCreateIcon(emoji) } key={ key }>{emoji}</span>) }
         </div>
       </ToolsWrapper>
-      {/* <ul className="canvas-tool">
-        <li className="canvas-tool-element" onClick={ () => onCreateIcon(cool) }>
-          <img className="canvas-icon" src={ cool } alt="icon-1" />
-        </li>
-        <li className="canvas-tool-element" onClick={ () => onCreateIcon(hug) }>
-          <img className="canvas-icon" src={ hug } alt="icon-2" />
-        </li>
-        <li className="canvas-tool-element" onClick={ () => onCreateIcon(yummy) }>
-          <img className="canvas-icon" src={ yummy } alt="icon-3" />
-        </li>
-        <li className="canvas-tool-element" onClick={ () => onUploadCanvas(canvasRef) }>
-          <p>SUBMIT</p>
-        </li>
-      </ul> */}
       <Stage width={ initialWidth } height={ initialHeight - 300 } ref={ canvasRef }>
         <Layer>
           <BackgroundImage width={ initialWidth } image={ { x: 0, y: 0, src: picture } } />
@@ -157,12 +150,12 @@ const Canvas = ({ data, canvasRef }) => {
           { iconList.map((element) => {
             return <Text text={ element.src } x={ element.x } y={ element.y } fontSize={ 40 } draggable />;
           }) }
-          {/* { iconList.map((element) => <URLImage image={ element } />) } */}
           <Text
             text={ productName }
             fontSize={ 30 }
             x={ productNameCoord.x }
             y={ productNameCoord.y }
+            width={ (width / 100) * 50 }
             draggable
             onDragStart={ () => setProductNameCoord({ ...productNameCoord, isDragging: true }) }
             onDragEnd={ (element) => {
@@ -178,10 +171,27 @@ const Canvas = ({ data, canvasRef }) => {
             fontSize={ 24 }
             x={ descriptionCoord.x }
             y={ descriptionCoord.y }
+            width={ (width / 100) * 50 }
             draggable
             onDragStart={ () => setDescriptionCoord({ ...descriptionCoord, isDragging: true }) }
             onDragEnd={ (element) => {
               setDescriptionCoord({
+                x: element.target.x(),
+                y: element.target.y(),
+                isDragging: false,
+              });
+            } }
+          />
+          <Text
+            text={ userName }
+            fontSize={ 24 }
+            x={ userCoord.x }
+            y={ userCoord.y }
+            width={ (width / 100) * 50 }
+            draggable
+            onDragStart={ () => setUserCoord({ ...userCoord, isDragging: true }) }
+            onDragEnd={ (element) => {
+              setUserCoord({
                 x: element.target.x(),
                 y: element.target.y(),
                 isDragging: false,
