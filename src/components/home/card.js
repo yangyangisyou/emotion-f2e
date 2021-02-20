@@ -13,7 +13,7 @@ const loading = keyframes`
 `;
 
 const CardWrapper = styled.li`
-  width: 250px;
+  width: 300px;
   margin: 2.5vh 10px;
   padding: 2.5vh 10px;
   display: flex;
@@ -24,9 +24,12 @@ const CardWrapper = styled.li`
   justify-content: space-around;
   border: grey 1px solid;
   border-radius: 10%;
+  position: relative;
+  overflow: hidden;
   ${(props) => props.isLoading === false && css`
-  background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.7)), url(${props.picture || defaultCard});
+  background-image: linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.1)), url(${props.picture || defaultCard});
   `}
+  /* filter: brightness(40%); */
   background-size: cover;
   cursor: pointer;
   &:hover {
@@ -36,6 +39,7 @@ const CardWrapper = styled.li`
   .card-header {
     display: flex;
     align-items: center;
+    z-index: 10;
     .card-crapper {
       width: 50px;
       height: 50px;
@@ -62,6 +66,11 @@ const CardWrapper = styled.li`
       font-size: ${fontsize.fontsize30};
       font-weight: 500;
       text-overflow: ellipsis;
+      width: 75%;
+      white-space: nowrap;
+      overflow: hidden;
+      color: white;
+      /* display: block; */
     }
     .card-title-loading {
       width: 200px;
@@ -82,12 +91,14 @@ const CardWrapper = styled.li`
     flex-direction: column;
     justify-content: space-around;
     height: 50%;
+    z-index: 10;
     .card-content {
       font-size: ${fontsize.fontsize20};
       font-weight: 500;
       white-space: normal;
       word-break: break-all;
       float: left;
+      color: white;
     }
     .card-content-loading {
       height: 20px;
@@ -134,6 +145,10 @@ const Card = ({ product, isLoading, router }) => {
                   {/* <p className="card-content">{description}</p> */}
                   <p className="card-content">See more...</p>
                 </div>
+                <div style={ {
+                  filter: 'brightness(40%)', opacity: 0.5, backgroundColor: 'black', position: 'absolute', width: '100%', height: '100%', zIndex: 0, left: 0
+                } }
+                />
               </CardWrapper>
             )
       }
