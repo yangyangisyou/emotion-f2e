@@ -38,6 +38,13 @@ Version 1.0:
 ### Data flow
 * redux-api-middleware 3.2.1
 
+### Canvas
+* React-konva 17.0.1
+
+### Form and validate
+* Formik 2.2.6
+* yup 0.36.8
+
 ### Security/SEO
 * react-helmet 6.0.1
 
