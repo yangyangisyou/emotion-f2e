@@ -69,7 +69,7 @@ const ProductInfo = ({ item, canvasImage, isLoadingItem }) => {
           <img className="product-canvas" src={ canvasPath } alt="canvas" />
         </div>
         <div className="product-footer">
-          <p className="product-content">This was designed by {userName}.</p>
+          <p className="product-content">This sharing designed by {userName}.</p>
           <a className="product-button" href={ canvasPath } target="_blank" download="canvas.png" rel="noreferrer">Download</a>
         </div>
       </ProductInfoWrapper>

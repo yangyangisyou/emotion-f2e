@@ -1,6 +1,6 @@
-const API_PATH = 'https://yy-product-api.herokuapp.com';
+const API_PATH = 'http://emotion-api.yyisyou.tw';
 const PIXABAY_PATH = 'https://pixabay.com/api';
-const SITE_PATH = 'https://canvas-app.yyisyou.tw';
+const SITE_PATH = 'http://emotion-app.yyisyou.tw';
 
 export {
   API_PATH,
