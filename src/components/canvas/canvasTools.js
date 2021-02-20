@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { emojiSelect } from '../../config/table';
-import { color } from '../../config/var';
+import { color, fontsize } from '../../config/var';
 
 const ToolsWrapper = styled.div`
   display: flex;
@@ -40,7 +40,7 @@ const ToolsWrapper = styled.div`
     .canvas-emoji {
       margin-left: 20px;
       cursor: pointer;
-      font-size: 40px;
+      font-size: ${fontsize.fontsize40};
     }
   }
 

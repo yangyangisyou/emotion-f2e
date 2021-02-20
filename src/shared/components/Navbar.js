@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { fontsize } from '../../config/var';
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -20,7 +21,7 @@ const HeaderWrapper = styled.header`
     a {
       font-weight: 700;
       color: #666;
-      font-size: 14px;
+      font-size: ${fontsize.fontsize14};
       text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -32,7 +33,7 @@ const HeaderWrapper = styled.header`
 
   .header-link-home > a {
     color: #000;
-    font-size: 16px;
+    font-size: ${fontsize.fontsize16};
   }
 
   .header-link-action {

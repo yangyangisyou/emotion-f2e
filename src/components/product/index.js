@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color } from '../../config/var';
+import { color, fontsize } from '../../config/var';
 
 const ProductInfoWrapper = styled.div`
     height: 100vh;
@@ -11,15 +11,12 @@ const ProductInfoWrapper = styled.div`
     background-color: ${color.primary};
     line-height: 40px;
     .product-title {
-      font-size: 36px;
+      font-size: ${fontsize.fontsize36};
       font-weight: 600;
     }
-    /* .product-subtitle {
-      font-size: 28px;
-      font-weight: 500;
-    } */
+
     .product-content {
-      font-size: 26px;
+      font-size: ${fontsize.fontsize26};
       font-weight: 400;
       padding: 2.5vh 10vw;
 

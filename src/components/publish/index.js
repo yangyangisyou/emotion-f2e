@@ -2,6 +2,7 @@ import styled, { keyframes } from 'styled-components';
 import { useEffect } from 'react';
 import { onSnowingEmoji } from '../../util/decorator';
 import EmojiRain from '../../shared/components/emojiRain';
+import { fontsize } from '../../config/var';
 
 const float = keyframes`
   0% {
@@ -31,11 +32,11 @@ const PublishWrapper = styled.div`
     }
 
     .publish-field-title {
-      font-size: 24px;
+      font-size: ${fontsize.fontsize24};
     }
 
     .publish-field-content {
-      font-size: 20px;
+      font-size: ${fontsize.fontsize20};
       width: 90vw;
     }
 

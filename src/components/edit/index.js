@@ -6,6 +6,7 @@ import {
 import { catList, largeCatTable, CATEGORIES } from '../../config/table';
 import ImageCardList from './imageCardList';
 import { validateEdit } from '../../config/validate';
+import { fontsize } from '../../config/var';
 import TagList from './tagList';
 // import FormikDebugTool from '../../util/formikDebugTool';
 
@@ -53,7 +54,7 @@ const FormWrapper = styled(Form)`
 
   .edit-error {
     color: #f44336;
-    font-size: 0.75rem;
+    font-size: ${fontsize.fontsize12};
   }
 
   .edit-wrap-center {

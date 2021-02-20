@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormikConsumer } from 'formik';
 import styled from 'styled-components';
+import { fontsize } from '../config/var';
 
 const DebugWrapper = styled.div`
     width: 100%;
@@ -10,7 +11,7 @@ const DebugWrapper = styled.div`
     box-shadow: 0 0 1px  #eee inset;
     .debug-title {
         text-transform: 'uppercase';
-        font-size: 12px;
+        font-size: ${fontsize.fontsize12};
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
         font-weight: 500;
@@ -20,7 +21,7 @@ const DebugWrapper = styled.div`
         letter-spacing: 1px;
     }
     .debug-state {
-        font-size: 20px;
+        font-size: ${fontsize.fontsize20};
         line-height: 25px;
         padding: .25rem .5rem;
         overflow-x: scroll;

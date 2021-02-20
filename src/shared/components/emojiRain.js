@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { fontsize } from '../../config/var';
 
 const fall = keyframes`
   to{
@@ -16,7 +17,7 @@ const RainWrapper = styled.div`
     .drop {
       position: fixed;
       top: -1vh;
-      font-size: 2rem;
+      font-size: ${fontsize.fontsize32};
       transform: translateY(0);
       animation: ${fall} 3s linear forwards;
     }

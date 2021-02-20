@@ -1,6 +1,7 @@
 import styled, { keyframes, css } from 'styled-components';
 import catAvatar from '../../assets/image/catAvatar.png';
 import defaultCard from '../../assets/image/defaultCard.jpeg';
+import { fontsize } from '../../config/var';
 
 const loading = keyframes`
   0% {
@@ -58,7 +59,7 @@ const CardWrapper = styled.li`
       background-size: 400% 100%;
     }
     .card-title {
-      font-size: 30px;
+      font-size: ${fontsize.fontsize30};
       font-weight: 500;
       text-overflow: ellipsis;
     }
@@ -82,7 +83,7 @@ const CardWrapper = styled.li`
     justify-content: space-around;
     height: 50%;
     .card-content {
-      font-size: 20px;
+      font-size: ${fontsize.fontsize20};
       font-weight: 500;
       white-space: normal;
       word-break: break-all;

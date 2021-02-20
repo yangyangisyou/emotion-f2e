@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color } from '../../config/var';
+import { color, fontsize } from '../../config/var';
 
 const GuideWrapper = styled.ul`
     font-family: 'Montserrat', sans-serif;
@@ -27,7 +27,7 @@ const GuideWrapper = styled.ul`
           .guide-intro-content {
             color: white;
             font-weight: bold;
-            font-size: 24px;
+            font-size: ${fontsize.fontsize24};
           }
 
           .guide-button {
@@ -36,7 +36,7 @@ const GuideWrapper = styled.ul`
             border: 1px white solid;
             color: white;
             font-weight: bold;
-            font-size: 20px;
+            font-size: ${fontsize.fontsize20};
             padding: 5px 10px;
 
             cursor: pointer;
@@ -61,10 +61,10 @@ const GuideWrapper = styled.ul`
         padding-left: 5vw;
         .guide-title {
           font-weight: bold;
-          font-size: 24px;
+          font-size: ${fontsize.fontsize24};
         }
         .guide-content {
-          font-size: 20px;
+          font-size: ${fontsize.fontsize20};
         }
         .guide-title + .guide-content {
           margin-top: 10px;

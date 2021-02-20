@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { color } from '../config/var';
+import { color, fontsize } from '../config/var';
 // import Button from '@material-ui/core/Button';
 // import { Link } from 'react-router-dom';
 
@@ -29,11 +29,11 @@ const LandingWrapper = styled.div`
       flex-direction: column;
       align-items: flex-start;
       .landing-header {
-          font-size: 40px;
+          font-size: ${fontsize.fontsize40};
           font-weight: 700;
       }
       .landing-content {
-          font-size: 24px;
+          font-size: ${fontsize.fontsize24};
       }
       .landing-header + .landing-content {
         margin-top: 20px;

@@ -3,7 +3,7 @@ import {
   Stepper, StepLabel, Step
 } from '@material-ui/core';
 import { editSteps } from '../../config/table';
-import { color } from '../../config/var';
+import { color, fontsize } from '../../config/var';
 import { validateEdit } from '../../config/validate';
 
 const StepFooterWrapper = styled.div`
@@ -28,7 +28,7 @@ const StepFooterWrapper = styled.div`
       a {
         font-weight: 700;
         color: #333;
-        font-size: 14px;
+        font-size: ${fontsize.fontsize14};
         text-decoration: none;
         text-transform: uppercase;
         letter-spacing: 1px;
@@ -40,7 +40,7 @@ const StepFooterWrapper = styled.div`
     }
 
     .header-link-home > a {
-      font-size: 16px;
+      font-size: ${fontsize.fontsize16};
     }
 
   }

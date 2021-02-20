@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { fontsize } from '../../config/var';
 
 const spinnerOne = keyframes`
   0% {
@@ -56,7 +57,7 @@ const LoadingModalWrapper = styled.div`
         }
       }
       .loading-text {
-        font-size: 24px;
+        font-size: ${fontsize.fontsize24};
         font-weight: 600;
       }
       .spinner + .loading-text {

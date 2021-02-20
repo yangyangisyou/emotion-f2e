@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color } from '../../config/var';
+import { color, fontsize } from '../../config/var';
 
 const DividerWrapper = styled.div`
     background-color: ${color.colorDark};
@@ -10,7 +10,7 @@ const DividerWrapper = styled.div`
     align-items: center;
     .divider-title {
       color: white;
-      font-size: 30px;
+      font-size: ${fontsize.fontsize30};
       font-weight: 600;
     }
 `;

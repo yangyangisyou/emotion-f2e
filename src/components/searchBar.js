@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color } from '../config/var';
+import { color, fontsize } from '../config/var';
 
 const SearchBarWrapper = styled.div`
     display: flex;
@@ -16,7 +16,7 @@ const SearchBarWrapper = styled.div`
       height: 100%;
       width: 150px;
       .searchbar-link-text {
-        font-size: 20px;
+        font-size: ${fontsize.fontsize20};
         font-weight: 600;
         text-transform: uppercase;
       }

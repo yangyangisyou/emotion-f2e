@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import image from '../../assets/image/cool.png';
+import { fontsize } from '../../config/var';
 
 const Background = styled.div`
     background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
@@ -13,7 +14,7 @@ const Background = styled.div`
         top: 7%;
         left: 35%;
         font-weight: 500;
-        font-size: 30px;
+        font-size: ${fontsize.fontsize30};
     }
     .about-guide {
         position: absolute;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Card from './card';
-import { color } from '../../config/var';
+import { color, fontsize, fontFamily } from '../../config/var';
 
 const CardListWrapper = styled.ul`
   display: flex;
@@ -30,9 +30,9 @@ const CardListWrapper = styled.ul`
     justify-content: center;
     align-items: center;
     padding: 10vh 20vw;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 24px;
-    line-height: 40px;
+    font-family: ${fontFamily};
+    font-size: ${fontsize.fontsize24};
+    line-height: ${fontsize.fontsize40};
     font-weight: bold;
     .emptycardlist-emoji {
       font-size: 60px;
