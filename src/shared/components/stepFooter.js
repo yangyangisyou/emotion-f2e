@@ -52,6 +52,12 @@ const StepFooterWrapper = styled.div`
       margin-left: 0;
       margin-right: 0;
       padding: 0;
+      width: 50vw;
+    }
+    .footer-step-label {
+      & > .MuiStepLabel-labelContainer {
+        display: none;
+      }
     }
   }
 `;
@@ -127,7 +133,7 @@ const StepFooter = ({
           {editSteps.map((label) => {
             return (
               <Step key={ label }>
-                <StepLabel>{label}</StepLabel>
+                <StepLabel className="footer-step-label">{label}</StepLabel>
               </Step>
             );
           })}
