@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import CanvasBoard from '../components/canvas/canvas';
+import CanvasBoard from '../components/canvas';
 import Navbar from '../shared/components/Navbar';
 import StepFooter from '../shared/components/stepFooter';
 import { uploadImage, loadProduct } from '../actions/product';
