@@ -4,7 +4,6 @@ import {
 } from '@material-ui/core';
 import { editSteps } from '../../config/table';
 import { color, fontsize } from '../../config/var';
-import { validateEdit } from '../../config/validate';
 
 const StepFooterWrapper = styled.div`
   position: fixed;
@@ -78,13 +77,15 @@ const renderLeftButton = (step, router) => {
 const renderRightButton = (step, stepRef, onSubmitForm, onUploadCanvas) => {
   if (step === 0) {
     return (
-      <Button onClick={ () => {
-        const { values } = stepRef.current;
-        validateEdit.isValid(values).then((isValid) => {
-          if (isValid) {
-            onSubmitForm(values);
-          }
-        });
+      <Button onClick={ async () => {
+        const { values, validateForm, validateField } = stepRef.current;
+        const errorObject = await validateForm();
+        const isValid = Object.keys(errorObject).length === 0;
+        if (isValid) {
+          onSubmitForm(values);
+        } else {
+          Object.keys(errorObject).map((error) => validateField(error));
+        }
       } }
       >NEXT
       </Button>

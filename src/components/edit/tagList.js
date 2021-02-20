@@ -49,6 +49,7 @@ const tagList = ({ categoryNo, onSelect, selectedNo }) => {
             color={ selectedNo === key ? 'primary' : '' }
             clickable={ selectedNo === key }
             onClick={ () => onSelect(key, element.label) }
+            key={ key }
           // onDelete={ handleDelete }
             variant="outlined"
           />

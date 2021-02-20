@@ -54,7 +54,8 @@ const FormWrapper = styled(Form)`
 
   .edit-error {
     color: #f44336;
-    font-size: ${fontsize.fontsize12};
+    font-size: ${fontsize.fontsize14};
+    font-weight: 500;
   }
 
   .edit-wrap-center {
@@ -91,8 +92,9 @@ const EditProductForm = ({
 };
 
 const renderForm = ({
-  recommandImages, onSearchRecommendImage, loadingRecommandImages, values, setFieldValue, touched, errors
+  recommandImages, onSearchRecommendImage, loadingRecommandImages, values, setFieldValue, errors
 }) => {
+  const isSelectProductType = values.productType;
   const imageList = recommandImages.map((element) => ({ reviewImage: element.previewURL, largeImage: element.largeImageURL }));
   return (
     <FormWrapper className="edit-form">
@@ -125,7 +127,7 @@ const renderForm = ({
           />
         </div>
         <div className="edit-field edit-field-newline">
-          <span className="edit-type">Description：<span className="edit-error">{touched.description ? errors.description : ''}</span></span>
+          <span className="edit-type">Description：<span className="edit-error">{errors.description}</span></span>
           <TextareaAutosize
             className="edit-input"
             id="description"
@@ -138,7 +140,7 @@ const renderForm = ({
           />
         </div>
         <div className="edit-field edit-field-newline">
-          <span className="edit-type">Type：<span className="edit-error">{touched.selectedImage ? errors.selectedImage : ''}</span></span>
+          <span className="edit-type">Type：<span className="edit-error">{errors.selectedImage}</span></span>
           <RadioGroup
             className="edit-input edit-input-radiogroup"
             name="productType"
@@ -146,6 +148,8 @@ const renderForm = ({
             onChange={ (element) => {
               const value = element.target.value;
               setFieldValue('productType', value);
+              setFieldValue('selectedImage', '');
+              setFieldValue('selectedImageNo', null);
               if (value !== CATEGORIES.OTHER) { onSearchRecommendImage(largeCatTable[value]); }
             }
         }
@@ -155,28 +159,25 @@ const renderForm = ({
         </div>
       </div>
       {
-        values.productType !== null
-          ? (
-            <>
-              {
-                values.productType === CATEGORIES.OTHER
-                  ? (
-                    <>
-                      <div className="edit-field">
-                        <span className="edit-type">Custom tag：</span>
-                        <TextField
-                          className="edit-input"
-                          label="Other tag"
-                          name="selectedTag"
-                          variant="outlined"
-                          onBlur={ (element) => {
-                            const value = element.target.value;
-                            setFieldValue('selectedTag', value);
-                            value && onSearchRecommendImage(value);
-                          } }
-                        />
-                      </div>
-                      {
+        isSelectProductType && (
+          values.productType === CATEGORIES.OTHER
+            ? (
+              <>
+                <div className="edit-field">
+                  <span className="edit-type">Custom tag：</span>
+                  <TextField
+                    className="edit-input"
+                    label="Other tag"
+                    name="selectedTag"
+                    variant="outlined"
+                    onBlur={ (element) => {
+                      const value = element.target.value;
+                      setFieldValue('selectedTag', value);
+                      value && onSearchRecommendImage(value);
+                    } }
+                  />
+                </div>
+                {
                       values.selectedTag ? (
                         <div className="edit-field edit-field-newline">
                           <p className="edit-type">Recommend image：</p>
@@ -190,33 +191,31 @@ const renderForm = ({
                         </div>
                       ) : <></>
                     }
-                    </>
-                  ) : (
-                    <>
-                      <div className="edit-field edit-field-newline">
-                        <span className="edit-type">Choose more specific tag：</span>
-                        <TagList
-                          className="edit-input"
-                          categoryNo={ values.productType }
-                          selectedNo={ values.selectedTagNo }
-                          onSelect={ (tagNo, tagName) => { setFieldValue('selectedTagNo', tagNo); setFieldValue('selectedTag', tagName); onSearchRecommendImage(tagName); } }
-                        />
-                      </div>
-                      <div className="edit-field edit-field-newline">
-                        <p className="edit-type">Recommend image：</p>
-                        <ImageCardList
-                          className="edit-input"
-                          imageList={ imageList }
-                          selectedNo={ values.selectedImageNo }
-                          isLoading={ loadingRecommandImages }
-                          onSelect={ (imageNo, imageLink) => { setFieldValue('selectedImage', imageLink); setFieldValue('selectedImageNo', imageNo); } }
-                        />
-                      </div>
-                    </>
-                  )
-              }
-            </>
-          ) : <></>
+              </>
+            ) : (
+              <>
+                <div className="edit-field edit-field-newline">
+                  <span className="edit-type">Choose more specific tag：</span>
+                  <TagList
+                    className="edit-input"
+                    categoryNo={ values.productType }
+                    selectedNo={ values.selectedTagNo }
+                    onSelect={ (tagNo, tagName) => { setFieldValue('selectedTagNo', tagNo); setFieldValue('selectedTag', tagName); onSearchRecommendImage(tagName); } }
+                  />
+                </div>
+                <div className="edit-field edit-field-newline">
+                  <p className="edit-type">Recommend image：</p>
+                  <ImageCardList
+                    className="edit-input"
+                    imageList={ imageList }
+                    selectedNo={ values.selectedImageNo }
+                    isLoading={ loadingRecommandImages }
+                    onSelect={ (imageNo, imageLink) => { setFieldValue('selectedImage', imageLink); setFieldValue('selectedImageNo', imageNo); } }
+                  />
+                </div>
+              </>
+            )
+        )
       }
       {/* <FormikDebugTool /> */}
     </FormWrapper>
