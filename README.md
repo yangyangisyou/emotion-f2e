@@ -47,7 +47,7 @@ Version 1.0:
 * Formik 2.2.6
 * yup 0.36.8
 
-### Security/SEO
+### Security/SEO injection
 * react-helmet 6.0.1
 
 ### Features
