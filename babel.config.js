@@ -34,15 +34,6 @@ module.exports = (api) => {
           camel2DashComponentName: false
         }, 'material-ui-icons'
       ],
-      [
-        'import',
-        {
-          libraryName: 'antd',
-          libraryDirectory: api.env('browser') ? 'es' : 'lib',
-          style: 'css',
-        },
-        'ant'
-      ],
       ['import', {
         libraryName: '@ant-design/icons',
         libraryDirectory: 'lib',
