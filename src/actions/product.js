@@ -55,7 +55,7 @@ export const loadCanvas = (imageName) => {
       types: [
         'REQUEST_PRODUCT_CANVAS',
         'PRODUCT_CANVAS_SUCCESS',
-        'FAILURE'
+        'PRODUCT_CANVAS_FAILURE'
       ]
     }
   };

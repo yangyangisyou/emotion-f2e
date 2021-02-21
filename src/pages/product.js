@@ -26,7 +26,7 @@ const Product = () => {
   return (
     <>
       <Navbar />
-      {isLoadingCanvasImage && <LoadingModal />}
+      {isLoadingCanvasImage && <LoadingModal isError={ canvasImage === undefined } />}
       <ProductInfo item={ item } canvasImage={ canvasImage } isLoadingItem={ isLoadingItem } isLoadingCanvasImage={ isLoadingCanvasImage } />
     </>
   );

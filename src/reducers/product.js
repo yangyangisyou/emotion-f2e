@@ -86,6 +86,12 @@ const productReducer = (state = initState, action) => {
         isLoadingProduct: false,
       };
     }
+    case 'PRODUCT_CANVAS_FAILURE': {
+      return {
+        ...state,
+        canvasImage: undefined,
+      };
+    }
     default: {
       return state;
     }

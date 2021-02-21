@@ -1,7 +1,20 @@
+import { useState, useEffect } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import catAvatar from '../../assets/image/catAvatar.png';
-import defaultCard from '../../assets/image/defaultCard.jpeg';
+import defaultCard from '../../assets/image/defaultCard.jpg';
 import { fontsize } from '../../config/var';
+
+const imageExistHandler = (url) => {
+  const imgPromise = new Promise((resolve, reject) => {
+    const imgElement = new Image();
+    imgElement.addEventListener('load', function imgOnLoad() {
+      resolve(this.src);
+    });
+    imgElement.addEventListener('error', () => reject());
+    imgElement.src = url;
+  });
+  return imgPromise;
+};
 
 const loading = keyframes`
   0% {
@@ -26,10 +39,8 @@ const CardWrapper = styled.li`
   border-radius: 10%;
   position: relative;
   overflow: hidden;
-  ${(props) => props.isLoading === false && css`
-  background-image: linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.1)), url(${props.picture || defaultCard});
-  `}
-  /* filter: brightness(40%); */
+  ${(props) => !props.isLoading && css`background-image: linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.1)), url(${props.picture})
+  `};
   background-size: cover;
   cursor: pointer;
   &:hover {
@@ -109,12 +120,34 @@ const CardWrapper = styled.li`
       background-size: 400% 100%;
     }
   }
+
+  .card-filter {
+    filter: brightness(40%);
+    opacity: 0.5;
+    background-color: black;
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    z-index: 0;
+    left: 0;
+  };
 `;
 
 const Card = ({ product, isLoading, router }) => {
   const {
     productName, description, avatar, picture, productId
   } = product;
+  const [backgroundImage, setBackgroundImage] = useState(defaultCard);
+
+  const onSettingBackground = async (imageLink) => {
+    const result = await imageExistHandler(imageLink).then((img) => img, () => defaultCard);
+    setBackgroundImage(result);
+  };
+
+  useEffect(() => {
+    onSettingBackground(picture);
+  }, [product]);
+
   return (
     <>
       {
@@ -134,7 +167,7 @@ const Card = ({ product, isLoading, router }) => {
               </CardWrapper>
             )
             : (
-              <CardWrapper picture={ picture } description={ description } isLoading={ isLoading } onClick={ () => router.history.push(`/product?productId=${productId}`) }>
+              <CardWrapper picture={ backgroundImage } description={ description } isLoading={ isLoading } onClick={ () => router.history.push(`/product?productId=${productId}`) }>
                 <div className="card-header">
                   <div className="card-crapper">
                     <img className="card-image" src={ avatar || catAvatar } alt="avatar" />
@@ -145,10 +178,7 @@ const Card = ({ product, isLoading, router }) => {
                   {/* <p className="card-content">{description}</p> */}
                   <p className="card-content">See more...</p>
                 </div>
-                <div style={ {
-                  filter: 'brightness(40%)', opacity: 0.5, backgroundColor: 'black', position: 'absolute', width: '100%', height: '100%', zIndex: 0, left: 0
-                } }
-                />
+                <div className="card-filter" />
               </CardWrapper>
             )
       }
