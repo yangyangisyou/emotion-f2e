@@ -1,4 +1,5 @@
 # Emotion website - F2E
+[![Node version](https://img.shields.io/badge/node-%3E=12.18.0-brightgreen.svg)](http://nodejs.org/)  
 Emotion is a creative and sharing platform that you can share some idea and put an image you like on the website.
 You can also browse many kinds of idea, just choose what kinds category you like.
 
