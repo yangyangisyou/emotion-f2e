@@ -26,7 +26,7 @@ const CardWrapper = styled.li`
   flex-direction: column;
   justify-content: space-around;
   border: grey 1px solid;
-  border-radius: 10%;
+  border-radius: 5%;
   position: relative;
   overflow: hidden;
   ${(props) => !props.isLoading && css`background-image: linear-gradient(rgba(255,255,255,.1), rgba(255,255,255,.1)), url(${props.picture})
