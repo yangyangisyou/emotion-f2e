@@ -3,7 +3,8 @@ import {
   Stepper, StepLabel, Step
 } from '@material-ui/core';
 import { editSteps } from '../../config/table';
-import { color, fontsize } from '../../config/var';
+import { fontsize } from '../../config/var';
+import Button from './button';
 
 const StepFooterWrapper = styled.div`
   position: fixed;
@@ -60,15 +61,6 @@ const StepFooterWrapper = styled.div`
       }
     }
   }
-`;
-
-const Button = styled.div`
-  padding: 10px 15px;
-  border-radius: 15px;
-  background-color: ${color.colorDark};
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
 `;
 
 const renderLeftButton = (step, router) => {
