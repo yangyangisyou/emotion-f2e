@@ -5,9 +5,9 @@ import Guide from '../components/home/guide';
 import Navbar from '../shared/components/Navbar';
 import EmojiRain from '../shared/components/emojiRain';
 import Divider from '../shared/components/divider';
-import Landing from '../components/landing';
+import Landing from '../components/home/landing';
 // import About from '../components/home/about';
-import SearchBar from '../components/searchBar';
+import SearchBar from '../components/home/searchBar';
 import { loadProductList } from '../actions/product';
 import { landingImageTable, titleList } from '../config/table';
 import { onSnowingEmoji } from '../util/decorator';
@@ -29,7 +29,7 @@ const Home = () => {
       <Landing imageLink={ landingImageTable[currentProductType] } />
       <SearchBar titleList={ titleList } setCurrentProductType={ setCurrentProductType } onSnowingEmoji={ onSnowingEmoji } />
       <CardList productList={ productList } isLoading={ isLoadingProduct } router={ router } />
-      <Divider title="See more info below" />
+      <Divider title="More about emotion" />
       <Guide router={ router } />
     </>
   );

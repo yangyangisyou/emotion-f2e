@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { color, fontsize } from '../config/var';
+import { color, fontsize } from '../../config/var';
 
 const float = keyframes`
   0% {
