@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import { color, fontsize } from '../../config/var';
+import step1Image from '../../assets/image/writedown.jpeg';
+import step2Image from '../../assets/image/painting.jpeg';
+import step3Image from '../../assets/image/sharing.jpeg';
 
 const GuideWrapper = styled.ul`
     font-family: 'Montserrat', sans-serif;
@@ -121,7 +124,7 @@ const Guide = ({ router }) => {
           <p className="guide-content">Fill out your form.</p>
         </div>
         <div className="guide-block guide-block-image">
-          <img className="guide-background" src="https://images.pexels.com/photos/3854816/pexels-photo-3854816.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="1" />
+          <img className="guide-background" src={ step1Image } alt="writing" />
           <div className="guide-intro">
             <p className="guide-intro-content">Thinking and imagine.</p>
             <p className="guide-button" onClick={ goToCreatePage }>CREATE</p>
@@ -134,7 +137,7 @@ const Guide = ({ router }) => {
           <p className="guide-content">Design your idea.</p>
         </div>
         <div className="guide-block guide-block-image">
-          <img className="guide-background" src="https://images.pexels.com/photos/542555/pexels-photo-542555.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="1" />
+          <img className="guide-background" src={ step2Image } alt="painting" />
           <div className="guide-intro">
             <p className="guide-intro-content">Painting your creative.</p>
             <p className="guide-button" onClick={ goToCreatePage }>CREATE</p>
@@ -147,7 +150,7 @@ const Guide = ({ router }) => {
           <p className="guide-content">Just share it.</p>
         </div>
         <div className="guide-block guide-block-image">
-          <img className="guide-background" src="https://images.pexels.com/photos/3764496/pexels-photo-3764496.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="1" />
+          <img className="guide-background" src={ step3Image } alt="sharing" />
           <div className="guide-intro">
             <p className="guide-intro-content">Sharing and enjoy.</p>
             <p className="guide-button" onClick={ goToCreatePage }>CREATE</p>

@@ -1,20 +1,10 @@
 import { useState, useEffect } from 'react';
 import styled, { keyframes, css } from 'styled-components';
-import catAvatar from '../../assets/image/catAvatar.png';
+// import catAvatar from '../../assets/image/catAvatar.png';
+import bearAvatar from '../../assets/image/bearAvatar.png';
 import defaultCard from '../../assets/image/defaultCard.jpg';
 import { fontsize } from '../../config/var';
-
-const imageExistHandler = (url) => {
-  const imgPromise = new Promise((resolve, reject) => {
-    const imgElement = new Image();
-    imgElement.addEventListener('load', function imgOnLoad() {
-      resolve(this.src);
-    });
-    imgElement.addEventListener('error', () => reject());
-    imgElement.src = url;
-  });
-  return imgPromise;
-};
+import { imageExistHandler } from '../../util/image';
 
 const loading = keyframes`
   0% {
@@ -170,7 +160,7 @@ const Card = ({ product, isLoading, router }) => {
               <CardWrapper picture={ backgroundImage } description={ description } isLoading={ isLoading } onClick={ () => router.history.push(`/product?productId=${productId}`) }>
                 <div className="card-header">
                   <div className="card-crapper">
-                    <img className="card-image" src={ avatar || catAvatar } alt="avatar" />
+                    <img className="card-image" src={ avatar || bearAvatar } alt="avatar" />
                   </div>
                   <p className="card-title">{productName}</p>
                 </div>
