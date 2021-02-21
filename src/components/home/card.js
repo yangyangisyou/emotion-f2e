@@ -26,7 +26,7 @@ const loading = keyframes`
 `;
 
 const CardWrapper = styled.li`
-  width: 300px;
+  width: 350px;
   margin: 2.5vh 10px;
   padding: 2.5vh 10px;
   display: flex;

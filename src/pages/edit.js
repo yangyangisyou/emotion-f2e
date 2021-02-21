@@ -19,18 +19,18 @@ const Edit = () => {
   const [isError, setIsError] = useState(false);
   useEffect(() => {
     const productId = router.query.productId;
-    if (productId) {
-      const dataFromStorage = localStorage.getItem('editStorage');
-      if (dataFromStorage) {
-        setInitialData(JSON.parse(dataFromStorage));
-      } else {
-        const result = dispatch(loadProduct(productId));
-        if (result.payload && result.payload.success) {
-          const payload = result.payload;
-          setInitialData(JSON.parse(payload));
-        }
+    const dataFromStorage = localStorage.getItem('editStorage');
+    if (productId && dataFromStorage) {
+      setInitialData(JSON.parse(dataFromStorage));
+    } else if (productId) {
+      const result = dispatch(loadProduct(productId));
+      if (result.payload && result.payload.success) {
+        const payload = result.payload;
+        setInitialData(JSON.parse(payload));
       }
-    } else {
+    }
+
+    if (!initialData) {
       setInitialData({
         productName: '',
         userName: '',

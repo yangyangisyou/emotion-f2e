@@ -91,7 +91,7 @@ const LoadingModalWrapper = styled.div`
 
 const LoadingModal = ({ isError, errorText }) => {
   const router = useRouter();
-  const text = isError ? errorText || 'Uh oh, This page might not exist.' : 'Wait a minute . . .';
+  const text = isError ? errorText || 'Uh oh, This page might not exist.' : 'Take a break . . .';
   return (
     <LoadingModalWrapper>
       <div className="loading-background" />
