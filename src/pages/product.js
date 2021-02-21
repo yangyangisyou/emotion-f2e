@@ -20,7 +20,9 @@ const Product = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(loadCanvas(item.imageName));
+    if (item && item.imageName) {
+      dispatch(loadCanvas(item.imageName));
+    }
   }, [item]);
 
   return (
