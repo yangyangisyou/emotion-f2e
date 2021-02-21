@@ -14,6 +14,7 @@ const Canvas = () => {
   let canvasRef = useRef(null);
   const productId = router.query.productId;
   const [data, setData] = useState(null);
+  const [isError, setIsError] = useState(false);
   useEffect(() => {
     const dataFromStorage = localStorage.getItem('editStorage');
     if (productId) {
@@ -36,12 +37,14 @@ const Canvas = () => {
     const result = await new Promise((resolve) => resolve(dispatch(uploadImage(uploadPayload))));
     if (result.payload && result.payload.success) {
       router.history.push(`/publish?productId=${productId}`);
+    } else {
+      setIsError(true);
     }
   };
   return (
     <>
       <Navbar />
-      {data ? <CanvasBoard data={ data } onUploadCanvas={ onUploadCanvas } canvasRef={ canvasRef } /> : <LoadingModal />}
+      {data ? <CanvasBoard data={ data } onUploadCanvas={ onUploadCanvas } canvasRef={ canvasRef } /> : <LoadingModal isError={ isError } errorText="Uh oh, we got a network issues." />}
       <StepFooter activeStep={ 1 } stepRef={ canvasRef } onUploadCanvas={ onUploadCanvas } router={ router } />
     </>
   );

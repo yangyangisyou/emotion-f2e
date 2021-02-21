@@ -16,6 +16,7 @@ const Edit = () => {
   const recommandImages = useSelector((state) => state.asset.recommandImages);
   const loadingRecommandImages = useSelector((state) => state.asset.loadingRecommandImages);
   const [initialData, setInitialData] = useState(null);
+  const [isError, setIsError] = useState(false);
   useEffect(() => {
     const productId = router.query.productId;
     if (productId) {
@@ -66,6 +67,8 @@ const Edit = () => {
       const productId = result.payload && result.payload.productId;
       localStorage.setItem('editStorage', JSON.stringify(payload));
       router.history.push(`/canvas${productId ? `?productId=${productId}` : ''}`);
+    } else {
+      setIsError(true);
     }
   };
   return (
@@ -81,7 +84,7 @@ const Edit = () => {
         editRef={ editRef }
       />
       )}
-      {isSubmitting && <LoadingModal />}
+      {isSubmitting && <LoadingModal isError={ isError } errorText="Uh oh, we got a network issues." />}
       <StepFooter activeStep={ 0 } stepRef={ editRef } onSubmitForm={ onSubmitForm } router={ router } />
     </>
   );
