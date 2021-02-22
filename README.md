@@ -81,7 +81,7 @@ npm run start
 ```
 3. Go to http://localhost:3000
 
-## How to build server-side prerender application
+## How to build server-side prerender application (developing)
 1. build web bundle using webpack
 ```
 npm run build:server
